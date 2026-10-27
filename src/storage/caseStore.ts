@@ -31,19 +31,19 @@ function tenantKey(tenantId: string, caseId: string): string {
   return `${PREFIX}${tenantId}:${caseId}`;
 }
 
+/** Structural subset of the real @forge/kvs query builder (verified against @forge/kvs types). */
+export interface KvsQueryLike {
+  where(property: 'key', condition: { beginsWith?: string; equalTo?: string }): KvsQueryLike;
+  cursor(cursor?: string): KvsQueryLike;
+  limit(limit?: number): KvsQueryLike;
+  getMany<T>(): Promise<{ results: Array<{ key: string; value: T }>; nextCursor?: string }>;
+}
+
 export interface KvsLike {
   set(key: string, value: unknown): Promise<unknown>;
   get(key: string): Promise<unknown>;
   delete(key: string): Promise<unknown>;
-  query(): {
-    where<T>(clause: T): KvsQueryLike;
-  };
-}
-
-interface KvsQueryLike {
-  cursor(cursor?: string): KvsQueryLike;
-  limit(n?: number): KvsQueryLike;
-  fetch(): Promise<{ results: Array<{ key: string; value: unknown }>; nextCursor?: string }>;
+  query(): KvsQueryLike;
 }
 
 export class KvsCaseRepository implements CaseRepository {
@@ -68,7 +68,12 @@ export class KvsCaseRepository implements CaseRepository {
     const results: CaseRecord[] = [];
     let cursor: string | undefined;
     do {
-      const page = await this.kvs.query().where(PREFIX).cursor(cursor).limit(50).fetch();
+      const page = await this.kvs
+        .query()
+        .where('key', { beginsWith: PREFIX })
+        .cursor(cursor)
+        .limit(50)
+        .getMany<CaseRecord>();
       for (const item of page.results) {
         if (!item.key.startsWith(`${PREFIX}${tenantId}:`)) continue;
         const v = item.value as CaseRecord;

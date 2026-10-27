@@ -6,7 +6,7 @@
  * bounded. Hypothetical recalculation (Decision Simulator) is returned under
  * an explicit `hypothetical: true` flag — it is never a prediction.
  */
-export type EdgeKind = 'blocks' | 'dependsOn' | 'supersedes' | 'implements';
+export type EdgeKind = 'blocks' | 'dependsOn' | 'supersedes' | 'implements' | 'related';
 
 export interface DependencyEdge {
   fromKey: string;
@@ -41,7 +41,12 @@ export interface HypotheticalImpactResult {
 const MAX_DEPTH = 4;
 
 /** Traverse verified edges first; inferred edges are collected but never merged. */
-export function analyzeImpact(rootKey: string, edges: DependencyEdge[]): ImpactResult {
+export function analyzeImpact(
+  rootKey: string,
+  edges: DependencyEdge[],
+  maxDepth: number = MAX_DEPTH,
+): ImpactResult {
+  const depthLimit = Math.max(1, Math.min(maxDepth, 10));
   const verified = edges.filter((e) => e.verified);
   const affected: ImpactResult['affected'] = [];
   const inferredOnly: ImpactResult['inferredOnly'] = [];
@@ -50,7 +55,7 @@ export function analyzeImpact(rootKey: string, edges: DependencyEdge[]): ImpactR
   // BFS over verified edges.
   let frontier = [{ key: rootKey, via: [] as string[] }];
   let depth = 0;
-  while (frontier.length > 0 && depth < MAX_DEPTH) {
+  while (frontier.length > 0 && depth < depthLimit) {
     depth += 1;
     const next: typeof frontier = [];
     for (const item of frontier) {
@@ -86,9 +91,7 @@ export function simulateHypotheticalChange(
   change: { add?: DependencyEdge[]; remove?: Array<{ fromKey: string; toKey: string }> },
 ): HypotheticalImpactResult {
   const removeKeys = new Set((change.remove ?? []).map((r) => `${r.fromKey}->${r.toKey}`));
-  const hypotheticalEdges = edges.filter(
-    (e) => !removeKeys.has(`${e.fromKey}->${e.toKey}`),
-  );
+  const hypotheticalEdges = edges.filter((e) => !removeKeys.has(`${e.fromKey}->${e.toKey}`));
   hypotheticalEdges.push(...(change.add ?? []));
 
   const impact = analyzeImpact(rootKey, hypotheticalEdges);

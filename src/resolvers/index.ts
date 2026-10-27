@@ -12,6 +12,10 @@ import { JiraAdapter } from '../integrations/jira';
 import { normalizeAll } from '../core/normalizer';
 import { analyze } from '../core/contradiction';
 import { sha256Hex } from '../core/digest';
+import { sanitizeUntrusted } from '../security/injection';
+import { KvsCaseRepository, type KvsLike } from '../storage/caseStore';
+import { KvsAuditRepository, type AuditSinkLike } from '../storage/auditStore';
+import { kvs } from '@forge/kvs';
 import type { EvidenceRecord, SourceSystem } from '../core/types';
 import type { JiraFetcher } from '../integrations/jira';
 
@@ -62,6 +66,20 @@ resolver.define('health', async () => {
   };
 });
 
+resolver.define('listCases', async (ctx: unknown) => {
+  const c = ctx as { context?: { cloudId?: string } };
+  if (!c.context?.cloudId) return { cases: [] };
+  const repo = new KvsCaseRepository(kvs as unknown as KvsLike);
+  return { cases: await repo.list(c.context.cloudId) };
+});
+
+resolver.define('listAuditEvents', async (ctx: unknown) => {
+  const c = ctx as { context?: { cloudId?: string } };
+  if (!c.context?.cloudId) return { events: [] };
+  const audit = new KvsAuditRepository(kvs as unknown as AuditSinkLike);
+  return { events: await audit.readAll(c.context.cloudId) };
+});
+
 resolver.define('analyzeIssue', async (ctx: unknown) => {
   const c = ctx as { payload?: unknown; context?: { cloudId?: string; accountId?: string } };
   const payload = issueKeySchema.safeParse((c.payload as { issueKey?: unknown })?.issueKey);
@@ -73,10 +91,20 @@ resolver.define('analyzeIssue', async (ctx: unknown) => {
   if (!cloudId || !userId) {
     return { status: 'ANALYSIS_FAILED', error: 'unauthenticated context' };
   }
+  return investigateIssueCore(cloudId, userId, payload.data);
+});
 
+/**
+ * Shared investigation pipeline used by the Custom UI resolver and the Rovo
+ * action. Builds evidence from authorized Jira content (description +
+ * comments, user-scoped via asUser), normalizes it, and classifies
+ * contradictions. Missing evidence yields CONSISTENT/INSUFFICIENT_EVIDENCE —
+ * never a verified contradiction.
+ */
+export async function investigateIssueCore(cloudId: string, userId: string, issueKey: string) {
   const adapter = new JiraAdapter(productionJiraFetcher);
   try {
-    const issue = await adapter.getIssue(payload.data);
+    const issue = await adapter.getIssue(issueKey);
 
     // Build evidence from authorized Jira content (description + comments).
     const evidence: EvidenceRecord[] = [];
@@ -129,7 +157,7 @@ resolver.define('analyzeIssue', async (ctx: unknown) => {
       error: err instanceof Error ? err.message : 'jira request failed',
     };
   }
-});
+}
 
 async function buildEvidence(
   tenantId: string,
@@ -141,13 +169,16 @@ async function buildEvidence(
   key: string,
 ): Promise<EvidenceRecord> {
   const contentDigest = await sha256Hex(`${objectId}:${text}`);
+  // Untrusted source content is sanitized before it ever becomes evidence.
+  // Injection flags are recorded in the content digest input but never silently dropped.
+  const { safeText } = sanitizeUntrusted(text, `jira ${objectId}`);
   return {
     id: `ev_${key.replace(/[^a-zA-Z0-9]/g, '-')}`,
     tenantId,
     sourceSystem: source,
     sourceObjectId: objectId,
     canonicalUrl: null,
-    extractedText: text,
+    extractedText: safeText,
     sourceVersion: updatedAt,
     observedAt: new Date().toISOString(),
     sourceUpdatedAt: updatedAt,

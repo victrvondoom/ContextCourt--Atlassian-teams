@@ -15,7 +15,10 @@
 import type { SourceSystem } from '../core/types';
 
 /** Transport boundary — in Forge runtime this wraps api.asUser().requestTeamworkGraph. */
-export type GraphFetcher = (query: string, variables: Record<string, unknown>) => Promise<{
+export type GraphFetcher = (
+  query: string,
+  variables: Record<string, unknown>,
+) => Promise<{
   ok: boolean;
   status: number;
   json: unknown;

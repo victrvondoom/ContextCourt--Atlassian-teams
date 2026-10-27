@@ -2,7 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { view } from '@forge/bridge';
 import { Sidebar, type NavItem } from './components/Sidebar';
 import { Overview } from './views/Overview';
-import { Cases, CaseDetail, ReviewQueue, AuditLedger, Integrations } from './views/Static';
+import { Cases } from './views/Cases';
+import { CaseDetail } from './views/Static';
+import { ReviewQueue } from './views/ReviewQueue';
+import { AuditLedger } from './views/AuditLedger';
+import { Integrations } from './views/Integrations';
 import type { HealthStatus } from './types';
 
 const NAV: NavItem[] = [

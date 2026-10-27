@@ -62,14 +62,16 @@ export async function draftProposal(req: ProposalRequest): Promise<ProposalDraft
   }
   // A sensitive operation requires at least a potential contradiction —
   // consistent or insufficient-evidence findings never generate proposals.
-  if (
-    req.finding.status !== 'VERIFIED_CONTRADICTION' &&
-    req.finding.status !== 'POTENTIAL_CONTRADICTION'
-  ) {
+  if (req.finding.status !== 'VERIFIED_CONTRADICTION' && req.finding.status !== 'POTENTIAL_CONTRADICTION') {
     throw new Error(`finding status ${req.finding.status} cannot generate remediation`);
   }
-  // Risk gating: high-risk operations require at least HIGH severity findings.
+  // Risk gating: an operation requires at least its minSeverity finding.
   const severityRank = (s: Severity) => SEVERITY_ORDER.indexOf(s);
+  if (severityRank(req.finding.severity) < severityRank(spec.minSeverity)) {
+    throw new Error(
+      `${req.operation} requires at least ${spec.minSeverity} severity (finding is ${req.finding.severity})`,
+    );
+  }
   if (spec.risk === 'high' && severityRank(req.finding.severity) < severityRank('HIGH')) {
     throw new Error('high-risk remediation requires HIGH or CRITICAL severity');
   }

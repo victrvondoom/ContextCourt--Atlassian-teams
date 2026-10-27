@@ -22,6 +22,8 @@ export interface JiraIssue {
   /** Label names used as lightweight decision/policy markers. */
   labels: string[];
   comments: Array<{ author: string; created: string; body: string }>;
+  /** Verified Jira issue links, used as impact-graph edges with Jira provenance. */
+  issuelinks: Array<{ key: string; summary: string | null; direction: 'blocks' | 'dependsOn' | 'related' }>;
 }
 
 export interface JiraSearchPage {
@@ -63,7 +65,7 @@ export class JiraAdapter {
   async getIssue(key: string): Promise<JiraIssue> {
     validateIssueKey(key);
     const res = await this.requestWithRetry(
-      `/rest/api/3/issue/${encodeURIComponent(key)}?fields=summary,description,status,updated,labels,comment`,
+      `/rest/api/3/issue/${encodeURIComponent(key)}?fields=summary,description,status,updated,labels,comment,issuelinks`,
     );
     return mapIssue(res);
   }
@@ -73,7 +75,7 @@ export class JiraAdapter {
     const body = {
       jql,
       maxResults: 25,
-      fields: ['summary', 'description', 'status', 'updated', 'labels', 'comment'],
+      fields: ['summary', 'description', 'status', 'updated', 'labels', 'comment', 'issuelinks'],
       ...(nextPageToken ? { nextPageToken } : {}),
     };
     const res = await this.requestWithRetry('/rest/api/3/search/jql', { method: 'POST', body });
@@ -153,6 +155,27 @@ function mapIssue(raw: unknown): JiraIssue {
           created: String(c.created ?? ''),
           body: typeof c.body === 'string' ? c.body : '',
         }))
+      : [],
+    // Only real issue links are kept; each is a verified Jira-sourced edge.
+    issuelinks: Array.isArray(fields.issuelinks)
+      ? fields.issuelinks.flatMap((link: any) => {
+          const type = link?.type?.name === 'Blocks' ? 'blocks' : 'dependsOn';
+          const outward = link?.outwardIssue
+            ? {
+                key: String(link.outwardIssue.key),
+                summary: link.outwardIssue.fields?.summary ?? null,
+                direction: type,
+              }
+            : null;
+          const inward = link?.inwardIssue
+            ? {
+                key: String(link.inwardIssue.key),
+                summary: link.inwardIssue.fields?.summary ?? null,
+                direction: type,
+              }
+            : null;
+          return [outward, inward].filter((e): e is JiraIssue['issuelinks'][number] => e !== null);
+        })
       : [],
   };
 }

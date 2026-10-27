@@ -20,7 +20,7 @@ function fakeKvs(): KvsLike & { data: Map<string, CaseRecord> } {
         where: () => q,
         cursor: () => q,
         limit: () => q,
-        fetch: async () => ({ results: all }),
+        getMany: async () => ({ results: all }),
       };
       return q as never;
     },

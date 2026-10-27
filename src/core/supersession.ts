@@ -55,11 +55,12 @@ export function detectSupersessionConflicts(input: SupersessionInput): Finding[]
           `Work references decision "${decision.subject}" which was superseded` +
           (decision.supersededDate ? ` on ${decision.supersededDate}` : '') +
           `. Evidence: ${[decision.evidenceIds[0], ref.id].filter(Boolean).join(', ')}`,
-        supportingEvidenceIds: [decision.evidenceIds[0], ref.id].filter(
-          (id): id is string => Boolean(id),
-        ),
+        supportingEvidenceIds: [decision.evidenceIds[0], ref.id].filter((id): id is string => Boolean(id)),
         competingClaims: [
-          { statement: `Decision "${decision.subject}" superseded`, evidenceId: decision.evidenceIds[0] ?? ref.id },
+          {
+            statement: `Decision "${decision.subject}" superseded`,
+            evidenceId: decision.evidenceIds[0] ?? ref.id,
+          },
           { statement: ref.extractedText, evidenceId: ref.id },
         ],
         confidence: assessment.confidence,
@@ -80,7 +81,10 @@ export function detectSupersessionConflicts(input: SupersessionInput): Finding[]
 }
 
 function referencesSubject(text: string, subject: string): boolean {
-  const words = subject.toLowerCase().split(/\s+/).filter((w) => w.length > 3);
+  const words = subject
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((w) => w.length > 3);
   if (words.length === 0) return false;
   const lower = text.toLowerCase();
   return words.some((w) => lower.includes(w));

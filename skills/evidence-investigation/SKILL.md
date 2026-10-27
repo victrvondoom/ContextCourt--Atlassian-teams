@@ -1,3 +1,8 @@
+---
+name: evidence-investigation
+description: Gather source-backed evidence for a Jira issue and evaluate its provenance before claiming any contradiction.
+allowed-tools: contextcourt-investigate-issue, contextcourt-get-evidence
+---
 # Evidence Investigation
 
 Gather source-backed evidence for a Jira issue and evaluate its provenance before making any claim.

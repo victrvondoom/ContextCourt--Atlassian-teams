@@ -1,3 +1,8 @@
+---
+name: impact-remediation
+description: Explore verified dependency impact for a contradiction and prepare a safe remediation proposal for human approval.
+allowed-tools: contextcourt-get-impact, contextcourt-prepare-remediation
+---
 # Impact and Remediation
 
 Explore verified dependency impact for a contradiction and prepare a safe remediation proposal.

@@ -175,25 +175,31 @@ modules:
           - contextcourt-get-impact
           - contextcourt-prepare-remediation
 
-function:
-  - key: main-resolver
-    handler: src/resolvers/index.handler
-  - key: agent-get-case
-    handler: src/rovo/index.getCaseHandler
-  - key: agent-investigate-issue
-    handler: src/rovo/index.investigateIssueHandler
-  - key: agent-get-evidence
-    handler: src/rovo/index.getEvidenceHandler
-  - key: agent-get-impact
-    handler: src/rovo/index.getImpactHandler
-  - key: agent-prepare-remediation
-    handler: src/rovo/index.prepareRemediationHandler
-  - key: agent-get-approval-status
-    handler: src/rovo/index.getApprovalStatusHandler
+  function:
+    - key: main-resolver
+      handler: src/resolvers/index.handler
+    - key: agent-get-case
+      handler: src/rovo/index.getCaseHandler
+    - key: agent-investigate-issue
+      handler: src/rovo/index.investigateIssueHandler
+    - key: agent-get-evidence
+      handler: src/rovo/index.getEvidenceHandler
+    - key: agent-get-impact
+      handler: src/rovo/index.getImpactHandler
+    - key: agent-prepare-remediation
+      handler: src/rovo/index.prepareRemediationHandler
+    - key: agent-get-approval-status
+      handler: src/rovo/index.getApprovalStatusHandler
 
 resources:
   - key: main
     path: src/frontend/dist
+
+app:
+  id: ari:cloud:ecosystem::app/c4afe958-659b-4cff-a460-c69cd1bd3f1f
+
+  runtime:
+    name: nodejs24.x
 
 permissions:
   scopes:

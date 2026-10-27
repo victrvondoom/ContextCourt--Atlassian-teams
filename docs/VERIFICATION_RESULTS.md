@@ -15,8 +15,8 @@ All commands executed in this environment; results captured verbatim.
 
 ## Git / GitHub
 
-- Local branch `main` at commit `9cbe6bde8d7f4324fa1d56979d7335a0e947a5fb`
-- Pushed to `https://github.com/uhuhyogiyfitufyktyhvfukyku/Context-Court-AI.git` → verified via `git ls-remote`: remote `refs/heads/main` = `9cbe6bd...` (match)
+- Local branch `main` at commit `481aed3 (481aed38abb96cfbfc8ae457c203d3fdf98bf75b)`
+- Pushed to `https://github.com/uhuhyogiyfitufyktyhvfukyku/Context-Court-AI.git` → verified via `git ls-remote`: remote `refs/heads/main` = `481aed3 (481aed38abb96cfbfc8ae457c203d3fdf98bf75b)` (match)
 - Push to `victrvondoom/Context-Court-Atlassian-teams-` remains blocked: authenticated
   account `uhuhyogiyfitufyktyhvfukyku` has pull-only permission there (HTTP 403, exact
   error captured in the session log). Required user action: grant that account write

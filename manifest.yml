@@ -1,0 +1,33 @@
+modules:
+  jira:globalPage:
+    - key: contextcourt-dashboard
+      resource: main
+      resolver:
+        function: main-resolver
+      title: ContextCourt AI
+
+  jira:issuePanel:
+    - key: contextcourt-issue-panel
+      resource: main
+      resolver:
+        function: main-resolver
+      title: ContextCourt
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+
+function:
+  - key: main-resolver
+    handler: src/resolvers/index.handler
+
+resources:
+  - key: main
+    path: src/frontend/dist
+
+app:
+  runtime:
+    name: nodejs24.x
+
+permissions:
+  scopes:
+    - read:jira-work
+    - read:jira-user
+    - storage:app

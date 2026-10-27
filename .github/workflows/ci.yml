@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Frontend build
+        run: npm run build:frontend
+
+      - name: Secret scan
+        shell: bash
+        run: |
+          if grep -rInE "(apiToken|API_TOKEN|password|secret)\s*[:=]\s*['\"][A-Za-z0-9+/_-]{16,}" src tests scripts 2>/dev/null; then
+            echo "::error::Potential secret detected in source"
+            exit 1
+          fi
+          echo "No obvious secrets found."
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: coverage
+          if-no-files-found: ignore

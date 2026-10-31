@@ -427,31 +427,57 @@ resolver.define('decideProposal', async (ctx: unknown) => {
     return { status: 'INVALID_INPUT', error: 'valid proposalId and decision required' };
   }
 
-  const repo = new KvsProposalRepository(kvs as unknown as KvsLike);
-  const proposal = await repo.get(cloudId, proposalId.data);
+  return decideProposalCore(
+    cloudId,
+    accountId,
+    proposalId.data,
+    decision.data,
+    rationale.success ? rationale.data : null,
+  );
+});
+
+/**
+ * Shared decision path (resolver + tests). The proposal is re-read from the
+ * store immediately before the state transition, so a second, conflicting
+ * decision made after the first one committed finds a non-PENDING state and
+ * fails safely (ET-243). Residual limitation: KVS has no compare-and-swap, so
+ * two truly concurrent decisions can interleave reads; the design accepts
+ * last-writer-wins on the state field and records both audit events — see
+ * docs/ARCHITECTURE_DECISIONS.md (ADR-007).
+ */
+export async function decideProposalCore(
+  cloudId: string,
+  accountId: string,
+  proposalId: string,
+  decision: 'approve' | 'reject',
+  rationale: string | null | undefined,
+  kvsClient: KvsLike = kvs as unknown as KvsLike,
+) {
+  const repo = new KvsProposalRepository(kvsClient);
+  const proposal = await repo.get(cloudId, proposalId);
   if (!proposal) return { status: 'NOT_FOUND', error: 'proposal not found for this tenant' };
 
   try {
     const updated = decideProposal({
       proposal,
-      decision: decision.data,
+      decision,
       approverUserId: accountId,
       now: new Date(),
-      rationale: rationale.success ? rationale.data : null,
+      rationale: rationale ?? null,
     });
     await repo.put(updated);
-    const audit = new KvsAuditRepository(kvs as unknown as AuditSinkLike);
+    const audit = new KvsAuditRepository(kvsClient as unknown as AuditSinkLike);
     await recordAuditEvent(
       audit,
       {
         tenantId: cloudId,
         actor: accountId,
-        action: decision.data === 'approve' ? 'proposal_approved' : 'proposal_rejected',
+        action: decision === 'approve' ? 'proposal_approved' : 'proposal_rejected',
         target: proposal.id,
         result: 'success',
         linkedEvidenceIds: proposal.supportingFindingIds,
         requestFingerprint: await digestPayload({
-          action: decision.data,
+          action: decision,
           actor: accountId,
           payloadDigest: proposal.payloadDigest,
         }),
@@ -465,7 +491,7 @@ resolver.define('decideProposal', async (ctx: unknown) => {
     }
     return { status: 'DECISION_FAILED', error: err instanceof Error ? err.message : 'decision failed' };
   }
-});
+}
 
 /**
  * Execute an approved proposal. Only the approver on record may execute; the

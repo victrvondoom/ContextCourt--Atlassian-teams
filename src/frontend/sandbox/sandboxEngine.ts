@@ -16,6 +16,8 @@ import { draftProposal } from '../../core/remediation';
 import { orderReviewQueue } from '../../core/queue';
 import { verifyExecutionOutcome } from '../../core/verification';
 import { recordAuditEvent, orderAuditEvents, type AuditSink } from '../../audit/auditLog';
+import { sanitizeUntrusted } from '../../security/injection';
+import { sha256Hex } from '../../core/digest';
 import type {
   AuditEvent,
   CaseRecordLite,
@@ -153,8 +155,6 @@ export async function runSandboxAnalysis(issueKey: string) {
   const scenario = scenarioForKey(key);
   const evidence = fixtureEvidence(key, scenario);
   // Real sanitization + digests run in-browser over the fixture text.
-  const { sanitizeUntrusted } = await import('../../security/injection');
-  const { sha256Hex } = await import('../../core/digest');
   for (const e of evidence) {
     e.extractedText = sanitizeUntrusted(e.extractedText, `jira ${e.sourceObjectId}`).safeText;
     e.contentDigest = await sha256Hex(`${e.sourceObjectId}:${e.extractedText}`);

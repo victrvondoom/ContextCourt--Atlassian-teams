@@ -1273,7 +1273,7 @@
     "domain": "C. Agentic intelligence and reasoning",
     "title": "Stored finding schema validation",
     "description": "Validate findings on read.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -1948,7 +1948,7 @@
     "domain": "E. Governance, approval and human control",
     "title": "Concurrent decision conflict handling",
     "description": "Two reviewers deciding simultaneously.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -2429,7 +2429,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Dependency security audit",
     "description": "npm audit gate in CI.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {

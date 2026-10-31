@@ -12,7 +12,7 @@ this repository at the final commit. Labels follow the project convention
 | Typecheck | `npm run typecheck` | **PASS — 0 errors** |
 | Lint | `npm run lint` | **PASS — 0 problems** |
 | Format | `npm run format:check` | **PASS** |
-| Tests | `npm test` | **PASS — 116/116 tests, 17 files** (87 at mission start; +18 mission, +11 dynamics pass) |
+| Tests | `npm test` | **PASS — 137/137 tests, 20 files** (87 at mission start; +18 mission, +11 dynamics, +21 reliability/security pass) |
 | Frontend build | `npm run build` | **PASS** |
 | Benchmark replay | `npx vite-node benchmarks/evaluate.ts benchmarks/dataset.json` | **MEASURED, exact**: P=0.800 R=0.571 F1=0.667 FPR=0.200 (unchanged by the mission — engine untouched) |
 | Demo | `npm run demo` | **PASS — 6/6 scenarios**, deterministic (Scenarios A–F) |
@@ -38,6 +38,17 @@ ordering (+ severity carried on proposals); trace markers in execution writes;
 demo runner for Scenarios A–F (+ `npm run demo`); 468+459 registers with
 generation and validation scripts; 13 new/updated governance, architecture,
 benchmark, demo and handoff documents; README as-built.
+
+## Reliability/security pass (2026-10-31, latest)
+
+ADR-008 retry-idempotency guard (4 tests); finding-record validation on all
+read paths (8 tests); `decideProposalCore` extraction + sequential
+decision-conflict safety, ADR-007 (4 tests); injection-governance security
+tests (4 tests); dependency audit remediated 2 critical + 7 high →
+0 critical / 0 high / 17 moderate (zod 4.6.7, @forge latest, bridge 5.5.0,
+vite 8, vitest 5, vite-node); CI now gates audit + register validation;
+`docs/ARCHITECTURE_DECISIONS.md` (ADR-001..010) and
+`docs/EXECUTION_STATE.md` added.
 
 ## Dynamics pass (after the mission, same day)
 

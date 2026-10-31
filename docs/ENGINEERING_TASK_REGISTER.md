@@ -6,9 +6,9 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Status | Count |
 |---|---|
-| TEST_VERIFIED | 305 |
+| TEST_VERIFIED | 309 |
 | IMPLEMENTED | 46 |
-| NOT_STARTED | 51 |
+| NOT_STARTED | 47 |
 | DEFERRED | 49 |
 | BLOCKED | 8 |
 
@@ -482,12 +482,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Confirm licenses compatible with MIT app.
 - **Linked features:** FR-401
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** package.json · **Deps:** ET-009
 - **Acceptance:** No incompatible licenses
 - **Verification:** License walk-through · **Regression:** On dependency change
 - **Risk:** License conflict
-- **Evidence:** Not yet performed this pass
+- **Evidence:** Direct deps MIT / Apache-2.0 / Atlassian Forge SDK license — compatible with the MIT app; recorded in docs/ARCHITECTURE_DECISIONS.md
 
 ### ET-044 — Bundle size audit
 
@@ -504,12 +504,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Index ADR-style decisions.
 - **Linked features:** FR-427
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** docs/ · **Deps:** ET-027
 - **Acceptance:** Key decisions indexed with rationale
 - **Verification:** Doc review · **Regression:** Per decision
 - **Risk:** Lost rationale
-- **Evidence:** Decisions currently spread across docs; index pending
+- **Evidence:** docs/ARCHITECTURE_DECISIONS.md authored: ADR-001..010 index incl. full ADR-007 (concurrent decisions) and ADR-008 (retry idempotency) records
 
 ## Workstream 2. Product workflows and frontend
 
@@ -1846,7 +1846,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 - **Acceptance:** 4xx non-429 not retried
 - **Verification:** Adapter tests · **Regression:** Existing suite
 - **Risk:** Retry storms
-- **Evidence:** jira-adapter tests
+- **Evidence:** jira-adapter tests; ADR-008 idempotency guard 2026-10-31 — only idempotent requests retry (3 guard tests + single-attempt execution test)
 
 ### ET-167 — Deterministic fallback policy
 
@@ -2072,12 +2072,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Validate findings on read.
 - **Linked features:** FR-162
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/storage/ · **Deps:** ET-101
 - **Acceptance:** Corrupt findings rejected
 - **Verification:** Unit tests · **Regression:** New tests
 - **Risk:** Poisoned store
-- **Evidence:** Backlog
+- **Evidence:** core/findingValidation.ts gates every finding read (getCase, prepareProposal, rovo loadFinding); malformed records rejected and counted — tests/unit/finding-validation.test.ts (8)
 
 ### ET-188 — Agent/UI proposal parity
 
@@ -2879,12 +2879,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Two reviewers at once.
 - **Linked features:** FR-243
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/storage/proposalStore.ts · **Deps:** ET-241
 - **Acceptance:** Second decision fails safely
 - **Verification:** Concurrency tests · **Regression:** New tests
 - **Risk:** Double decisions
-- **Evidence:** Backlog; single-writer KVS mitigates
+- **Evidence:** decideProposalCore re-reads before transition; sequential conflicting decisions rejected safely; last-writer-wins residual documented (ADR-007) — tests/integration/decision-conflicts.test.ts (4)
 
 ### ET-261 — Multi-approver policies
 

@@ -828,8 +828,8 @@
     "verification": "License walk-through",
     "regression": "On dependency change",
     "risk": "License conflict",
-    "status": "NOT_STARTED",
-    "evidence": "Not yet performed this pass"
+    "status": "TEST_VERIFIED",
+    "evidence": "Direct deps MIT / Apache-2.0 / Atlassian Forge SDK license — compatible with the MIT app; recorded in docs/ARCHITECTURE_DECISIONS.md"
   },
   {
     "id": "ET-044",
@@ -864,8 +864,8 @@
     "verification": "Doc review",
     "regression": "Per decision",
     "risk": "Lost rationale",
-    "status": "NOT_STARTED",
-    "evidence": "Decisions currently spread across docs; index pending"
+    "status": "TEST_VERIFIED",
+    "evidence": "docs/ARCHITECTURE_DECISIONS.md authored: ADR-001..010 index incl. full ADR-007 (concurrent decisions) and ADR-008 (retry idempotency) records"
   },
   {
     "id": "ET-046",
@@ -3062,7 +3062,7 @@
     "regression": "Existing suite",
     "risk": "Retry storms",
     "status": "TEST_VERIFIED",
-    "evidence": "jira-adapter tests"
+    "evidence": "jira-adapter tests; ADR-008 idempotency guard 2026-10-31 — only idempotent requests retry (3 guard tests + single-attempt execution test)"
   },
   {
     "id": "ET-167",
@@ -3441,8 +3441,8 @@
     "verification": "Unit tests",
     "regression": "New tests",
     "risk": "Poisoned store",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "core/findingValidation.ts gates every finding read (getCase, prepareProposal, rovo loadFinding); malformed records rejected and counted — tests/unit/finding-validation.test.ts (8)"
   },
   {
     "id": "ET-188",
@@ -4767,8 +4767,8 @@
     "verification": "Concurrency tests",
     "regression": "New tests",
     "risk": "Double decisions",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog; single-writer KVS mitigates"
+    "status": "TEST_VERIFIED",
+    "evidence": "decideProposalCore re-reads before transition; sequential conflicting decisions rejected safely; last-writer-wins residual documented (ADR-007) — tests/integration/decision-conflicts.test.ts (4)"
   },
   {
     "id": "ET-261",

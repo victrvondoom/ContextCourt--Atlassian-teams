@@ -17,7 +17,7 @@ for demos, never present simulated as live.
   user authorization.** Remote `contextcourt` → `uhuhyogiyfitufyktyhvfukyku/Context-Court-AI`
   (note: differs from the `updatingmyhim` URL in some briefs).
 - Verification: `tsc` clean · `eslint` clean · `prettier` clean ·
-  **116/116 tests, 17 files** · `vite build` ok · benchmark replay exact
+  **137/137 tests, 20 files** · `vite build` ok · benchmark replay exact
   (P=0.800 R=0.571 F1=0.667) · `npm run demo` 6/6 ·
   `npm run validate:registers` PASS (468 FR + 459 ET).
 
@@ -73,6 +73,16 @@ timeline (getCaseTimeline resolver + CaseDetail card + sandbox), live expiry
 countdown, execution confirmation, case search/sort/pagination, at-a-glance
 real-counts panel. Registers updated (11 FR DEFER→EXISTING, 11 ET
 NOT_STARTED→TEST_VERIFIED) and re-validated. All 116/116 green.
+
+## Reliability/security pass (2026-10-31)
+ADR-008 retry-idempotency guard; ADR-007 concurrent-decision handling
+(decideProposalCore, sequential conflicts fail safely, last-writer-wins
+residual documented); finding validation on every read
+(core/findingValidation.ts); injection-governance security tests; dependency
+audit remediated (zod 4.6.7, @forge latest, @forge/bridge 5.5.0, vite 8,
+vitest 5, vite-node devDep) → 0 critical/0 high/17 moderate; CI gates audit
++ registers; docs/ARCHITECTURE_DECISIONS.md + docs/EXECUTION_STATE.md.
+137/137 tests green after all upgrades.
 
 ## Outstanding (highest value next)
 1. External: dev-site deploy → verify live paths → flip `health` labels for

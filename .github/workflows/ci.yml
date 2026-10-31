@@ -36,6 +36,12 @@ jobs:
       - name: Frontend build
         run: npm run build:frontend
 
+      - name: Dependency audit (high and above)
+        run: npm audit --audit-level=high
+
+      - name: Register validation
+        run: npm run validate:registers
+
       - name: Secret scan
         shell: bash
         run: |

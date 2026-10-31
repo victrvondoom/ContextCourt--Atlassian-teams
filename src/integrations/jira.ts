@@ -57,6 +57,14 @@ export class JiraApiError extends Error {
 
 const MAX_RETRIES = 3;
 
+/** True for requests whose retry cannot duplicate an external side effect. */
+function isRetryable(path: string, init?: { method?: string; body?: unknown }): boolean {
+  const method = (init?.method ?? 'GET').toUpperCase();
+  if (method === 'GET' || method === 'HEAD') return true;
+  // JQL search is a POST with read-only semantics (documented Jira v3 search API).
+  return method === 'POST' && path === '/rest/api/3/search/jql';
+}
+
 export class JiraAdapter {
   constructor(
     private readonly fetcher: JiraFetcher,
@@ -99,7 +107,22 @@ export class JiraAdapter {
     return all;
   }
 
-  private async requestWithRetry(path: string, init?: { method?: string; body?: unknown }): Promise<unknown> {
+  /**
+   * Single transport entry point with bounded retry. Public so the retry
+   * idempotency guard is directly testable; callers must respect that only
+   * idempotent requests are retried (enforced below).
+   */
+  async requestWithRetry(path: string, init?: { method?: string; body?: unknown }): Promise<unknown> {
+    // Retrying a request whose side effects may already have been applied can
+    // duplicate non-idempotent external effects (a comment posted twice, an
+    // issue created twice). Only idempotent reads are retryable: GETs and the
+    // JQL search endpoint (a POST with read-only semantics). Every write path
+    // is single-attempt by design.
+    if (!isRetryable(path, init)) {
+      const res = await this.fetcher(path, init);
+      if (res.ok) return res.json;
+      throw new JiraApiError(res.status, path, `Jira API error ${res.status} on ${path}`);
+    }
     let lastError: unknown;
     for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
       try {

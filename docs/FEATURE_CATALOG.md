@@ -6,9 +6,9 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Disposition | Count |
 |---|---|
-| EXISTING | 291 |
+| EXISTING | 294 |
 | IMPLEMENT | 49 |
-| DEFER | 117 |
+| DEFER | 114 |
 | REJECT_WITH_REASON | 11 |
 
 ---
@@ -970,7 +970,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-159 — Stored finding schema validation
 
 - **Description:** Validate findings on read.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-160 — Agent/UI proposal parity
@@ -1478,7 +1478,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-243 — Concurrent decision conflict handling
 
 - **Description:** Two reviewers deciding simultaneously.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-244 — Multi-approver policies
@@ -1840,7 +1840,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-303 — Dependency security audit
 
 - **Description:** npm audit gate in CI.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-304 — Data minimization

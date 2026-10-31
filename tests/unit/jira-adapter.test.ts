@@ -190,3 +190,45 @@ describe('Jira adapter', () => {
     expect(res.nextPageToken).toBeNull();
   });
 });
+
+describe('retry idempotency guard (2026-10-31 reliability pass)', () => {
+  it('never retries a non-idempotent write even on a transient 5xx — no duplicated side effects', async () => {
+    let calls = 0;
+    const fetcher = async () => {
+      calls += 1;
+      return { ok: false, status: 503, json: {} };
+    };
+    const adapter = new JiraAdapter(fetcher);
+    await expect(
+      adapter.requestWithRetry('/rest/api/3/issue/PAY-142/comment', { method: 'POST', body: {} }),
+    ).rejects.toThrow(/503/);
+    expect(calls).toBe(1);
+  });
+
+  it('still retries idempotent GETs on transient 5xx', async () => {
+    let calls = 0;
+    const fetcher = async () => {
+      calls += 1;
+      return calls < 3
+        ? { ok: false, status: 503, json: {} }
+        : { ok: true, status: 200, json: { fields: {} } };
+    };
+    const adapter = new JiraAdapter(fetcher);
+    await adapter.requestWithRetry('/rest/api/3/issue/PAY-142?fields=summary');
+    expect(calls).toBe(3);
+  });
+
+  it('still retries the read-only JQL search POST', async () => {
+    let calls = 0;
+    const fetcher = async () => {
+      calls += 1;
+      return calls < 2
+        ? { ok: false, status: 500, json: {} }
+        : { ok: true, status: 200, json: { issues: [], nextPageToken: undefined } };
+    };
+    const adapter = new JiraAdapter(fetcher);
+    const page = await adapter.searchIssues('project = PAY');
+    expect(page.issues).toEqual([]);
+    expect(calls).toBe(2);
+  });
+});

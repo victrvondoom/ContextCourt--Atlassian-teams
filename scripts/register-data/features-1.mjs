@@ -164,7 +164,7 @@ export const FEATURES_1 = [
   ['Shadow execution mode', 'Dry-run agent proposals for evaluation.', 'DEFER', 4],
   ['Agent human-review rubric', 'Structured rubric for live agent evaluation.', 'DEFER', 4],
     ['Structured investigation output', 'Typed analysis result shape everywhere.', 'EXISTING', 0],
-  ['Stored finding schema validation', 'Validate findings on read.', 'DEFER', 3],
+  ['Stored finding schema validation', 'Validate findings on read.', 'EXISTING', 3],
   ['Agent/UI proposal parity', 'Both producers yield identical proposal contracts.', 'EXISTING', 1],
   ['Per-action audit events', 'Agent mutations are audited like human ones.', 'EXISTING', 1],
   ['Severity-gated agent proposals', 'Operations require minimum finding severity.', 'EXISTING', 0],

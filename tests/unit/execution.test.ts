@@ -294,3 +294,23 @@ describe('cancelProposal (withdrawal / revocation)', () => {
     );
   });
 });
+
+describe('execution transport is single-attempt (no retry duplication)', () => {
+  it('an execution write invokes the Jira transport exactly once', async () => {
+    const p = await approved();
+    let calls = 0;
+    const countingFetcher = async () => {
+      calls += 1;
+      return { ok: true, status: 201, json: {} };
+    };
+    const out = await executeProposal({
+      proposal: p,
+      executorUserId: APPROVER,
+      executedDigests: [],
+      now: new Date('2026-10-30T12:30:00Z'),
+      fetcher: countingFetcher,
+    });
+    expect(out.state).toBe('EXECUTED');
+    expect(calls).toBe(1);
+  });
+});

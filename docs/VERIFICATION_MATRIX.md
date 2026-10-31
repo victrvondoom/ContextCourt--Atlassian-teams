@@ -46,6 +46,16 @@ test) · PROP (property/invariant test) · REPLAY (deterministic replay) · DEMO
 | Pending-first ordering | UNIT | same |
 | Priority explanations rendered | UNIT+UI | same + ReviewQueue |
 
+## Reliability/security pass (2026-10-31)
+
+| Capability | Method | Evidence |
+|---|---|---|
+| Only idempotent requests retry; writes single-attempt | UNIT | `tests/unit/jira-adapter.test.ts` (retry guard), `tests/unit/execution.test.ts` |
+| Sequential conflicting decisions fail safely | INT | `tests/integration/decision-conflicts.test.ts` (4) |
+| Malformed finding records rejected on read | UNIT | `tests/unit/finding-validation.test.ts` (8) |
+| Injection flagged, never obeyed; forged authorization inert | SEC | `tests/security/injection-governance.test.ts` (4) |
+| Dependency advisories: 0 critical / 0 high | MEASURED | `npm audit --audit-level=high` exit 0; CI gate |
+
 ## Audit
 
 | Capability | Method | Evidence |

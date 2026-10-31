@@ -165,7 +165,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-156 | Shadow execution mode | DEFER | ET-182, ET-405 |
 | FR-157 | Agent human-review rubric | DEFER | ET-183, ET-408 |
 | FR-158 | Structured investigation output | EXISTING | — |
-| FR-159 | Stored finding schema validation | DEFER | ET-184 |
+| FR-159 | Stored finding schema validation | EXISTING | ET-184 |
 | FR-160 | Agent/UI proposal parity | EXISTING | ET-185 |
 | FR-161 | Per-action audit events | EXISTING | ET-186 |
 | FR-162 | Severity-gated agent proposals | EXISTING | ET-187 |
@@ -249,7 +249,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-240 | Approval evidence snapshot | DEFER | ET-257 |
 | FR-241 | Approval-to-execution traceability | EXISTING | ET-258 |
 | FR-242 | Decision accountability | EXISTING | ET-259 |
-| FR-243 | Concurrent decision conflict handling | DEFER | ET-260, ET-398 |
+| FR-243 | Concurrent decision conflict handling | EXISTING | ET-260, ET-398 |
 | FR-244 | Multi-approver policies | DEFER | ET-261 |
 | FR-245 | Approval delegation | DEFER | ET-262 |
 | FR-246 | Approval SLA tracking | DEFER | ET-263 |
@@ -309,7 +309,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-300 | Recovery by re-analysis | EXISTING | — |
 | FR-301 | Failure scenario fixtures | IMPLEMENT | ET-334, ET-429 |
 | FR-302 | Failure demo in sandbox | EXISTING | — |
-| FR-303 | Dependency security audit | DEFER | — |
+| FR-303 | Dependency security audit | EXISTING | — |
 | FR-304 | Data minimization | EXISTING | ET-336 |
 | FR-305 | Cross-tenant read rejection tests | EXISTING | ET-286, ET-400 |
 | FR-306 | Injection defense tests | EXISTING | — |

@@ -19,6 +19,7 @@ import { KvsAuditRepository } from '../storage/auditStore';
 import { analyzeImpact } from '../core/impact';
 import type { DependencyEdge } from '../core/impact';
 import { draftProposal } from '../core/remediation';
+import { isValidFinding } from '../core/findingValidation';
 import { recordAuditEvent, type AuditSink } from '../audit/auditLog';
 import { digestPayload } from '../core/digest';
 import type { RemediationProposal } from '../core/types';
@@ -261,11 +262,10 @@ export async function prepareRemediation({ payload, context }: { payload: unknow
   }
 }
 
-/** Load a stored finding by id (findings are stored alongside their case). */
+/** Load a stored finding by id; malformed records are rejected, never drafted against. */
 async function loadFinding(tenantId: string, findingId: string) {
-  const value = (await kvs.get(`finding:${tenantId}:${findingId}`)) as
-    import('../core/types').Finding | undefined;
-  if (!value || value.tenantId !== tenantId) return null;
+  const value = await kvs.get(`finding:${tenantId}:${findingId}`);
+  if (!isValidFinding(value) || value.tenantId !== tenantId) return null;
   return value;
 }
 

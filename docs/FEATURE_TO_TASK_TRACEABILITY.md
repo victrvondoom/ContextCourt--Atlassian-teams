@@ -29,9 +29,9 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-020 | ARIA roles and labels | EXISTING | ET-061 |
 | FR-021 | Design token system | EXISTING | ET-062 |
 | FR-022 | Responsive app shell | EXISTING | ET-093 |
-| FR-023 | Post-execution verification display | IMPLEMENT | ET-023, ET-063 |
-| FR-024 | Queue priority explanation | IMPLEMENT | ET-064, ET-208 |
-| FR-025 | Execution outcome detail display | IMPLEMENT | ET-065, ET-376 |
+| FR-023 | Post-execution verification display | EXISTING | ET-023, ET-063 |
+| FR-024 | Queue priority explanation | EXISTING | ET-064, ET-208 |
+| FR-025 | Execution outcome detail display | EXISTING | ET-065, ET-376 |
 | FR-026 | Proposal risk badge | EXISTING | ET-014 |
 | FR-027 | Approver identity display | EXISTING | — |
 | FR-028 | Approval expiry countdown | DEFER | ET-068 |
@@ -44,7 +44,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-035 | Rejection rationale capture | DEFER | ET-074 |
 | FR-036 | Proposal notifications | DEFER | ET-075 |
 | FR-037 | Live-mode onboarding tour | DEFER | ET-076 |
-| FR-038 | Demo fixtures for scenarios A–F | IMPLEMENT | ET-020, ET-067 |
+| FR-038 | Demo fixtures for scenarios A–F | EXISTING | ET-020, ET-067 |
 | FR-039 | Deterministic demo replay | EXISTING | — |
 | FR-040 | Copyable evidence citations | DEFER | ET-077 |
 | FR-041 | Deep links to Jira issues | DEFER | ET-078 |
@@ -154,13 +154,13 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-145 | LLM-assisted extraction layer | DEFER | ET-171 |
 | FR-146 | Metamorphic agent testing | DEFER | ET-172 |
 | FR-147 | Differential testing vs rule baseline | DEFER | ET-173 |
-| FR-148 | Tool-call post-state verification | IMPLEMENT | ET-174 |
+| FR-148 | Tool-call post-state verification | EXISTING | ET-174 |
 | FR-149 | Idempotent agent operations | EXISTING | ET-175 |
 | FR-150 | Agent/UI shared core | EXISTING | ET-176 |
 | FR-151 | Severity reasons as explanations | EXISTING | ET-177 |
 | FR-152 | Confidence separated from severity | EXISTING | ET-178, ET-395 |
 | FR-153 | Both-sides contradiction reply | EXISTING | ET-179 |
-| FR-154 | Agent rate limits | DEFER | ET-180 |
+| FR-154 | Agent rate limits | EXISTING | ET-180 |
 | FR-155 | Failure recovery guidance | DEFER | ET-181 |
 | FR-156 | Shadow execution mode | DEFER | ET-182, ET-405 |
 | FR-157 | Agent human-review rubric | DEFER | ET-183, ET-408 |
@@ -172,7 +172,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-163 | Proposal risk classification | EXISTING | ET-188 |
 | FR-164 | Documented operation catalog | EXISTING | ET-189 |
 | FR-165 | Escalation path documentation | EXISTING | ET-190 |
-| FR-166 | Agent contract registry | IMPLEMENT | ET-191, ET-194 |
+| FR-166 | Agent contract registry | EXISTING | ET-191, ET-194 |
 | FR-167 | Agent verification matrix | EXISTING | ET-192, ET-195 |
 | FR-168 | Prompt version tracking | DEFER | ET-193 |
 | FR-169 | Autonomous approval agent | REJECT_WITH_REASON | — |
@@ -192,26 +192,26 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-183 | Supporting finding links | EXISTING | ET-204 |
 | FR-184 | Duplicate proposal convergence | EXISTING | ET-205, ET-395 |
 | FR-185 | Conflicting remediation detection | DEFER | ET-206 |
-| FR-186 | Documented utility queue ordering | IMPLEMENT | ET-207, ET-431 |
-| FR-187 | Priority explanation strings | IMPLEMENT | ET-208 |
+| FR-186 | Documented utility queue ordering | EXISTING | ET-207, ET-431 |
+| FR-187 | Priority explanation strings | EXISTING | ET-208 |
 | FR-188 | Dependency-aware queue constraints | DEFER | ET-209 |
 | FR-189 | Deadline awareness | DEFER | ET-210 |
 | FR-190 | Resource-constrained scheduling | DEFER | ET-211 |
 | FR-191 | Fairness / starvation prevention | DEFER | ET-212 |
 | FR-192 | Dynamic replanning on new evidence | DEFER | ET-213 |
-| FR-193 | Deterministic priority recalculation | IMPLEMENT | ET-214 |
+| FR-193 | Deterministic priority recalculation | EXISTING | ET-214 |
 | FR-194 | Cost estimation per proposal | DEFER | — |
 | FR-195 | Expected-benefit quantification | DEFER | ET-215 |
 | FR-196 | Reversibility classification | DEFER | ET-216 |
 | FR-197 | Rollback eligibility | DEFER | ET-217 |
 | FR-198 | Execution prerequisites check | EXISTING | ET-218 |
 | FR-199 | Candidate state validation | EXISTING | ET-219 |
-| FR-200 | Risk-adjusted ordering factor | IMPLEMENT | ET-220 |
-| FR-201 | Age-decay ordering factor | IMPLEMENT | ET-221 |
-| FR-202 | Severity-dominant ordering | IMPLEMENT | ET-222 |
+| FR-200 | Risk-adjusted ordering factor | EXISTING | ET-220 |
+| FR-201 | Age-decay ordering factor | EXISTING | ET-221 |
+| FR-202 | Severity-dominant ordering | EXISTING | ET-222 |
 | FR-203 | Queue pending counts | EXISTING | ET-223, ET-377 |
 | FR-204 | Optimization objective documentation | EXISTING | ET-224, ET-419 |
-| FR-205 | Queue design documentation | IMPLEMENT | ET-225 |
+| FR-205 | Queue design documentation | EXISTING | ET-225 |
 | FR-206 | Proposal comparison view | DEFER | ET-226 |
 | FR-207 | Remediation playbooks | DEFER | ET-227 |
 | FR-208 | Multi-proposal bundling | DEFER | ET-228 |
@@ -222,8 +222,8 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-213 | Reopen proposals | DEFER | ET-233 |
 | FR-214 | Proposal history per case | DEFER | ET-234 |
 | FR-215 | Cross-case remediation dedup | DEFER | ET-235, ET-236, ET-403 |
-| FR-216 | Ordering sensitivity property test | IMPLEMENT | ET-237, ET-403 |
-| FR-217 | Ordering regression suite | IMPLEMENT | ET-238 |
+| FR-216 | Ordering sensitivity property test | EXISTING | ET-237, ET-403 |
+| FR-217 | Ordering regression suite | EXISTING | ET-238 |
 | FR-218 | Documented queue constraints | EXISTING | — |
 | FR-219 | Background scheduler hooks | DEFER | ET-239 |
 | FR-220 | Arbitrary numeric priority score | REJECT_WITH_REASON | ET-240 |
@@ -255,7 +255,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-246 | Approval SLA tracking | DEFER | ET-263 |
 | FR-247 | Role-based approver eligibility | DEFER | ET-264 |
 | FR-248 | Approval history view | DEFER | ET-265 |
-| FR-249 | Governance documentation | IMPLEMENT | ET-266 |
+| FR-249 | Governance documentation | EXISTING | ET-266 |
 | FR-250 | Policy evaluation engine | DEFER | ET-267 |
 | FR-251 | Scope-based permission boundaries | EXISTING | ET-268 |
 | FR-252 | Separation-of-duties tests | EXISTING | ET-247, ET-423 |
@@ -263,7 +263,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-254 | Replay enforcement tests | EXISTING | ET-245, ET-387, ET-423 |
 | FR-255 | Self-approval tests | EXISTING | ET-243, ET-423 |
 | FR-256 | Approver-identity tests | EXISTING | ET-246, ET-385, ET-423 |
-| FR-257 | Governance scenario demo | IMPLEMENT | ET-269, ET-427 |
+| FR-257 | Governance scenario demo | EXISTING | ET-269, ET-427 |
 | FR-258 | Human escalation display | DEFER | ET-270 |
 | FR-259 | Approval search/filter | DEFER | — |
 | FR-260 | Binding re-verification at execution | EXISTING | ET-271 |
@@ -293,21 +293,21 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-284 | Explicit EXECUTION_FAILED | EXISTING | ET-018, ET-353, ET-393 |
 | FR-285 | Execution audit events | EXISTING | ET-018 |
 | FR-286 | Execution receipts | EXISTING | ET-018 |
-| FR-287 | Post-execution independent verification | IMPLEMENT | ET-018, ET-177, ET-330, ET-430 |
-| FR-288 | Verification result storage | IMPLEMENT | ET-018, ET-331 |
-| FR-289 | Verification audit events | IMPLEMENT | ET-018, ET-332 |
-| FR-290 | Success vs verified distinction | IMPLEMENT | ET-018, ET-333, ET-392 |
+| FR-287 | Post-execution independent verification | EXISTING | ET-018, ET-177, ET-330, ET-430 |
+| FR-288 | Verification result storage | EXISTING | ET-018, ET-331 |
+| FR-289 | Verification audit events | EXISTING | ET-018, ET-332 |
+| FR-290 | Success vs verified distinction | EXISTING | ET-018, ET-333, ET-392 |
 | FR-291 | Partial failure classification | DEFER | ET-396 |
 | FR-292 | State reconciliation | DEFER | — |
 | FR-293 | Compensating actions | DEFER | — |
 | FR-294 | Rollback boundaries | DEFER | — |
-| FR-295 | Circuit breaker for Jira | DEFER | — |
-| FR-296 | Execution timeout budgets | DEFER | — |
+| FR-295 | Circuit breaker for Jira | EXISTING | — |
+| FR-296 | Execution timeout budgets | EXISTING | — |
 | FR-297 | 429 rate-limit retry | EXISTING | ET-335 |
 | FR-298 | Secret management policy | EXISTING | ET-041, ET-290 |
 | FR-299 | Abuse-resistant input validation | EXISTING | ET-289, ET-407, ET-421 |
 | FR-300 | Recovery by re-analysis | EXISTING | — |
-| FR-301 | Failure scenario fixtures | IMPLEMENT | ET-334, ET-429 |
+| FR-301 | Failure scenario fixtures | EXISTING | ET-334, ET-429 |
 | FR-302 | Failure demo in sandbox | EXISTING | — |
 | FR-303 | Dependency security audit | EXISTING | — |
 | FR-304 | Data minimization | EXISTING | ET-336 |
@@ -322,11 +322,11 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-313 | Comment execution path | EXISTING | ET-304 |
 | FR-314 | Issue-creation execution path | EXISTING | ET-303 |
 | FR-315 | Execution state persistence | EXISTING | — |
-| FR-316 | Honest UNVERIFIED handling | IMPLEMENT | ET-333, ET-392, ET-402, ET-422 |
+| FR-316 | Honest UNVERIFIED handling | EXISTING | ET-333, ET-392, ET-402, ET-422 |
 | FR-317 | Security review checklist | EXISTING | — |
-| FR-318 | Threat model documentation | IMPLEMENT | ET-024 |
+| FR-318 | Threat model documentation | EXISTING | ET-024 |
 | FR-319 | CI secret scan | EXISTING | ET-041, ET-290 |
-| FR-320 | Analysis flooding resistance | DEFER | — |
+| FR-320 | Analysis flooding resistance | EXISTING | — |
 | FR-321 | Forge app manifest (globalPage + issuePanel) | EXISTING | ET-012, ET-013, ET-291 |
 | FR-322 | Rovo agent module | EXISTING | ET-013, ET-291 |
 | FR-323 | Six action modules | EXISTING | ET-013, ET-291 |
@@ -384,7 +384,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-375 | Audit ledger UI | EXISTING | ET-019, ET-348, ET-375 |
 | FR-376 | Event evidence linkage | EXISTING | ET-019, ET-349 |
 | FR-377 | Request fingerprints | EXISTING | ET-019, ET-350 |
-| FR-378 | Verification outcome events | IMPLEMENT | ET-019, ET-332, ET-351 |
+| FR-378 | Verification outcome events | EXISTING | ET-019, ET-332, ET-351 |
 | FR-379 | Execution receipts in audit | EXISTING | ET-352, ET-376 |
 | FR-380 | Failure-result events | EXISTING | ET-353, ET-380, ET-393 |
 | FR-381 | Chain integrity tests | EXISTING | — |
@@ -406,7 +406,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-397 | Measurement label discipline | EXISTING | ET-369, ET-379, ET-412 |
 | FR-398 | Benchmark replay determinism | EXISTING | ET-370, ET-417 |
 | FR-399 | Audit event schema stability | EXISTING | ET-007, ET-371 |
-| FR-400 | Chain demo for judges | IMPLEMENT | ET-372 |
+| FR-400 | Chain demo for judges | EXISTING | ET-372 |
 | FR-401 | Modular monolith on Forge | EXISTING | ET-009, ET-043, ET-373, ET-378 |
 | FR-402 | No speculative infrastructure | EXISTING | — |
 | FR-403 | Storage abstraction | EXISTING | — |
@@ -420,9 +420,9 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-411 | Local development docs | EXISTING | — |
 | FR-412 | One-command verification | EXISTING | — |
 | FR-413 | Deterministic test fixtures | EXISTING | — |
-| FR-414 | Register validation script | IMPLEMENT | ET-033 |
-| FR-415 | Register authoring scripts | IMPLEMENT | ET-032 |
-| FR-416 | Generated docs from data | IMPLEMENT | ET-034, ET-035, ET-036 |
+| FR-414 | Register validation script | EXISTING | ET-033 |
+| FR-415 | Register authoring scripts | EXISTING | ET-032 |
+| FR-416 | Generated docs from data | EXISTING | ET-034, ET-035, ET-036 |
 | FR-417 | Environment example | EXISTING | ET-042 |
 | FR-418 | Configuration validation | EXISTING | — |
 | FR-419 | Health check resolver | EXISTING | — |
@@ -434,8 +434,8 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-425 | Recovery behavior | EXISTING | — |
 | FR-426 | Contributor documentation | EXISTING | — |
 | FR-427 | Architecture documentation set | EXISTING | ET-027, ET-028, ET-038, ET-039, ET-040, ET-045 |
-| FR-428 | Durable handoff document | IMPLEMENT | ET-037 |
-| FR-429 | Feature-to-task traceability docs | IMPLEMENT | ET-036 |
+| FR-428 | Durable handoff document | EXISTING | ET-037 |
+| FR-429 | Feature-to-task traceability docs | EXISTING | ET-036 |
 | FR-430 | Durable execution state | EXISTING | — |
 | FR-431 | Transaction boundary notes | EXISTING | — |
 | FR-432 | Background worker evaluation | EXISTING | — |
@@ -444,16 +444,16 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-435 | Kubernetes/Kafka/Redis cluster | REJECT_WITH_REASON | — |
 | FR-436 | Problem statement documentation | EXISTING | — |
 | FR-437 | Core identity statement | EXISTING | — |
-| FR-438 | Scenario A: normal remediation | IMPLEMENT | ET-424, ET-426 |
-| FR-439 | Scenario B: approval security | IMPLEMENT | ET-269, ET-427 |
-| FR-440 | Scenario C: evidence contradiction | IMPLEMENT | ET-428 |
-| FR-441 | Scenario D: failed execution | IMPLEMENT | ET-334, ET-429 |
-| FR-442 | Scenario E: post-execution verification | IMPLEMENT | ET-430 |
-| FR-443 | Scenario F: optimization and queue | IMPLEMENT | ET-431 |
-| FR-444 | Demo script document | IMPLEMENT | ET-433 |
-| FR-445 | Deterministic demo fixtures | IMPLEMENT | ET-067 |
-| FR-446 | Demo replay instructions | IMPLEMENT | ET-435, ET-456 |
-| FR-447 | Judging evidence pack | IMPLEMENT | ET-436 |
+| FR-438 | Scenario A: normal remediation | EXISTING | ET-424, ET-426 |
+| FR-439 | Scenario B: approval security | EXISTING | ET-269, ET-427 |
+| FR-440 | Scenario C: evidence contradiction | EXISTING | ET-428 |
+| FR-441 | Scenario D: failed execution | EXISTING | ET-334, ET-429 |
+| FR-442 | Scenario E: post-execution verification | EXISTING | ET-430 |
+| FR-443 | Scenario F: optimization and queue | EXISTING | ET-431 |
+| FR-444 | Demo script document | EXISTING | ET-433 |
+| FR-445 | Deterministic demo fixtures | EXISTING | ET-067 |
+| FR-446 | Demo replay instructions | EXISTING | ET-435, ET-456 |
+| FR-447 | Judging evidence pack | EXISTING | ET-436 |
 | FR-448 | README as-built | EXISTING | ET-441 |
 | FR-449 | Benchmark results presentation | EXISTING | ET-411, ET-453 |
 | FR-450 | Honest limitations section | EXISTING | ET-025, ET-394, ET-445 |
@@ -461,17 +461,17 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-452 | Before/after defect evidence | EXISTING | ET-008, ET-029, ET-030, ET-447 |
 | FR-453 | Architecture diagram | EXISTING | ET-027, ET-448 |
 | FR-454 | Security demonstration | EXISTING | ET-021, ET-382, ET-449 |
-| FR-455 | Failure demonstration | IMPLEMENT | ET-373 |
+| FR-455 | Failure demonstration | EXISTING | ET-373 |
 | FR-456 | Video readiness outline | DEFER | ET-444 |
-| FR-457 | Pitch narrative | IMPLEMENT | ET-438 |
+| FR-457 | Pitch narrative | EXISTING | ET-438 |
 | FR-458 | Bonus prize mapping | EXISTING | ET-443 |
-| FR-459 | Evaluation methodology doc | IMPLEMENT | ET-410, ET-454 |
+| FR-459 | Evaluation methodology doc | EXISTING | ET-410, ET-454 |
 | FR-460 | Measured vs simulated separation | EXISTING | ET-413, ET-452 |
-| FR-461 | Demo timing plan | IMPLEMENT | ET-434 |
+| FR-461 | Demo timing plan | EXISTING | ET-434 |
 | FR-462 | Live vs sandbox labeling | EXISTING | ET-096, ET-450, ET-455 |
-| FR-463 | One-command demo runner | IMPLEMENT | ET-432, ET-457 |
-| FR-464 | Proof-of-work appendix | IMPLEMENT | ET-437, ET-442 |
-| FR-465 | Differentiation vs generic AI dashboards | IMPLEMENT | ET-439 |
-| FR-466 | Submission checklist | IMPLEMENT | ET-440 |
+| FR-463 | One-command demo runner | EXISTING | ET-432, ET-457 |
+| FR-464 | Proof-of-work appendix | EXISTING | ET-437, ET-442 |
+| FR-465 | Differentiation vs generic AI dashboards | EXISTING | ET-439 |
+| FR-466 | Submission checklist | EXISTING | ET-440 |
 | FR-467 | External blockers disclosure | EXISTING | ET-026, ET-451 |
 | FR-468 | Invented competitor comparisons | REJECT_WITH_REASON | — |

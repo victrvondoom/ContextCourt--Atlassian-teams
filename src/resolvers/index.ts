@@ -16,6 +16,9 @@ import { digestPayload, sha256Hex } from '../core/digest';
 import { cancelProposal, decideProposal, executeProposal, DecisionError } from '../core/execution';
 import { verifyExecutionOutcome } from '../core/verification';
 import { orderReviewQueue } from '../core/queue';
+import { isValidFinding } from '../core/findingValidation';
+import { consumeRateLimitToken } from '../core/rateLimit';
+import { createCircuitBreaker, resilientJiraFetcher } from '../core/reliability';
 import { draftProposal } from '../core/remediation';
 
 import { KvsCaseRepository, type KvsLike, type CaseRecord } from '../storage/caseStore';
@@ -47,6 +50,21 @@ export const productionJiraFetcher: JiraFetcher = async (path, init) => {
   return { ok: res.ok, status: res.status, json };
 };
 
+/**
+ * Production Jira transport wrapped with bounded timeout and a circuit
+ * breaker (reliability topics 10–11): every external call gets a 10s budget;
+ * five consecutive 5xx/429/network failures open the circuit for 30s and
+ * calls fail fast with CircuitOpenError instead of piling on a struggling
+ * provider. Never silently succeeds while the provider is down.
+ */
+const jiraBreaker = createCircuitBreaker({
+  failureThreshold: 5,
+  cooldownMs: 30_000,
+  now: () => Date.now(),
+});
+export const resilientProductionJiraFetcher: JiraFetcher = (path, init) =>
+  resilientJiraFetcher(productionJiraFetcher, jiraBreaker)(path, init) as never;
+
 // ---------------------------------------------------------------------------
 // Validation schemas
 // ---------------------------------------------------------------------------
@@ -71,7 +89,7 @@ resolver.define('health', async () => {
     mcp: 'not-wired' as const,
   };
   try {
-    const res = await productionJiraFetcher('/rest/api/3/myself');
+    const res = await resilientProductionJiraFetcher('/rest/api/3/myself');
     integrations.jira = res.ok
       ? 'available'
       : res.status === 401 || res.status === 403
@@ -115,11 +133,16 @@ resolver.define('getCase', async (ctx: unknown) => {
   if (!record) return { status: 'NOT_FOUND', case: null, findings: [] };
   const kvsClient = kvs as unknown as KvsLike;
   const findings: Finding[] = [];
+  let invalidFindings = 0;
   for (const id of record.findingIds) {
-    const f = (await kvsClient.get(`finding:${c.context.cloudId}:${id}`)) as Finding | undefined;
-    if (f && f.tenantId === c.context.cloudId) findings.push(f);
+    const f = await kvsClient.get(`finding:${c.context.cloudId}:${id}`);
+    // Storage-corruption defense (CC-025, now applied on this path too): a
+    // malformed record is skipped and counted — never rendered or drafted
+    // against as if it were a real finding.
+    if (isValidFinding(f) && f.tenantId === c.context.cloudId) findings.push(f);
+    else if (f) invalidFindings += 1;
   }
-  return { status: 'OK', case: record, findings };
+  return { status: 'OK', case: record, findings, ...(invalidFindings ? { invalidFindings } : {}) };
 });
 
 resolver.define('analyzeIssue', async (ctx: unknown) => {
@@ -164,7 +187,25 @@ export async function investigateIssueCore(
   issueKey: string,
   deps: InvestigateDeps = {},
 ) {
-  const fetcher = deps.jiraFetcher ?? productionJiraFetcher;
+  // Rate limit (topic 1): analysis is the expensive, abusable operation —
+  // one bucket per tenant+user, persisted in KVS so budgets survive invocations.
+  const rlStore = (deps.kvs ?? kvs) as unknown as import('../core/rateLimit').RateLimitStore;
+  const rl = await consumeRateLimitToken({
+    store: rlStore,
+    tenantId: cloudId,
+    userId,
+    action: 'analyze',
+    clock: { now: () => Date.now() },
+  });
+  if (!rl.allowed) {
+    return {
+      status: 'ANALYSIS_FAILED',
+      error: `rate limit exceeded — retry in ${rl.retryAfterSeconds}s`,
+      rateLimited: true,
+      retryAfterSeconds: rl.retryAfterSeconds,
+    };
+  }
+  const fetcher = deps.jiraFetcher ?? resilientProductionJiraFetcher;
   const kvsClient = (deps.kvs ?? kvs) as KvsLike & AuditSinkLike;
   const auditSink: AuditSink = deps.auditSink ?? new KvsAuditRepository(kvsClient);
   const adapter = new JiraAdapter(fetcher);
@@ -337,13 +378,31 @@ resolver.define('prepareProposal', async (ctx: unknown) => {
     return { status: 'INVALID_INPUT', error: parsed.error.issues[0]?.message ?? 'invalid input' };
 
   const kvsClient = kvs as unknown as KvsLike;
+  const rl = await consumeRateLimitToken({
+    store: kvsClient as unknown as import('../core/rateLimit').RateLimitStore,
+    tenantId: cloudId,
+    userId,
+    action: 'prepare',
+    clock: { now: () => Date.now() },
+  });
+  if (!rl.allowed) {
+    return {
+      status: 'RATE_LIMITED',
+      error: `too many proposal preparations — retry in ${rl.retryAfterSeconds}s`,
+      retryAfterSeconds: rl.retryAfterSeconds,
+    };
+  }
   const caseRepo = new KvsCaseRepository(kvsClient);
   const record = await caseRepo.get(cloudId, parsed.data.caseId);
   if (!record) return { status: 'NOT_FOUND', error: 'case not found for this tenant' };
-  const finding = (await kvsClient.get(`finding:${cloudId}:${parsed.data.findingId}`)) as Finding | undefined;
-  if (!finding || finding.tenantId !== cloudId) {
-    return { status: 'NOT_FOUND', error: 'finding not found for this case' };
+  const storedFinding = await kvsClient.get(`finding:${cloudId}:${parsed.data.findingId}`);
+  if (!isValidFinding(storedFinding) || storedFinding.tenantId !== cloudId) {
+    return {
+      status: 'NOT_FOUND',
+      error: 'finding not found for this case (or its stored record is invalid)',
+    };
   }
+  const finding: Finding = storedFinding;
 
   try {
     const draft = await draftProposal({
@@ -453,6 +512,21 @@ export async function decideProposalCore(
   rationale: string | null | undefined,
   kvsClient: KvsLike = kvs as unknown as KvsLike,
 ) {
+  // Rate limit: decisions get a generous but bounded budget.
+  const rl = await consumeRateLimitToken({
+    store: kvsClient as unknown as import('../core/rateLimit').RateLimitStore,
+    tenantId: cloudId,
+    userId: accountId,
+    action: 'decide',
+    clock: { now: () => Date.now() },
+  });
+  if (!rl.allowed) {
+    return {
+      status: 'RATE_LIMITED',
+      error: `too many decisions — retry in ${rl.retryAfterSeconds}s`,
+      retryAfterSeconds: rl.retryAfterSeconds,
+    };
+  }
   const repo = new KvsProposalRepository(kvsClient);
   const proposal = await repo.get(cloudId, proposalId);
   if (!proposal) return { status: 'NOT_FOUND', error: 'proposal not found for this tenant' };
@@ -538,7 +612,7 @@ resolver.define('executeProposal', async (ctx: unknown) => {
     const verification = await verifyExecutionOutcome({
       proposal,
       resultRef: outcome.resultRef,
-      fetcher: productionJiraFetcher,
+      fetcher: resilientProductionJiraFetcher as never,
       now: new Date(),
     });
     updated.verification = verification;

@@ -6,10 +6,10 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Status | Count |
 |---|---|
-| TEST_VERIFIED | 309 |
+| TEST_VERIFIED | 310 |
 | IMPLEMENTED | 46 |
 | NOT_STARTED | 47 |
-| DEFERRED | 49 |
+| DEFERRED | 48 |
 | BLOCKED | 8 |
 
 ---
@@ -1846,7 +1846,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 - **Acceptance:** 4xx non-429 not retried
 - **Verification:** Adapter tests · **Regression:** Existing suite
 - **Risk:** Retry storms
-- **Evidence:** jira-adapter tests; ADR-008 idempotency guard 2026-10-31 — only idempotent requests retry (3 guard tests + single-attempt execution test)
+- **Evidence:** jira-adapter tests; ADR-008 idempotency guard 2026-10-31 — only idempotent requests retry (3 guard tests + single-attempt execution test) + full jitter in [exp/2, exp] capped at 2s (bounds-tested)
 
 ### ET-167 — Deterministic fallback policy
 
@@ -2028,12 +2028,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Throttle agent actions.
 - **Linked features:** FR-157
-- **Priority:** P4 · **Status:** DEFERRED
+- **Priority:** P4 · **Status:** TEST_VERIFIED
 - **Location:** future middleware · **Deps:** ET-152
 - **Acceptance:** Abuse bounded
 - **Verification:** Load tests · **Regression:** New tests
 - **Risk:** DoS
-- **Evidence:** Forge platform throttles first; revisit with live data (BLOCKED)
+- **Evidence:** core/rateLimit.ts token bucket per tenant+user persisted in KVS on analyze/prepare/decide (analyze bucket inside investigateIssueCore covers the agent path); explicit rate-limited responses with retryAfterSeconds — tests/integration/rate-limit.test.ts (15 with reliability)
 
 ### ET-184 — Shadow execution mode
 

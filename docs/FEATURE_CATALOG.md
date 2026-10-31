@@ -6,9 +6,8 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Disposition | Count |
 |---|---|
-| EXISTING | 294 |
-| IMPLEMENT | 49 |
-| DEFER | 114 |
+| EXISTING | 347 |
+| DEFER | 110 |
 | REJECT_WITH_REASON | 11 |
 
 ---
@@ -150,19 +149,19 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-023 — Post-execution verification display
 
 - **Description:** Executed proposals show VERIFIED / UNVERIFIED / MISMATCH state.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-024 — Queue priority explanation
 
 - **Description:** Each proposal shows why it ranks where it does.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-025 — Execution outcome detail display
 
 - **Description:** Result reference and detail from execution are visible.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-026 — Proposal risk badge
@@ -240,7 +239,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-038 — Demo fixtures for scenarios A–F
 
 - **Description:** Deterministic fixtures covering all six judge scenarios.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-039 — Deterministic demo replay
@@ -904,7 +903,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-148 — Tool-call post-state verification
 
 - **Description:** Verify the world state after tool writes.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-149 — Idempotent agent operations
@@ -940,7 +939,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-154 — Agent rate limits
 
 - **Description:** Per-user throttling of agent actions.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P4
 
 ### FR-155 — Failure recovery guidance
@@ -1012,7 +1011,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-166 — Agent contract registry
 
 - **Description:** AGENT_CONTRACTS.md defining every agent task.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-167 — Agent verification matrix
@@ -1134,13 +1133,13 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-186 — Documented utility queue ordering
 
 - **Description:** Queue order follows a documented utility function.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-187 — Priority explanation strings
 
 - **Description:** Each proposal explains its rank inputs.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-188 — Dependency-aware queue constraints
@@ -1176,7 +1175,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-193 — Deterministic priority recalculation
 
 - **Description:** Same inputs produce the same order.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-194 — Cost estimation per proposal
@@ -1218,19 +1217,19 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-200 — Risk-adjusted ordering factor
 
 - **Description:** Higher-risk proposals surface for faster review.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-201 — Age-decay ordering factor
 
 - **Description:** Waiting time increases review priority.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-202 — Severity-dominant ordering
 
 - **Description:** Severity outranks risk and age.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-203 — Queue pending counts
@@ -1248,7 +1247,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-205 — Queue design documentation
 
 - **Description:** QUEUE_DESIGN.md with invariants and rationale.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-206 — Proposal comparison view
@@ -1314,13 +1313,13 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-216 — Ordering sensitivity property test
 
 - **Description:** Ordering responds predictably to input changes.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-217 — Ordering regression suite
 
 - **Description:** Snapshot tests guard the documented order.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-218 — Documented queue constraints
@@ -1514,7 +1513,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-249 — Governance documentation
 
 - **Description:** SECURITY_AND_GOVERNANCE.md with invariants and threat model.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-250 — Policy evaluation engine
@@ -1562,7 +1561,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-257 — Governance scenario demo
 
 - **Description:** Scenario B fixtures demonstrate every refusal.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-258 — Human escalation display
@@ -1744,25 +1743,25 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-287 — Post-execution independent verification
 
 - **Description:** Re-read the resulting state after execution.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-288 — Verification result storage
 
 - **Description:** Verification outcome persisted on the proposal.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-289 — Verification audit events
 
 - **Description:** proposal_verified chained with outcome.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-290 — Success vs verified distinction
 
 - **Description:** API 200 is not verified success.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-291 — Partial failure classification
@@ -1792,13 +1791,13 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-295 — Circuit breaker for Jira
 
 - **Description:** Trip on repeated downstream failures.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P4
 
 ### FR-296 — Execution timeout budgets
 
 - **Description:** Bounded execution wall-clock.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-297 — 429 rate-limit retry
@@ -1828,7 +1827,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-301 — Failure scenario fixtures
 
 - **Description:** Deterministic failure fixtures (Scenario D).
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-302 — Failure demo in sandbox
@@ -1918,7 +1917,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-316 — Honest UNVERIFIED handling
 
 - **Description:** Unverifiable states stay UNVERIFIED, not success.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-317 — Security review checklist
@@ -1930,7 +1929,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-318 — Threat model documentation
 
 - **Description:** Assets, actors, threats and mitigations.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-319 — CI secret scan
@@ -1942,7 +1941,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-320 — Analysis flooding resistance
 
 - **Description:** Bound analysis frequency per tenant.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ## Domain G. Atlassian and collaboration integration
@@ -2294,7 +2293,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-378 — Verification outcome events
 
 - **Description:** proposal_verified chained after execution checks.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P1
 
 ### FR-379 — Execution receipts in audit
@@ -2426,7 +2425,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-400 — Chain demo for judges
 
 - **Description:** Demo step shows chain verification live.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ## Domain I. Cloud-native platform and developer experience
@@ -2512,19 +2511,19 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-414 — Register validation script
 
 - **Description:** Automated 927-record validation.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-415 — Register authoring scripts
 
 - **Description:** Single-source-of-truth data modules.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-416 — Generated docs from data
 
 - **Description:** Catalog/traceability docs generated, not hand-copied.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-417 — Environment example
@@ -2596,13 +2595,13 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-428 — Durable handoff document
 
 - **Description:** MISTRAL_VIBE_HANDOFF.md for long-run continuity.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-429 — Feature-to-task traceability docs
 
 - **Description:** Generated mapping FR↔ET.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-430 — Durable execution state
@@ -2658,61 +2657,61 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-438 — Scenario A: normal remediation
 
 - **Description:** Deterministic fixture: analyze→propose→approve→execute→verify.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-439 — Scenario B: approval security
 
 - **Description:** Every governance refusal demonstrated from tests.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-440 — Scenario C: evidence contradiction
 
 - **Description:** Contradiction fixture surfaces uncertainty honestly.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-441 — Scenario D: failed execution
 
 - **Description:** Controlled failure: classification, audit, no fake success.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-442 — Scenario E: post-execution verification
 
 - **Description:** Execution success distinguished from verified state.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-443 — Scenario F: optimization and queue
 
 - **Description:** Multiple proposals ordered by documented utility.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-444 — Demo script document
 
 - **Description:** HACKATHON_DEMO_SCRIPT.md with exact steps and commands.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-445 — Deterministic demo fixtures
 
 - **Description:** Scenario fixtures checked in and stable.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-446 — Demo replay instructions
 
 - **Description:** One command re-runs the full demo.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-447 — Judging evidence pack
 
 - **Description:** Test output and command transcripts included.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-448 — README as-built
@@ -2760,7 +2759,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-455 — Failure demonstration
 
 - **Description:** Scenario D shown with real output.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-456 — Video readiness outline
@@ -2772,7 +2771,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-457 — Pitch narrative
 
 - **Description:** HACKATHON_DIFFERENTIATION.md.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-458 — Bonus prize mapping
@@ -2784,7 +2783,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-459 — Evaluation methodology doc
 
 - **Description:** BENCHMARK_METHODOLOGY.md.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-460 — Measured vs simulated separation
@@ -2796,7 +2795,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-461 — Demo timing plan
 
 - **Description:** Minute-by-minute demo schedule.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-462 — Live vs sandbox labeling
@@ -2808,25 +2807,25 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-463 — One-command demo runner
 
 - **Description:** scripts/demo-scenarios.ts runs all scenarios.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-464 — Proof-of-work appendix
 
 - **Description:** Commands and outputs recorded in final report.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-465 — Differentiation vs generic AI dashboards
 
 - **Description:** Explicit contrast in differentiation doc.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-466 — Submission checklist
 
 - **Description:** Exact list of what is submitted and its status.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-467 — External blockers disclosure

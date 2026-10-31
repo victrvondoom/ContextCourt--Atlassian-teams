@@ -148,3 +148,20 @@ function mkReq(tenantId: string, action: string) {
     requestFingerprint: `fp-${action}`,
   };
 }
+
+describe('monotonic ledger clock (CC-029 regression)', () => {
+  it('an event whose wall clock is EARLIER than the tail still chains and verifies', async () => {
+    const sink = shuffledSink();
+    // Tail at a late fixed time...
+    await recordAuditEvent(sink, mkReq('t1', 'late'), new Date('2026-10-31T23:00:00.000Z'));
+    // ...then a caller with a skewed/earlier clock appends.
+    await recordAuditEvent(sink, mkReq('t1', 'early-clock'), new Date('2026-10-31T01:00:00.000Z'));
+    const events = orderAuditEvents(await sink.readAll('t1'));
+    expect(events).toHaveLength(2);
+    // The ledger clock is monotonic: the second event reads AFTER the tail.
+    expect(events[0]!.action).toBe('late');
+    expect(events[1]!.action).toBe('early-clock');
+    expect(events[1]!.timestamp >= events[0]!.timestamp).toBe(true);
+    expect(await verifyAuditChain(sink, 't1')).toBe(true);
+  });
+});

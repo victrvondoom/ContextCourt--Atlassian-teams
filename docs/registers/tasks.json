@@ -3062,7 +3062,7 @@
     "regression": "Existing suite",
     "risk": "Retry storms",
     "status": "TEST_VERIFIED",
-    "evidence": "jira-adapter tests; ADR-008 idempotency guard 2026-10-31 — only idempotent requests retry (3 guard tests + single-attempt execution test)"
+    "evidence": "jira-adapter tests; ADR-008 idempotency guard 2026-10-31 — only idempotent requests retry (3 guard tests + single-attempt execution test) + full jitter in [exp/2, exp] capped at 2s (bounds-tested)"
   },
   {
     "id": "ET-167",
@@ -3369,8 +3369,8 @@
     "verification": "Load tests",
     "regression": "New tests",
     "risk": "DoS",
-    "status": "DEFERRED",
-    "evidence": "Forge platform throttles first; revisit with live data (BLOCKED)"
+    "status": "TEST_VERIFIED",
+    "evidence": "core/rateLimit.ts token bucket per tenant+user persisted in KVS on analyze/prepare/decide (analyze bucket inside investigateIssueCore covers the agent path); explicit rate-limited responses with retryAfterSeconds — tests/integration/rate-limit.test.ts (15 with reliability)"
   },
   {
     "id": "ET-184",

@@ -84,6 +84,19 @@ vitest 5, vite-node devDep) → 0 critical/0 high/17 moderate; CI gates audit
 + registers; docs/ARCHITECTURE_DECISIONS.md + docs/EXECUTION_STATE.md.
 137/137 tests green after all upgrades.
 
+## Closure pass (2026-10-31, final)
+UF-001 fixed (CC-025 had silently applied only to the rovo path — resolver
+read paths now gated by isValidFinding); timeouts + circuit breaker +
+jittered backoff (core/reliability.ts, CC-027); KVS token-bucket rate
+limiting on analyze/prepare/decide (core/rateLimit.ts, CC-028); closure docs
+generated (FEATURE_CLOSURE_MATRIX, ENGINEERING_COMPLETION_REPORT,
+UNFINISHED_FEATURE_AUDIT, FIXTURE_AND_MOCK_ELIMINATION,
+EXTERNAL_INTEGRATION_CREDENTIAL_MATRIX, LOCAL_DEVELOPMENT,
+ENVIRONMENT_CONFIGURATION, DEPLOYMENT_READINESS, EXTERNAL_INTEGRATION_SETUP,
+PRODUCTION_READINESS, FINAL_FEATURE_COMPLETION_REPORT). All 49 IMPLEMENT
+dispositions flipped to EXISTING after verification. Final counts: 347/468
+features operational, 356/459 tasks verified; 152/152 tests, 22 files.
+
 ## Outstanding (highest value next)
 1. External: dev-site deploy → verify live paths → flip `health` labels for
    rovo/mcp → wire Teamwork Graph enrichment.

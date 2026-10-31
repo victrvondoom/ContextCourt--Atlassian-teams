@@ -149,9 +149,14 @@ export class JiraAdapter {
   }
 }
 
-/** Bounded exponential backoff: 200ms, 400ms, 800ms... capped at 2s. */
-export async function backoff(attempt: number): Promise<void> {
-  const delay = Math.min(200 * 2 ** attempt, 2000);
+/**
+ * Bounded exponential backoff with jitter: full jitter in
+ * [exponential/2, exponential], capped at 2s — a thundering herd of clients
+ * cannot retry on the same millisecond (TRACEN topic 13).
+ */
+export async function backoff(attempt: number, rng: () => number = Math.random): Promise<void> {
+  const exponential = Math.min(200 * 2 ** attempt, 2000);
+  const delay = exponential / 2 + rng() * (exponential / 2);
   await new Promise((r) => setTimeout(r, delay));
 }
 

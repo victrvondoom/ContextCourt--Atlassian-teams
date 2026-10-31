@@ -180,7 +180,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Post-execution verification display",
     "description": "Executed proposals show VERIFIED / UNVERIFIED / MISMATCH state.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -188,7 +188,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Queue priority explanation",
     "description": "Each proposal shows why it ranks where it does.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -196,7 +196,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Execution outcome detail display",
     "description": "Result reference and detail from execution are visible.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -301,7 +301,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Demo fixtures for scenarios A–F",
     "description": "Deterministic fixtures covering all six judge scenarios.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -1185,7 +1185,7 @@
     "domain": "C. Agentic intelligence and reasoning",
     "title": "Tool-call post-state verification",
     "description": "Verify the world state after tool writes.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -1233,7 +1233,7 @@
     "domain": "C. Agentic intelligence and reasoning",
     "title": "Agent rate limits",
     "description": "Per-user throttling of agent actions.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P4"
   },
   {
@@ -1329,7 +1329,7 @@
     "domain": "C. Agentic intelligence and reasoning",
     "title": "Agent contract registry",
     "description": "AGENT_CONTRACTS.md defining every agent task.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -1491,7 +1491,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Documented utility queue ordering",
     "description": "Queue order follows a documented utility function.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1499,7 +1499,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Priority explanation strings",
     "description": "Each proposal explains its rank inputs.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1547,7 +1547,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Deterministic priority recalculation",
     "description": "Same inputs produce the same order.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1603,7 +1603,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Risk-adjusted ordering factor",
     "description": "Higher-risk proposals surface for faster review.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1611,7 +1611,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Age-decay ordering factor",
     "description": "Waiting time increases review priority.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1619,7 +1619,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Severity-dominant ordering",
     "description": "Severity outranks risk and age.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1643,7 +1643,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Queue design documentation",
     "description": "QUEUE_DESIGN.md with invariants and rationale.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1731,7 +1731,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Ordering sensitivity property test",
     "description": "Ordering responds predictably to input changes.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1739,7 +1739,7 @@
     "domain": "D. Remediation intelligence and optimization",
     "title": "Ordering regression suite",
     "description": "Snapshot tests guard the documented order.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1996,7 +1996,7 @@
     "domain": "E. Governance, approval and human control",
     "title": "Governance documentation",
     "description": "SECURITY_AND_GOVERNANCE.md with invariants and threat model.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2060,7 +2060,7 @@
     "domain": "E. Governance, approval and human control",
     "title": "Governance scenario demo",
     "description": "Scenario B fixtures demonstrate every refusal.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -2301,7 +2301,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Post-execution independent verification",
     "description": "Re-read the resulting state after execution.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2309,7 +2309,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Verification result storage",
     "description": "Verification outcome persisted on the proposal.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2317,7 +2317,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Verification audit events",
     "description": "proposal_verified chained with outcome.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2325,7 +2325,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Success vs verified distinction",
     "description": "API 200 is not verified success.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2365,7 +2365,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Circuit breaker for Jira",
     "description": "Trip on repeated downstream failures.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P4"
   },
   {
@@ -2373,7 +2373,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Execution timeout budgets",
     "description": "Bounded execution wall-clock.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -2413,7 +2413,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Failure scenario fixtures",
     "description": "Deterministic failure fixtures (Scenario D).",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -2533,7 +2533,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Honest UNVERIFIED handling",
     "description": "Unverifiable states stay UNVERIFIED, not success.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2549,7 +2549,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Threat model documentation",
     "description": "Assets, actors, threats and mitigations.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -2565,7 +2565,7 @@
     "domain": "F. Execution, security and reliability",
     "title": "Analysis flooding resistance",
     "description": "Bound analysis frequency per tenant.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3030,7 +3030,7 @@
     "domain": "H. Audit, observability and analytics",
     "title": "Verification outcome events",
     "description": "proposal_verified chained after execution checks.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P1"
   },
   {
@@ -3206,7 +3206,7 @@
     "domain": "H. Audit, observability and analytics",
     "title": "Chain demo for judges",
     "description": "Demo step shows chain verification live.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3318,7 +3318,7 @@
     "domain": "I. Cloud-native platform and developer experience",
     "title": "Register validation script",
     "description": "Automated 927-record validation.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -3326,7 +3326,7 @@
     "domain": "I. Cloud-native platform and developer experience",
     "title": "Register authoring scripts",
     "description": "Single-source-of-truth data modules.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -3334,7 +3334,7 @@
     "domain": "I. Cloud-native platform and developer experience",
     "title": "Generated docs from data",
     "description": "Catalog/traceability docs generated, not hand-copied.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -3430,7 +3430,7 @@
     "domain": "I. Cloud-native platform and developer experience",
     "title": "Durable handoff document",
     "description": "MISTRAL_VIBE_HANDOFF.md for long-run continuity.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -3438,7 +3438,7 @@
     "domain": "I. Cloud-native platform and developer experience",
     "title": "Feature-to-task traceability docs",
     "description": "Generated mapping FR↔ET.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -3511,7 +3511,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Scenario A: normal remediation",
     "description": "Deterministic fixture: analyze→propose→approve→execute→verify.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3519,7 +3519,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Scenario B: approval security",
     "description": "Every governance refusal demonstrated from tests.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3527,7 +3527,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Scenario C: evidence contradiction",
     "description": "Contradiction fixture surfaces uncertainty honestly.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3535,7 +3535,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Scenario D: failed execution",
     "description": "Controlled failure: classification, audit, no fake success.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3543,7 +3543,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Scenario E: post-execution verification",
     "description": "Execution success distinguished from verified state.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3551,7 +3551,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Scenario F: optimization and queue",
     "description": "Multiple proposals ordered by documented utility.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3559,7 +3559,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Demo script document",
     "description": "HACKATHON_DEMO_SCRIPT.md with exact steps and commands.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3567,7 +3567,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Deterministic demo fixtures",
     "description": "Scenario fixtures checked in and stable.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3575,7 +3575,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Demo replay instructions",
     "description": "One command re-runs the full demo.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3583,7 +3583,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Judging evidence pack",
     "description": "Test output and command transcripts included.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3647,7 +3647,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Failure demonstration",
     "description": "Scenario D shown with real output.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3663,7 +3663,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Pitch narrative",
     "description": "HACKATHON_DIFFERENTIATION.md.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3679,7 +3679,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Evaluation methodology doc",
     "description": "BENCHMARK_METHODOLOGY.md.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -3695,7 +3695,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Demo timing plan",
     "description": "Minute-by-minute demo schedule.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3711,7 +3711,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "One-command demo runner",
     "description": "scripts/demo-scenarios.ts runs all scenarios.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3719,7 +3719,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Proof-of-work appendix",
     "description": "Commands and outputs recorded in final report.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3727,7 +3727,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Differentiation vs generic AI dashboards",
     "description": "Explicit contrast in differentiation doc.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -3735,7 +3735,7 @@
     "domain": "J. Hackathon demonstration, evaluation and differentiation",
     "title": "Submission checklist",
     "description": "Exact list of what is submitted and its status.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {

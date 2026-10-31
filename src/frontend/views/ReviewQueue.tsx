@@ -8,7 +8,7 @@
  * Sandbox mode: the same core decision/execution modules run in-browser over
  * the sandbox stores — nothing is hardcoded.
  */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { invoke } from '@forge/bridge';
 import { StatusPill } from '../components/Pills';
 import { useSandbox } from '../sandbox/SandboxContext';
@@ -69,6 +69,24 @@ export function ReviewQueue(props: { onPendingCount?: (n: number) => void }) {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [, forceTick] = useState(0);
+  const [filter, setFilter] = useState('');
+  const [stateFilter, setStateFilter] = useState<'ALL' | ProposalView['state']>('ALL');
+
+  const filtered = useMemo(() => {
+    if (!proposals) return null;
+    const q = filter.trim().toLowerCase();
+    return proposals.filter((p) => {
+      if (stateFilter !== 'ALL' && p.state !== stateFilter) return false;
+      if (!q) return true;
+      return (
+        p.id.toLowerCase().includes(q) ||
+        p.caseId.toLowerCase().includes(q) ||
+        p.target.toLowerCase().includes(q) ||
+        p.operation.toLowerCase().includes(q) ||
+        p.expectedChange.toLowerCase().includes(q)
+      );
+    });
+  }, [proposals, filter, stateFilter]);
 
   // Live countdown refresh for approved proposals.
   useEffect(() => {
@@ -192,6 +210,40 @@ export function ReviewQueue(props: { onPendingCount?: (n: number) => void }) {
         </div>
       )}
       {!proposals && !error && <p className="muted">Loading proposals…</p>}
+      {proposals && proposals.length > 0 && (
+        <div className="row">
+          <input
+            className="input"
+            placeholder="Filter proposals by id, case, target, operation…"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            aria-label="Filter proposals"
+          />
+          <select
+            className="input"
+            value={stateFilter}
+            onChange={(e) => setStateFilter(e.target.value as 'ALL' | ProposalView['state'])}
+            aria-label="Filter by state"
+          >
+            {[
+              'ALL',
+              'PENDING_APPROVAL',
+              'APPROVED',
+              'EXECUTED',
+              'REJECTED',
+              'CANCELLED',
+              'EXECUTION_FAILED',
+            ].map((s) => (
+              <option key={s} value={s}>
+                {s === 'ALL' ? 'All states' : s.replace(/_/g, ' ')}
+              </option>
+            ))}
+          </select>
+          <span className="muted">
+            {(filtered ?? []).length} / {proposals.length} proposal(s)
+          </span>
+        </div>
+      )}
       {proposals && proposals.length === 0 && (
         <section className="card">
           <p className="muted">

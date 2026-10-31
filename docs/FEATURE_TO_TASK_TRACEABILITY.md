@@ -36,7 +36,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-027 | Approver identity display | EXISTING | — |
 | FR-028 | Approval expiry countdown | DEFER | ET-068 |
 | FR-029 | Case search by issue key | DEFER | ET-069 |
-| FR-030 | Saved views and filters | DEFER | ET-070 |
+| FR-030 | Saved views and filters | EXISTING | ET-070 |
 | FR-031 | Sortable case table | DEFER | ET-071 |
 | FR-032 | Case list pagination | DEFER | ET-072 |
 | FR-033 | Bulk decisions | DEFER | ET-073 |
@@ -46,7 +46,7 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-037 | Live-mode onboarding tour | DEFER | ET-076 |
 | FR-038 | Demo fixtures for scenarios A–F | EXISTING | ET-020, ET-067 |
 | FR-039 | Deterministic demo replay | EXISTING | — |
-| FR-040 | Copyable evidence citations | DEFER | ET-077 |
+| FR-040 | Copyable evidence citations | EXISTING | ET-077 |
 | FR-041 | Deep links to Jira issues | DEFER | ET-078 |
 | FR-042 | Dark theme | DEFER | ET-079 |
 | FR-043 | Localization | DEFER | ET-080 |

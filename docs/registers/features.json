@@ -235,8 +235,8 @@
     "id": "FR-030",
     "domain": "A. Product experience and workflows",
     "title": "Saved views and filters",
-    "description": "Named filters over cases and proposals (one filter model).",
-    "disposition": "DEFER",
+    "description": "Live filter model across cases, proposals and the audit ledger (merged saved-views + filtering capability).",
+    "disposition": "EXISTING",
     "priority": "P3",
     "reason": "MERGE of saved views + case/proposal filtering: one capability, one model."
   },
@@ -317,7 +317,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Copyable evidence citations",
     "description": "One-click copy of an evidence citation.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {

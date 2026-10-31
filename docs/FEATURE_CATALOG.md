@@ -6,8 +6,8 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Disposition | Count |
 |---|---|
-| EXISTING | 347 |
-| DEFER | 110 |
+| EXISTING | 349 |
+| DEFER | 108 |
 | REJECT_WITH_REASON | 11 |
 
 ---
@@ -190,8 +190,8 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 ### FR-030 — Saved views and filters
 
-- **Description:** Named filters over cases and proposals (one filter model).
-- **Disposition:** DEFER — MERGE of saved views + case/proposal filtering: one capability, one model.
+- **Description:** Live filter model across cases, proposals and the audit ledger (merged saved-views + filtering capability).
+- **Disposition:** EXISTING — MERGE of saved views + case/proposal filtering: one capability, one model.
 - **Priority:** P3
 
 ### FR-031 — Sortable case table
@@ -251,7 +251,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-040 — Copyable evidence citations
 
 - **Description:** One-click copy of an evidence citation.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-041 — Deep links to Jira issues

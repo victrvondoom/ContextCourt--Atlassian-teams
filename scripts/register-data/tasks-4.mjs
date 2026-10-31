@@ -56,7 +56,7 @@ export const TASKS_4 = [
 
   // ---- Workstream 8: Audit, observability and analytics (40) ----
   ['Digest chain construction tests', 'Chain builds correctly.', 'FR-366,FR-367', 0, 'src/audit/auditLog.ts', 'ET-019', 'Each event digests predecessor', 'Unit tests', 'Existing suite', 'Broken chain', 'TEST_VERIFIED', 'audit-log tests'],
-  ['Chain verification API tests', 'verifyAuditChain correct.', 'FR-368,FR-370', 0, 'src/audit/auditLog.ts', 'ET-019', 'Intact true / tampered false', 'Unit tests', 'Existing suite', 'False confidence', 'TEST_VERIFIED', 'Tamper test'],
+  ['Chain verification API tests', 'verifyAuditChain correct.', 'FR-368,FR-370', 0, 'src/audit/auditLog.ts', 'ET-019', 'Intact true / tampered false', 'Unit tests', 'Existing suite', 'False confidence', 'TEST_VERIFIED', 'Tamper test Now also exposed interactively: verifyAuditChain resolver + Verify-chain-integrity button (tamper-detection test: tests/integration/chain-verify-endpoint.test.ts)'],
   ['Tamper detection demonstration', 'Mutation breaks chain.', 'FR-369,FR-308', 0, 'tests/unit/audit-log.test.ts', 'ET-371', 'Edited event detected', 'Unit test', 'Existing suite', 'Undetected edits', 'TEST_VERIFIED', 'Tamper case covered'],
   ['analysis_run event coverage', 'All runs audited.', 'FR-371', 0, 'src/resolvers/index.ts', 'ET-019', 'Success and failure audited', 'Integration tests', 'Existing suite', 'Missing events', 'TEST_VERIFIED', 'Both paths tested'],
   ['Decision event coverage', 'approve/reject audited.', 'FR-372', 0, 'src/resolvers/index.ts', 'ET-241', 'Decisions in ledger', 'Integration tests', 'Existing suite', 'Missing events', 'TEST_VERIFIED', 'Decision events tested'],

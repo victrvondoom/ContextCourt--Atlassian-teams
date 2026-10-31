@@ -1320,8 +1320,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Scope creep",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Live filter model: cases text filter, proposals text+state filter, audit text filter (persistence of named views not included — honest scope)"
   },
   {
     "id": "ET-071",
@@ -1446,8 +1446,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Low value",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Copy-citation button on every finding card (clipboard API, honest failure feedback)"
   },
   {
     "id": "ET-078",
@@ -6270,7 +6270,7 @@
     "regression": "Existing suite",
     "risk": "False confidence",
     "status": "TEST_VERIFIED",
-    "evidence": "Tamper test"
+    "evidence": "Tamper test Now also exposed interactively: verifyAuditChain resolver + Verify-chain-integrity button (tamper-detection test: tests/integration/chain-verify-endpoint.test.ts)"
   },
   {
     "id": "ET-343",

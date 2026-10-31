@@ -6,9 +6,9 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Status | Count |
 |---|---|
-| TEST_VERIFIED | 310 |
+| TEST_VERIFIED | 312 |
 | IMPLEMENTED | 46 |
-| NOT_STARTED | 47 |
+| NOT_STARTED | 45 |
 | DEFERRED | 48 |
 | BLOCKED | 8 |
 
@@ -781,12 +781,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Named filter model.
 - **Linked features:** FR-030
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/ · **Deps:** ET-075
 - **Acceptance:** Filters persist per user
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Scope creep
-- **Evidence:** Backlog
+- **Evidence:** Live filter model: cases text filter, proposals text+state filter, audit text filter (persistence of named views not included — honest scope)
 
 ### ET-071 — Sortable case table
 
@@ -858,12 +858,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Copy evidence citation.
 - **Linked features:** FR-040
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/CaseDetail.tsx · **Deps:** ET-047
 - **Acceptance:** Citation copies to clipboard
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Low value
-- **Evidence:** Backlog
+- **Evidence:** Copy-citation button on every finding card (clipboard API, honest failure feedback)
 
 ### ET-078 — Deep links to Jira
 
@@ -3790,7 +3790,7 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 - **Acceptance:** Intact true / tampered false
 - **Verification:** Unit tests · **Regression:** Existing suite
 - **Risk:** False confidence
-- **Evidence:** Tamper test
+- **Evidence:** Tamper test Now also exposed interactively: verifyAuditChain resolver + Verify-chain-integrity button (tamper-detection test: tests/integration/chain-verify-endpoint.test.ts)
 
 ### ET-343 — Tamper detection demonstration
 

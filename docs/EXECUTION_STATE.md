@@ -26,3 +26,5 @@ handoff: `docs/MISTRAL_VIBE_HANDOFF.md`.
   commit. Then: O(n) audit append optimization only if ledger volume grows;
   remaining moderate audit advisories are transitive dev-tooling (accept or
   upgrade eslint 9 separately).
+
+## Dynamics pass (2026-10-31, second): audit ledger filter + interactive Verify-chain-integrity button (verifyAuditChain resolver + sandbox parity, tamper-detection tests), review-queue text+state filter (one filter model with cases/audit), copy-citation buttons on findings. 156/156 tests, 23 files. Registers: 349 EXISTING / 108 DEFER / 11 REJECT; 359/459 tasks verified.

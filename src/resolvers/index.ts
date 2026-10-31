@@ -24,7 +24,7 @@ import { draftProposal } from '../core/remediation';
 import { KvsCaseRepository, type KvsLike, type CaseRecord } from '../storage/caseStore';
 import { KvsAuditRepository, type AuditSinkLike } from '../storage/auditStore';
 import { KvsProposalRepository } from '../storage/proposalStore';
-import { recordAuditEvent, type AuditSink } from '../audit/auditLog';
+import { recordAuditEvent, verifyAuditChain, type AuditSink } from '../audit/auditLog';
 import { kvs } from '@forge/kvs';
 import type { EvidenceRecord, Finding, RemediationProposal } from '../core/types';
 import type { JiraFetcher } from '../integrations/jira';
@@ -763,6 +763,36 @@ export async function getCaseTimelineCore(
     proposals: caseProposals.map((p) => ({ id: p.id, state: p.state, operation: p.operation })),
   };
 }
+
+/**
+ * Interactive tamper-evidence for the Audit ledger UI: verifies the tenant's
+ * digest chain on demand and reports the event count, so "tamper-evident" is
+ * a button a human can press, not just a claim in the docs.
+ */
+export async function verifyAuditChainCore(
+  cloudId: string,
+  kvsClient: KvsLike = kvs as unknown as KvsLike,
+): Promise<{ status: string; valid: boolean; eventCount: number; firstEventAt: string | null }> {
+  const audit = new KvsAuditRepository(kvsClient as unknown as AuditSinkLike);
+  const events = await audit.readAll(cloudId);
+  if (events.length === 0) {
+    return { status: 'OK', valid: true, eventCount: 0, firstEventAt: null };
+  }
+  const valid = await verifyAuditChain(audit as never, cloudId);
+  return {
+    status: 'OK',
+    valid,
+    eventCount: events.length,
+    firstEventAt: events[0]!.timestamp,
+  };
+}
+
+resolver.define('verifyAuditChain', async (ctx: unknown) => {
+  const c = ctx as { context?: { cloudId?: string } };
+  if (!c.context?.cloudId)
+    return { status: 'UNAUTHENTICATED', valid: false, eventCount: 0, firstEventAt: null };
+  return verifyAuditChainCore(c.context.cloudId);
+});
 
 resolver.define('getCaseTimeline', async (ctx: unknown) => {
   const c = ctx as { payload?: unknown; context?: { cloudId?: string } };

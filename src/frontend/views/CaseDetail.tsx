@@ -116,6 +116,16 @@ export function CaseDetail(props: { caseId: string | null; onBack: () => void })
     load();
   }, [load]);
 
+  const copyCitation = async (f: FindingView) => {
+    const citation = `ContextCourt finding ${f.findingId} (${f.type}, ${f.status}, severity ${f.severity}) — ${f.explanation} Evidence: ${f.supportingEvidenceIds.join(', ')}. Detected ${f.detectedAt}.`;
+    try {
+      await navigator.clipboard.writeText(citation);
+      setFeedback('Citation copied to clipboard.');
+    } catch {
+      setFeedback('Could not copy — clipboard unavailable in this context.');
+    }
+  };
+
   const prepareRemediation = async (finding: FindingView) => {
     if (!data) return;
     setBusyFinding(finding.findingId);
@@ -209,6 +219,11 @@ export function CaseDetail(props: { caseId: string | null; onBack: () => void })
                   ? ` · Affected: ${f.affectedWork.map((w) => w.key).join(', ')}`
                   : ''}
               </p>
+              <div className="row">
+                <button className="button subtle" onClick={() => copyCitation(f)}>
+                  Copy citation
+                </button>
+              </div>
               {(f.status === 'VERIFIED_CONTRADICTION' || f.status === 'POTENTIAL_CONTRADICTION') && (
                 <button
                   className="button"

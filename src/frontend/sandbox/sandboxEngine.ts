@@ -15,7 +15,7 @@ import { cancelProposal, decideProposal, executeProposal } from '../../core/exec
 import { draftProposal } from '../../core/remediation';
 import { orderReviewQueue } from '../../core/queue';
 import { verifyExecutionOutcome } from '../../core/verification';
-import { recordAuditEvent, orderAuditEvents, type AuditSink } from '../../audit/auditLog';
+import { recordAuditEvent, orderAuditEvents, verifyAuditChain, type AuditSink } from '../../audit/auditLog';
 import { sanitizeUntrusted } from '../../security/injection';
 import { sha256Hex } from '../../core/digest';
 import type {
@@ -459,6 +459,18 @@ const sandboxVerifyFetcher = async (path: string) => {
   }
   return { ok: false, status: 404, json: {} };
 };
+
+/** Sandbox parity for the interactive tamper-evidence check (Audit ledger UI). */
+export async function verifySandboxChainAsync(): Promise<{ valid: boolean; eventCount: number }> {
+  const sink: AuditSink = {
+    async append() {},
+    async readAll() {
+      return orderAuditEvents([...auditEvents]);
+    },
+  };
+  const valid = await verifyAuditChain(sink as never, 'sandbox');
+  return { valid, eventCount: auditEvents.length };
+}
 
 export function listSandboxAuditEvents(): AuditEvent[] {
   return orderAuditEvents([...auditEvents]);

@@ -4,13 +4,13 @@ Generated from `docs/registers/tasks.json` (validated, 459 records).
 
 | Status | Count |
 |---|---|
-| TEST_VERIFIED | 310 |
+| TEST_VERIFIED | 312 |
 | IMPLEMENTED | 46 |
-| NOT_STARTED | 47 |
+| NOT_STARTED | 45 |
 | DEFERRED | 48 |
 | BLOCKED | 8 |
 
-**Completed (verified with evidence): 356 / 459**
+**Completed (verified with evidence): 358 / 459**
 
 ## Completed tasks (with evidence)
 
@@ -84,9 +84,11 @@ Generated from `docs/registers/tasks.json` (validated, 459 records).
 | ET-067 | Sandbox fixture scenarios A–F | TEST_VERIFIED | Implementation slice this session |
 | ET-068 | Expiry countdown display | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Remaining-time label on approved proposals, live 30s tick (tes |
 | ET-069 | Case search | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Filter input over stored cases (tests: execution 7 new, case-t |
+| ET-070 | Saved views/filters | TEST_VERIFIED | Live filter model: cases text filter, proposals text+state filter, audit text filter (persistence of |
 | ET-071 | Sortable case table | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Column sort with stable tiebreak (tests: execution 7 new, case |
 | ET-072 | Case pagination | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Client paging, 10/page (tests: execution 7 new, case-timeline  |
 | ET-074 | Rejection rationale capture | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Rationale prompted on reject, stored + rendered (tests: execut |
+| ET-077 | Copyable citations | TEST_VERIFIED | Copy-citation button on every finding card (clipboard API, honest failure feedback) |
 | ET-088 | Execution confirmation dialog | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Confirm before execute (tests: execution 7 new, case-timeline  |
 | ET-089 | Post-approval cancel flow | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: Revoke button for the approver on record (tests: execution 7 n |
 | ET-090 | Judge summary panel | TEST_VERIFIED | Implemented 2026-10-31 dynamics pass: At-a-glance card from real stores (tests: execution 7 new, cas |
@@ -280,7 +282,7 @@ Generated from `docs/registers/tasks.json` (validated, 459 records).
 | ET-336 | Data minimization audit | TEST_VERIFIED | Spans only |
 | ET-337 | Error classification audit | TEST_VERIFIED | Typed errors |
 | ET-341 | Digest chain construction tests | TEST_VERIFIED | audit-log tests |
-| ET-342 | Chain verification API tests | TEST_VERIFIED | Tamper test |
+| ET-342 | Chain verification API tests | TEST_VERIFIED | Tamper test Now also exposed interactively: verifyAuditChain resolver + Verify-chain-integrity butto |
 | ET-343 | Tamper detection demonstration | TEST_VERIFIED | Tamper case covered |
 | ET-344 | analysis_run event coverage | TEST_VERIFIED | Both paths tested |
 | ET-345 | Decision event coverage | TEST_VERIFIED | Decision events tested |
@@ -389,4 +391,4 @@ Generated from `docs/registers/tasks.json` (validated, 459 records).
 ## Deferred tasks (reason recorded in the register)
 
 Total deferred: **48**. Full records with reasons: docs/ENGINEERING_TASK_REGISTER.md.
-Not started: **47** (backlog items with acceptance criteria already defined).
+Not started: **45** (backlog items with acceptance criteria already defined).

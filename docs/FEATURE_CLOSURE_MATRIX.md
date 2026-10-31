@@ -8,10 +8,10 @@ runtime path and verification evidence exist (see docs/FINAL_FEATURE_COMPLETION_
 
 | Disposition | Count | Meaning |
 |---|---|---|
-| EXISTING | 347 | Implemented, in the runtime path, verified by tests/commands |
+| EXISTING | 349 | Implemented, in the runtime path, verified by tests/commands |
 | IMPLEMENT | undefined | Implemented in the current closure slice, test-verified |
 | MERGE | 0 | Merged duplicate (reason recorded) |
-| DEFER | 110 | Prioritized backlog, not yet operational (see backlog below) |
+| DEFER | 108 | Prioritized backlog, not yet operational (see backlog below) |
 | REJECT_WITH_REASON | 11 | Explicitly rejected as anti-product (reason recorded) |
 
 ---
@@ -47,7 +47,7 @@ runtime path and verification evidence exist (see docs/FINAL_FEATURE_COMPLETION_
 | FR-027 | Approver identity display | EXISTING | 1 | — |
 | FR-028 | Approval expiry countdown | DEFER | 3 | Implemented 2026-10-31 dynamics pass: Remaining-time label on approved proposals, live 30s |
 | FR-029 | Case search by issue key | DEFER | 3 | Implemented 2026-10-31 dynamics pass: Filter input over stored cases (tests: execution 7 n |
-| FR-030 | Saved views and filters | DEFER | 3 | — |
+| FR-030 | Saved views and filters | EXISTING | 3 | Live filter model: cases text filter, proposals text+state filter, audit text filter (pers |
 | FR-031 | Sortable case table | DEFER | 3 | Implemented 2026-10-31 dynamics pass: Column sort with stable tiebreak (tests: execution 7 |
 | FR-032 | Case list pagination | DEFER | 3 | Implemented 2026-10-31 dynamics pass: Client paging, 10/page (tests: execution 7 new, case |
 | FR-033 | Bulk decisions | DEFER | 3 | — |
@@ -57,7 +57,7 @@ runtime path and verification evidence exist (see docs/FINAL_FEATURE_COMPLETION_
 | FR-037 | Live-mode onboarding tour | DEFER | 3 | — |
 | FR-038 | Demo fixtures for scenarios A–F | EXISTING | 3 | Sandbox documented as real engine + scripted transport |
 | FR-039 | Deterministic demo replay | EXISTING | 3 | — |
-| FR-040 | Copyable evidence citations | DEFER | 3 | — |
+| FR-040 | Copyable evidence citations | EXISTING | 3 | Copy-citation button on every finding card (clipboard API, honest failure feedback) |
 | FR-041 | Deep links to Jira issues | DEFER | 3 | — |
 | FR-042 | Dark theme | DEFER | 4 | — |
 | FR-043 | Localization | DEFER | 4 | — |
@@ -488,4 +488,4 @@ runtime path and verification evidence exist (see docs/FINAL_FEATURE_COMPLETION_
 | FR-468 | Invented competitor comparisons | REJECT_WITH_REASON | 3 | — |
 
 ## Backlog (DEFER) — every entry has a recorded reason in docs/FEATURE_CATALOG.md
-Total deferred: **110** (of 468).
+Total deferred: **108** (of 468).

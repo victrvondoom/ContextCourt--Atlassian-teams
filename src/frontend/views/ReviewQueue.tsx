@@ -2,9 +2,9 @@
  * Review queue — remediation proposals awaiting a human decision.
  *
  * Live mode: proposals come from the tenant's KVS store via the
- * `listProposals` resolver and every decision/execution goes through the
- * `decideProposal` / `executeProposal` resolvers (server-side authorization:
- * no self-approval, digest-bound, expiry, replay rejection).
+ * `listProposals` resolver (documented utility ordering); every action goes
+ * through server-side resolvers (approve/reject with rationale, cancel with
+ * authority rules, execute with binding checks + independent verification).
  * Sandbox mode: the same core decision/execution modules run in-browser over
  * the sandbox stores — nothing is hardcoded.
  */
@@ -13,6 +13,7 @@ import { invoke } from '@forge/bridge';
 import { StatusPill } from '../components/Pills';
 import { useSandbox } from '../sandbox/SandboxContext';
 import {
+  cancelSandboxProposal,
   decideSandboxProposal,
   executeSandboxProposal,
   listSandboxProposals,
@@ -44,6 +45,7 @@ export interface ProposalView {
   viewerIsActor: boolean;
   viewerIsApprover: boolean;
   priorityExplanation?: string;
+  decisionRationale?: string | null;
   verification?: {
     outcome: 'VERIFIED' | 'MISMATCH' | 'UNVERIFIED';
     detail: string;
@@ -52,12 +54,27 @@ export interface ProposalView {
   } | null;
 }
 
+function remainingLabel(expiresAt: string): string {
+  const ms = new Date(expiresAt).getTime() - Date.now();
+  if (ms <= 0) return 'expired';
+  const minutes = Math.floor(ms / 60000);
+  if (minutes < 60) return `${minutes}m left`;
+  return `${Math.floor(minutes / 60)}h ${minutes % 60}m left`;
+}
+
 export function ReviewQueue(props: { onPendingCount?: (n: number) => void }) {
   const { sandbox } = useSandbox();
   const [proposals, setProposals] = useState<ProposalView[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [, forceTick] = useState(0);
+
+  // Live countdown refresh for approved proposals.
+  useEffect(() => {
+    const t = setInterval(() => forceTick((n) => n + 1), 30_000);
+    return () => clearInterval(t);
+  }, []);
 
   const refresh = useCallback(async () => {
     try {
@@ -81,34 +98,55 @@ export function ReviewQueue(props: { onPendingCount?: (n: number) => void }) {
 
   const act = async (
     proposalId: string,
-    action: 'approve' | 'reject' | 'execute' | 'prepare',
-    caseId?: string,
-    findingId?: string,
+    action: 'approve' | 'reject' | 'execute' | 'cancel' | 'prepare',
+    opts: { caseId?: string; findingId?: string; rationale?: string | null } = {},
   ) => {
-    setBusyId(proposalId || `${caseId}:${findingId}`);
+    setBusyId(proposalId || `${opts.caseId}:${opts.findingId}`);
     setFeedback(null);
     try {
-      let res: { status?: string; error?: string; outcome?: { state: string; detail: string } };
+      let res: {
+        status?: string;
+        error?: string;
+        outcome?: { state: string; detail: string };
+      };
       if (sandbox) {
         if (action === 'prepare') {
-          res = await prepareSandboxProposal(caseId!, findingId!);
+          res = await prepareSandboxProposal(opts.caseId!, opts.findingId!);
         } else if (action === 'execute') {
           res = await executeSandboxProposal(proposalId);
+        } else if (action === 'cancel') {
+          res = await cancelSandboxProposal(proposalId, opts.rationale);
         } else {
-          res = await decideSandboxProposal(proposalId, action);
+          res = await decideSandboxProposal(proposalId, action, opts.rationale);
         }
       } else if (action === 'prepare') {
         res = { status: 'UNSUPPORTED' };
       } else if (action === 'execute') {
+        if (
+          !window.confirm(
+            'Execute this approved proposal against Jira? The result will be independently verified.',
+          )
+        ) {
+          setBusyId(null);
+          return;
+        }
         res = (await invoke('executeProposal', { proposalId })) as never;
+      } else if (action === 'cancel') {
+        res = (await invoke('cancelProposal', { proposalId, rationale: opts.rationale })) as never;
+      } else if (action === 'reject') {
+        const rationale =
+          window.prompt('Rejection rationale (stored with the decision and visible to the team):') ?? '';
+        res = (await invoke('decideProposal', { proposalId, decision: 'reject', rationale })) as never;
       } else {
-        res = (await invoke('decideProposal', { proposalId, decision: action })) as never;
+        res = (await invoke('decideProposal', { proposalId, decision: 'approve' })) as never;
       }
       if (res.status === 'OK') {
         setFeedback(
           action === 'execute'
             ? `Executed: ${res.outcome?.detail ?? 'done'}`
-            : `Proposal ${action === 'approve' ? 'approved' : 'rejected'}.`,
+            : action === 'cancel'
+              ? 'Proposal cancelled.'
+              : `Proposal ${action === 'approve' ? 'approved' : 'rejected'}.`,
         );
       } else if (res.status === 'DECISION_REJECTED' || res.status === 'DECISION_FAILED') {
         setFeedback(`Decision rejected: ${res.error ?? 'not permitted'}`);
@@ -130,16 +168,18 @@ export function ReviewQueue(props: { onPendingCount?: (n: number) => void }) {
       <header className="view-header">
         <h1>Review queue</h1>
         <p className="muted">
-          Remediation proposals awaiting human approval. Nothing executes without an explicit, recorded
-          approval bound to user, tenant, target and payload digest — and the proposal author can never
-          approve their own proposal.
+          Remediation proposals awaiting human approval, ordered by the documented review utility (severity ×
+          risk × waiting time). Nothing executes without an explicit, recorded approval bound to user, tenant,
+          target and payload digest — and the proposal author can never approve their own proposal.
         </p>
       </header>
 
       {feedback && (
         <div
           className={
-            feedback.startsWith('Executed') || feedback.includes('approved') ? 'alert ok' : 'alert error'
+            feedback.startsWith('Executed') || feedback.includes('approved') || feedback.includes('cancelled')
+              ? 'alert ok'
+              : 'alert error'
           }
           role="status"
         >
@@ -172,9 +212,8 @@ function ProposalCard(props: {
   busy: boolean;
   onAct: (
     proposalId: string,
-    action: 'approve' | 'reject' | 'execute' | 'prepare',
-    caseId?: string,
-    findingId?: string,
+    action: 'approve' | 'reject' | 'execute' | 'cancel' | 'prepare',
+    opts?: { caseId?: string; findingId?: string; rationale?: string | null },
   ) => void;
 }) {
   const { proposal: p } = props;
@@ -203,13 +242,14 @@ function ProposalCard(props: {
       <p className="muted">
         Prepared by <span className="mono">{p.actor}</span> at {new Date(p.createdAt).toLocaleString()}
         {p.approverId ? ` · approved by ${p.approverId}` : ''}
-        {p.expiresAt ? ` · expires ${new Date(p.expiresAt).toLocaleString()}` : ''}
+        {p.expiresAt && approved ? ` · ${remainingLabel(p.expiresAt)}` : ''}
       </p>
       {p.priorityExplanation && pending && (
         <p className="muted">
           Queue priority: <span className="mono">{p.priorityExplanation}</span>
         </p>
       )}
+      {p.decisionRationale && <p className="muted">Rationale: “{p.decisionRationale}”</p>}
       {p.verification && (
         <div className="row">
           <StatusPill state={`verification-${p.verification.outcome.toLowerCase()}`} />
@@ -236,23 +276,51 @@ function ProposalCard(props: {
               <button className="button" disabled={props.busy} onClick={() => props.onAct(p.id, 'reject')}>
                 Reject
               </button>
+              {p.viewerIsActor && (
+                <button
+                  className="button"
+                  disabled={props.busy}
+                  onClick={() =>
+                    props.onAct(p.id, 'cancel', {
+                      rationale: window.prompt('Withdrawal note (optional):'),
+                    })
+                  }
+                >
+                  Withdraw
+                </button>
+              )}
             </>
           )}
           {approved && (
-            <button
-              className="button primary"
-              disabled={props.busy || expired || !p.viewerIsApprover}
-              onClick={() => props.onAct(p.id, 'execute')}
-              title={
-                expired
-                  ? 'The approval has expired'
-                  : !p.viewerIsApprover
-                    ? 'Only the approver can execute'
-                    : undefined
-              }
-            >
-              Execute
-            </button>
+            <>
+              <button
+                className="button primary"
+                disabled={props.busy || expired || !p.viewerIsApprover}
+                onClick={() => props.onAct(p.id, 'execute')}
+                title={
+                  expired
+                    ? 'The approval has expired'
+                    : !p.viewerIsApprover
+                      ? 'Only the approver can execute'
+                      : undefined
+                }
+              >
+                Execute
+              </button>
+              {p.viewerIsApprover && (
+                <button
+                  className="button"
+                  disabled={props.busy}
+                  onClick={() =>
+                    props.onAct(p.id, 'cancel', {
+                      rationale: window.prompt('Revocation reason (stored with the cancellation):'),
+                    })
+                  }
+                >
+                  Revoke approval
+                </button>
+              )}
+            </>
           )}
         </div>
       )}

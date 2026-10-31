@@ -6,9 +6,9 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Disposition | Count |
 |---|---|
-| EXISTING | 287 |
-| IMPLEMENT | 50 |
-| DEFER | 120 |
+| EXISTING | 291 |
+| IMPLEMENT | 49 |
+| DEFER | 117 |
 | REJECT_WITH_REASON | 11 |
 
 ---
@@ -354,13 +354,13 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-057 — Case lifecycle timeline
 
 - **Description:** Analysis→proposal→decision→execution→verification timeline per case.
-- **Disposition:** IMPLEMENT
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-058 — Judge summary panel
 
 - **Description:** One-glance panel with counts and states for demos.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P3
 
 ### FR-059 — Fake live indicators
@@ -1436,13 +1436,13 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 ### FR-236 — Approval revocation before execution
 
 - **Description:** Cancel an approval pre-execution.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-237 — Rejection rationale capture
 
 - **Description:** Reason stored with the rejection.
-- **Disposition:** DEFER
+- **Disposition:** EXISTING
 - **Priority:** P2
 
 ### FR-238 — Risk-based approval routing

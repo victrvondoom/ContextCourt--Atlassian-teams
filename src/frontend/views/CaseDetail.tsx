@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { invoke } from '@forge/bridge';
 import { StatusPill, SeverityPill } from '../components/Pills';
 import { useSandbox } from '../sandbox/SandboxContext';
-import { getSandboxCase, prepareSandboxProposal } from '../sandbox/sandboxEngine';
+import { getSandboxCase, getSandboxCaseTimeline, prepareSandboxProposal } from '../sandbox/sandboxEngine';
 
 interface CaseRecordView {
   caseId: string;
@@ -20,6 +20,20 @@ interface CaseRecordView {
   createdAt: string;
   updatedAt: string;
   owner: string | null;
+}
+
+interface TimelineEvent {
+  actor: string;
+  action: string;
+  target: string;
+  timestamp: string;
+  result: string;
+}
+
+interface TimelineProposal {
+  id: string;
+  state: string;
+  operation: string;
 }
 
 interface FindingView {
@@ -39,6 +53,33 @@ export function CaseDetail(props: { caseId: string | null; onBack: () => void })
   const [error, setError] = useState<string | null>(null);
   const [busyFinding, setBusyFinding] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
+  const [timeline, setTimeline] = useState<{
+    events: TimelineEvent[];
+    proposals: TimelineProposal[];
+  } | null>(null);
+
+  const loadTimeline = useCallback(async () => {
+    if (!props.caseId) return;
+    if (sandbox) {
+      const t = getSandboxCaseTimeline(props.caseId);
+      setTimeline({ events: t.events, proposals: t.proposals });
+      return;
+    }
+    try {
+      const res = (await invoke('getCaseTimeline', { caseId: props.caseId })) as {
+        status: string;
+        events: TimelineEvent[];
+        proposals: TimelineProposal[];
+      };
+      setTimeline(res.status === 'OK' ? { events: res.events, proposals: res.proposals } : null);
+    } catch {
+      setTimeline(null);
+    }
+  }, [props.caseId, sandbox]);
+
+  useEffect(() => {
+    loadTimeline();
+  }, [loadTimeline]);
 
   const load = useCallback(async () => {
     if (!props.caseId) return;
@@ -180,6 +221,31 @@ export function CaseDetail(props: { caseId: string | null; onBack: () => void })
             </section>
           ))
         ))}
+      <section className="card" aria-labelledby="timeline-h">
+        <h2 id="timeline-h">Case lifecycle</h2>
+        {!timeline && <p className="muted">Loading timeline…</p>}
+        {timeline && timeline.events.length === 0 && (
+          <p className="muted">No audited events for this case yet.</p>
+        )}
+        {timeline && timeline.events.length > 0 && (
+          <ol className="timeline">
+            {timeline.events.map((e, i) => (
+              <li key={`${e.timestamp}-${i}`} className="timeline-item">
+                <span className="mono">{e.action}</span>
+                <span className="muted">
+                  {' '}
+                  by {e.actor} · {new Date(e.timestamp).toLocaleString()} · {e.result}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+        {timeline && timeline.proposals.length > 0 && (
+          <p className="muted">
+            Proposals for this case: {timeline.proposals.map((pr) => `${pr.id} (${pr.state})`).join(' · ')}
+          </p>
+        )}
+      </section>
     </div>
   );
 }

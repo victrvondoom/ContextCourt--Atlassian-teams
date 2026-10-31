@@ -6,9 +6,9 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 | Status | Count |
 |---|---|
-| TEST_VERIFIED | 294 |
+| TEST_VERIFIED | 305 |
 | IMPLEMENTED | 46 |
-| NOT_STARTED | 62 |
+| NOT_STARTED | 51 |
 | DEFERRED | 49 |
 | BLOCKED | 8 |
 
@@ -737,12 +737,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Per-case event timeline.
 - **Linked features:** FR-057
-- **Priority:** P2 · **Status:** NOT_STARTED
+- **Priority:** P2 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/CaseDetail.tsx · **Deps:** ET-047
 - **Acceptance:** Timeline renders case-linked audit events
 - **Verification:** UI code inspection · **Regression:** Manual check
 - **Risk:** Broken event links
-- **Evidence:** Planned after verification slice
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Timeline card from getCaseTimeline / sandbox timeline (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-067 — Sandbox fixture scenarios A–F
 
@@ -759,23 +759,23 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Live remaining-time display.
 - **Linked features:** FR-028
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/ReviewQueue.tsx · **Deps:** ET-050
 - **Acceptance:** Countdown renders from binding expiry
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Clock skew confusion
-- **Evidence:** Backlog after core slices
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Remaining-time label on approved proposals, live 30s tick (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-069 — Case search
 
 - **Description:** Filter cases by key fragment.
 - **Linked features:** FR-029
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/Cases.tsx · **Deps:** ET-046
 - **Acceptance:** Search filters stored cases
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Client/server filter mismatch
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Filter input over stored cases (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-070 — Saved views/filters
 
@@ -792,23 +792,23 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Column sorting.
 - **Linked features:** FR-031
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/Cases.tsx · **Deps:** ET-046
 - **Acceptance:** Sorting stable and labeled
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Sort ambiguity
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Column sort with stable tiebreak (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-072 — Case pagination
 
 - **Description:** Bounded pages.
 - **Linked features:** FR-032
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/Cases.tsx · **Deps:** ET-046
 - **Acceptance:** Large lists paginate
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Perf on big tenants
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Client paging, 10/page (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-073 — Bulk decisions
 
@@ -825,12 +825,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Reason with rejection.
 - **Linked features:** FR-035
-- **Priority:** P2 · **Status:** NOT_STARTED
+- **Priority:** P2 · **Status:** TEST_VERIFIED
 - **Location:** src/core/execution.ts · **Deps:** ET-056
 - **Acceptance:** Rationale stored and audited
 - **Verification:** Unit tests · **Regression:** New tests
 - **Risk:** Lost decision context
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Rationale prompted on reject, stored + rendered (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-075 — Proposal notifications
 
@@ -979,34 +979,34 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Confirm before execution.
 - **Linked features:** FR-055
-- **Priority:** P2 · **Status:** NOT_STARTED
+- **Priority:** P2 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/views/ReviewQueue.tsx · **Deps:** ET-057
 - **Acceptance:** Dialog prevents accidental execution
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Friction
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Confirm before execute (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-089 — Post-approval cancel flow
 
 - **Description:** Cancel before execution.
 - **Linked features:** FR-056
-- **Priority:** P2 · **Status:** NOT_STARTED
+- **Priority:** P2 · **Status:** TEST_VERIFIED
 - **Location:** src/core/execution.ts · **Deps:** ET-057
 - **Acceptance:** Cancel transitions are legal + audited
 - **Verification:** Unit tests · **Regression:** approval tests
 - **Risk:** State confusion
-- **Evidence:** Backlog; state machine already permits CANCELLED
+- **Evidence:** Implemented 2026-10-31 dynamics pass: Revoke button for the approver on record (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-090 — Judge summary panel
 
 - **Description:** Demo counts panel.
 - **Linked features:** FR-058
-- **Priority:** P3 · **Status:** NOT_STARTED
+- **Priority:** P3 · **Status:** TEST_VERIFIED
 - **Location:** src/frontend/ · **Deps:** ET-055
 - **Acceptance:** Panel shows real counts only
 - **Verification:** UI inspection · **Regression:** Manual check
 - **Risk:** Fake metrics
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: At-a-glance card from real stores (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-091 — Navigation consistency
 
@@ -2569,12 +2569,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Store rejection reason.
 - **Linked features:** FR-212
-- **Priority:** P2 · **Status:** NOT_STARTED
+- **Priority:** P2 · **Status:** TEST_VERIFIED
 - **Location:** src/core/execution.ts · **Deps:** ET-056
 - **Acceptance:** Rationale stored + audited
 - **Verification:** Unit tests · **Regression:** New tests
 - **Risk:** Lost rationale
-- **Evidence:** Backlog
+- **Evidence:** Implemented 2026-10-31 dynamics pass: decisionRationale stored on rejection/cancel (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-233 — Reopen proposals
 
@@ -2802,12 +2802,12 @@ Generated from `scripts/register-data/` (single source of truth). Validated by `
 
 - **Description:** Cancel approved pre-execution.
 - **Linked features:** FR-236
-- **Priority:** P2 · **Status:** NOT_STARTED
+- **Priority:** P2 · **Status:** TEST_VERIFIED
 - **Location:** future resolver · **Deps:** ET-241
 - **Acceptance:** Revocation audited and enforced
 - **Verification:** Unit tests · **Regression:** New tests
 - **Risk:** Revoked-but-executed
-- **Evidence:** Backlog; CANCELLED transition exists, resolver pending
+- **Evidence:** Implemented 2026-10-31 dynamics pass: cancelProposal resolver + authority rules + audit (tests: execution 7 new, case-timeline 3, sandbox parity)
 
 ### ET-254 — Rejection rationale storage
 

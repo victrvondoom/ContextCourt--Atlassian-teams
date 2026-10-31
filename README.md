@@ -23,6 +23,7 @@ Built for Codegeist 2026 (Apps for Software Teams).
 | **Independent post-execution verification** (VERIFIED / MISMATCH / UNVERIFIED read-back) | VERIFIED LOCALLY (`tests/unit/verification.test.ts`) |
 | **Documented queue ordering** (review utility: severity × risk × age, per-item explanations) | VERIFIED LOCALLY (`tests/unit/queue-ordering.test.ts`) |
 | One-command demo of Scenarios A–F | VERIFIED LOCALLY (`npm run demo`, deterministic 6/6) |
+| Dynamics: cancel/revocation, rejection rationale, case timeline, search/sort/paging, live countdown | VERIFIED LOCALLY (116/116 tests) |
 | Capability registers: 468 features + 459 engineering tasks, validated | VERIFIED LOCALLY (`npm run validate:registers`) |
 | Sandbox demo — the real engine running in-browser over deterministic fixtures | VERIFIED LOCALLY |
 | Teamwork Graph adapter | IMPLEMENTED — UNVERIFIED (adapter tested; not wired, needs graph scopes + dev site) |

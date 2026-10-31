@@ -1247,8 +1247,8 @@
     "verification": "UI code inspection",
     "regression": "Manual check",
     "risk": "Broken event links",
-    "status": "NOT_STARTED",
-    "evidence": "Planned after verification slice"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Timeline card from getCaseTimeline / sandbox timeline (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-067",
@@ -1284,8 +1284,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Clock skew confusion",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog after core slices"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Remaining-time label on approved proposals, live 30s tick (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-069",
@@ -1302,8 +1302,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Client/server filter mismatch",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Filter input over stored cases (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-070",
@@ -1338,8 +1338,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Sort ambiguity",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Column sort with stable tiebreak (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-072",
@@ -1356,8 +1356,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Perf on big tenants",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Client paging, 10/page (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-073",
@@ -1392,8 +1392,8 @@
     "verification": "Unit tests",
     "regression": "New tests",
     "risk": "Lost decision context",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Rationale prompted on reject, stored + rendered (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-075",
@@ -1644,8 +1644,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Friction",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Confirm before execute (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-089",
@@ -1662,8 +1662,8 @@
     "verification": "Unit tests",
     "regression": "approval tests",
     "risk": "State confusion",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog; state machine already permits CANCELLED"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: Revoke button for the approver on record (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-090",
@@ -1680,8 +1680,8 @@
     "verification": "UI inspection",
     "regression": "Manual check",
     "risk": "Fake metrics",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: At-a-glance card from real stores (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-091",
@@ -4256,8 +4256,8 @@
     "verification": "Unit tests",
     "regression": "New tests",
     "risk": "Lost rationale",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: decisionRationale stored on rejection/cancel (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-233",
@@ -4641,8 +4641,8 @@
     "verification": "Unit tests",
     "regression": "New tests",
     "risk": "Revoked-but-executed",
-    "status": "NOT_STARTED",
-    "evidence": "Backlog; CANCELLED transition exists, resolver pending"
+    "status": "TEST_VERIFIED",
+    "evidence": "Implemented 2026-10-31 dynamics pass: cancelProposal resolver + authority rules + audit (tests: execution 7 new, case-timeline 3, sandbox parity)"
   },
   {
     "id": "ET-254",

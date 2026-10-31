@@ -12,7 +12,7 @@ this repository at the final commit. Labels follow the project convention
 | Typecheck | `npm run typecheck` | **PASS — 0 errors** |
 | Lint | `npm run lint` | **PASS — 0 problems** |
 | Format | `npm run format:check` | **PASS** |
-| Tests | `npm test` | **PASS — 105/105 tests, 16 files** (87 at mission start; +18: 9 verification, 9 queue-ordering) |
+| Tests | `npm test` | **PASS — 116/116 tests, 17 files** (87 at mission start; +18 mission, +11 dynamics pass) |
 | Frontend build | `npm run build` | **PASS** |
 | Benchmark replay | `npx vite-node benchmarks/evaluate.ts benchmarks/dataset.json` | **MEASURED, exact**: P=0.800 R=0.571 F1=0.667 FPR=0.200 (unchanged by the mission — engine untouched) |
 | Demo | `npm run demo` | **PASS — 6/6 scenarios**, deterministic (Scenarios A–F) |
@@ -38,6 +38,16 @@ ordering (+ severity carried on proposals); trace markers in execution writes;
 demo runner for Scenarios A–F (+ `npm run demo`); 468+459 registers with
 generation and validation scripts; 13 new/updated governance, architecture,
 benchmark, demo and handoff documents; README as-built.
+
+## Dynamics pass (after the mission, same day)
+
+Made the remaining deferred product surfaces functional and dynamic —
+cancellation/revocation with authority rules, rejection rationale, case
+lifecycle timeline (resolver + UI + sandbox), expiry countdown, execution
+confirmation, case search/sort/pagination, at-a-glance real-counts panel.
+Registers updated honestly (11 features DEFER→EXISTING, 11 tasks
+NOT_STARTED→TEST_VERIFIED) and re-validated. Demo still 6/6; queue and
+governance invariants unchanged.
 
 ## Tests added (this mission)
 

@@ -7,7 +7,7 @@
  * dispatch, explicit failure states).
  */
 import { describe, expect, it } from 'vitest';
-import { decideProposal, executeProposal, DecisionError } from '../../src/core/execution';
+import { cancelProposal, decideProposal, executeProposal, DecisionError } from '../../src/core/execution';
 import { draftProposal } from '../../src/core/remediation';
 import type { Finding, RemediationProposal } from '../../src/core/types';
 
@@ -228,5 +228,69 @@ describe('executeProposal', () => {
     });
     expect(out.state).toBe('EXECUTION_FAILED');
     expect(out.detail).toMatch(/invalid approval transition/);
+  });
+});
+
+describe('rejection rationale (dynamics pass)', () => {
+  it('stores the reviewer rationale with the rejection', async () => {
+    const p = await proposal();
+    const out = decideProposal({
+      proposal: p,
+      decision: 'reject',
+      approverUserId: APPROVER,
+      now: NOW,
+      rationale: '  Superseded by DEC-90; no longer applicable.  ',
+    });
+    expect(out.state).toBe('REJECTED');
+    expect(out.decisionRationale).toBe('Superseded by DEC-90; no longer applicable.');
+    expect(out.binding).toBeNull();
+  });
+
+  it('rejection without rationale stores null, never a fabricated one', async () => {
+    const p = await proposal();
+    const out = decideProposal({ proposal: p, decision: 'reject', approverUserId: APPROVER, now: NOW });
+    expect(out.decisionRationale).toBeNull();
+  });
+});
+
+describe('cancelProposal (withdrawal / revocation)', () => {
+  it('the proposal actor may withdraw their own pending proposal', async () => {
+    const p = await proposal();
+    const out = cancelProposal({
+      proposal: p,
+      requesterUserId: ACTOR,
+      now: NOW,
+      rationale: 'obsolete',
+    });
+    expect(out.state).toBe('CANCELLED');
+    expect(out.decisionRationale).toBe('obsolete');
+  });
+
+  it('anyone else may NOT withdraw a pending proposal', async () => {
+    const p = await proposal();
+    expect(() => cancelProposal({ proposal: p, requesterUserId: OTHER, now: NOW })).toThrow(
+      /only the proposal author/,
+    );
+  });
+
+  it('the approver on record may revoke an approved proposal before execution', async () => {
+    const p = await approved();
+    const out = cancelProposal({ proposal: p, requesterUserId: APPROVER, now: NOW });
+    expect(out.state).toBe('CANCELLED');
+    expect(out.binding).toBeNull();
+  });
+
+  it('the proposal actor may NOT revoke their own approved proposal', async () => {
+    const p = await approved();
+    expect(() => cancelProposal({ proposal: p, requesterUserId: ACTOR, now: NOW })).toThrow(
+      /only the approver on record/,
+    );
+  });
+
+  it('executed proposals are irreversible', async () => {
+    const p = { ...(await approved()), state: 'EXECUTED' as const };
+    expect(() => cancelProposal({ proposal: p, requesterUserId: APPROVER, now: NOW })).toThrow(
+      /only PENDING_APPROVAL or APPROVED/,
+    );
   });
 });

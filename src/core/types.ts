@@ -166,6 +166,8 @@ export interface RemediationProposal {
   binding: ApprovalBinding | null;
   /** Severity of the supporting finding at draft time; drives queue utility. */
   severity?: Severity;
+  /** Reviewer-supplied rationale, stored with a rejection or cancellation. */
+  decisionRationale?: string | null;
   verificationRequirements: string[];
   /** Independent post-execution verification result (null until executed+verified read). */
   verification?: {

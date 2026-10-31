@@ -3,7 +3,12 @@ import { invoke } from '@forge/bridge';
 import type { AnalysisView, HealthStatus } from '../types';
 import { StatusPill, SeverityPill } from '../components/Pills';
 import { useSandbox } from '../sandbox/SandboxContext';
-import { runSandboxAnalysis, sandboxStoreCounts, listSandboxCases } from '../sandbox/sandboxEngine';
+import {
+  runSandboxAnalysis,
+  sandboxStoreCounts,
+  listSandboxCases,
+  listSandboxProposals,
+} from '../sandbox/sandboxEngine';
 
 interface CaseSummary {
   caseId: string;
@@ -20,6 +25,39 @@ export function Overview(props: { issueKey: string | null; onHealth: (h: HealthS
   const [busy, setBusy] = useState(false);
   const [inputKey, setInputKey] = useState(props.issueKey ?? '');
   const [recentCases, setRecentCases] = useState<CaseSummary[] | null>(null);
+  const [stats, setStats] = useState<{
+    cases: number;
+    pending: number;
+    executed: number;
+    verified: number;
+  } | null>(null);
+
+  const loadStats = async () => {
+    if (sandbox) {
+      const proposals = listSandboxProposals();
+      setStats({
+        cases: sandboxStoreCounts().cases,
+        pending: proposals.filter((p) => p.state === 'PENDING_APPROVAL').length,
+        executed: proposals.filter((p) => p.state === 'EXECUTED').length,
+        verified: proposals.filter((p) => p.verification?.outcome === 'VERIFIED').length,
+      });
+      return;
+    }
+    try {
+      const [caseRes, proposalRes] = (await Promise.all([invoke('listCases'), invoke('listProposals')])) as [
+        { cases: unknown[] },
+        { proposals: { state: string; verification?: { outcome: string } }[] },
+      ];
+      setStats({
+        cases: caseRes.cases.length,
+        pending: proposalRes.proposals.filter((p) => p.state === 'PENDING_APPROVAL').length,
+        executed: proposalRes.proposals.filter((p) => p.state === 'EXECUTED').length,
+        verified: proposalRes.proposals.filter((p) => p.verification?.outcome === 'VERIFIED').length,
+      });
+    } catch {
+      setStats(null);
+    }
+  };
 
   const loadCases = async () => {
     if (sandbox) {
@@ -65,6 +103,7 @@ export function Overview(props: { issueKey: string | null; onHealth: (h: HealthS
   useEffect(() => {
     refresh();
     loadCases();
+    loadStats();
   }, [sandbox]);
 
   const runAnalysis = async () => {
@@ -79,11 +118,13 @@ export function Overview(props: { issueKey: string | null; onHealth: (h: HealthS
         const res = (await runSandboxAnalysis(key)) as AnalysisView;
         setAnalysis(res);
         loadCases();
+        loadStats();
         return;
       }
       const res = (await invoke('analyzeIssue', { issueKey: key })) as AnalysisView;
       setAnalysis(res);
       loadCases();
+      loadStats();
     } catch (err) {
       setAnalysis({ status: 'ANALYSIS_FAILED', error: String(err) });
     } finally {
@@ -136,6 +177,20 @@ export function Overview(props: { issueKey: string | null; onHealth: (h: HealthS
           </ul>
         ) : (
           <p className="muted">Checking integrations…</p>
+        )}
+      </section>
+
+      <section className="card" aria-labelledby="stats-h">
+        <h2 id="stats-h">At a glance</h2>
+        {stats ? (
+          <ul className="health-list">
+            <li>Stored cases: {stats.cases}</li>
+            <li>Proposals awaiting review: {stats.pending}</li>
+            <li>Executed proposals: {stats.executed}</li>
+            <li>Independently verified: {stats.verified}</li>
+          </ul>
+        ) : (
+          <p className="muted">Counting…</p>
         )}
       </section>
 

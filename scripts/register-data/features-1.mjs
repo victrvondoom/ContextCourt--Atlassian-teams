@@ -58,8 +58,8 @@ export const FEATURES_1 = [
     ['Inline action feedback', 'Approve/reject/execute outcomes surfaced inline.', 'EXISTING', 2],
   ['Execution confirmation dialog', 'Explicit confirmation step before execution.', 'DEFER', 2],
   ['Post-approval cancel flow', 'Allow the approver to cancel before execution.', 'DEFER', 2],
-  ['Case lifecycle timeline', 'Analysis→proposal→decision→execution→verification timeline per case.', 'IMPLEMENT', 2],
-  ['Judge summary panel', 'One-glance panel with counts and states for demos.', 'DEFER', 3],
+  ['Case lifecycle timeline', 'Analysis→proposal→decision→execution→verification timeline per case.', 'EXISTING', 2],
+  ['Judge summary panel', 'One-glance panel with counts and states for demos.', 'EXISTING', 3],
   ['Fake live indicators', 'Pulsing "live" dots or fake real-time streams.', 'REJECT_WITH_REASON', 4, 'Rejected: fabricated liveness violates the honesty invariant.'],
   ['Decorative metric graphs', 'Charts without an operational meaning.', 'REJECT_WITH_REASON', 4, 'Rejected: only measured values are ever shown.'],
 

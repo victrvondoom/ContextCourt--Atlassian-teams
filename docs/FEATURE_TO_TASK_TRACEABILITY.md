@@ -63,8 +63,8 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-054 | Inline action feedback | EXISTING | ET-092 |
 | FR-055 | Execution confirmation dialog | DEFER | ET-088 |
 | FR-056 | Post-approval cancel flow | DEFER | ET-089 |
-| FR-057 | Case lifecycle timeline | IMPLEMENT | ET-066 |
-| FR-058 | Judge summary panel | DEFER | ET-090 |
+| FR-057 | Case lifecycle timeline | EXISTING | ET-066 |
+| FR-058 | Judge summary panel | EXISTING | ET-090 |
 | FR-059 | Fake live indicators | REJECT_WITH_REASON | — |
 | FR-060 | Decorative metric graphs | REJECT_WITH_REASON | ET-091 |
 | FR-061 | Evidence record contract | EXISTING | ET-016, ET-101 |
@@ -242,8 +242,8 @@ Generated from the registers. Every engineering task references at least one fea
 | FR-233 | Binding creation path (UI resolver) | EXISTING | ET-251 |
 | FR-234 | Digest-bound approval | EXISTING | ET-252 |
 | FR-235 | Modified proposal cannot reuse approval | EXISTING | ET-252, ET-388 |
-| FR-236 | Approval revocation before execution | DEFER | ET-253 |
-| FR-237 | Rejection rationale capture | DEFER | ET-254 |
+| FR-236 | Approval revocation before execution | EXISTING | ET-253 |
+| FR-237 | Rejection rationale capture | EXISTING | ET-254 |
 | FR-238 | Risk-based approval routing | DEFER | ET-255 |
 | FR-239 | Sensitive-operation restrictions | EXISTING | ET-256 |
 | FR-240 | Approval evidence snapshot | DEFER | ET-257 |

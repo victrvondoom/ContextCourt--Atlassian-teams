@@ -17,7 +17,7 @@ for demos, never present simulated as live.
   user authorization.** Remote `contextcourt` → `uhuhyogiyfitufyktyhvfukyku/Context-Court-AI`
   (note: differs from the `updatingmyhim` URL in some briefs).
 - Verification: `tsc` clean · `eslint` clean · `prettier` clean ·
-  **105/105 tests, 16 files** · `vite build` ok · benchmark replay exact
+  **116/116 tests, 17 files** · `vite build` ok · benchmark replay exact
   (P=0.800 R=0.571 F1=0.667) · `npm run demo` 6/6 ·
   `npm run validate:registers` PASS (468 FR + 459 ET).
 
@@ -66,12 +66,19 @@ external dependency). Re-run `npm run build:registers` after editing data.
 `tests/integration/{review-queue,sandbox-engine,persistence,teamwork-graph}.test.ts` ·
 `tests/helpers/fakeKvs.ts`.
 
+## Dynamics pass (2026-10-31, post-mission commit)
+Cancel/revocation (actor withdraws pending; approver revokes approved;
+terminal irreversible), rejection rationale (stored+rendered), case lifecycle
+timeline (getCaseTimeline resolver + CaseDetail card + sandbox), live expiry
+countdown, execution confirmation, case search/sort/pagination, at-a-glance
+real-counts panel. Registers updated (11 FR DEFER→EXISTING, 11 ET
+NOT_STARTED→TEST_VERIFIED) and re-validated. All 116/116 green.
+
 ## Outstanding (highest value next)
 1. External: dev-site deploy → verify live paths → flip `health` labels for
    rovo/mcp → wire Teamwork Graph enrichment.
-2. Case lifecycle timeline UI (FR-057) — audit events per case exist already.
-3. npm audit gate (ET-303), license audit (ET-043), ADR index (ET-045).
-4. Benchmark category B items — only after live deployment (BLOCKED).
+2. npm audit gate (ET-303), license audit (ET-043), ADR index (ET-045).
+3. Benchmark category B items — only after live deployment (BLOCKED).
 
 ## Commands
 `npm test` · `npm run demo` · `npm run build:registers` ·

@@ -11,7 +11,7 @@
  */
 import { analyze, resetFindingIds } from '../../core/contradiction';
 import { normalizeAll, resetPropositionIds } from '../../core/normalizer';
-import { decideProposal, executeProposal } from '../../core/execution';
+import { cancelProposal, decideProposal, executeProposal } from '../../core/execution';
 import { draftProposal } from '../../core/remediation';
 import { orderReviewQueue } from '../../core/queue';
 import { verifyExecutionOutcome } from '../../core/verification';
@@ -282,11 +282,76 @@ export function listSandboxProposals() {
     viewerIsApprover: r.proposal.binding?.approverUserId === SANDBOX_APPROVER,
     priorityExplanation: r.priorityExplanation,
     verification: r.proposal.verification ?? null,
+    decisionRationale: r.proposal.decisionRationale ?? null,
   }));
 }
 
+/**
+ * Cancel in sandbox: same authority rules as production. The sandbox viewer
+ * is the reviewer persona, so APPROVED proposals (which they approved) can be
+ * revoked; withdrawing a PENDING proposal belongs to the analyst persona and
+ * is refused for the viewer — exactly as the live product would.
+ */
+export async function cancelSandboxProposal(proposalId: string, rationale?: string | null) {
+  const proposal = proposals.get(proposalId);
+  if (!proposal) return { status: 'NOT_FOUND' as const, error: 'proposal not found' };
+  try {
+    const updated = cancelProposal({
+      proposal,
+      requesterUserId: SANDBOX_APPROVER,
+      now: new Date(),
+      rationale: rationale ?? null,
+    });
+    proposals.set(proposalId, updated);
+    await recordAuditEvent(
+      auditSink,
+      {
+        tenantId: 'sandbox',
+        actor: SANDBOX_APPROVER,
+        action: 'proposal_cancelled',
+        target: proposalId,
+        result: 'success',
+        linkedEvidenceIds: proposal.supportingFindingIds,
+        requestFingerprint: `sandbox-cancel-${proposalId}`,
+      },
+      new Date(),
+    );
+    return { status: 'OK' as const };
+  } catch (err) {
+    return {
+      status: 'DECISION_REJECTED' as const,
+      error: err instanceof Error ? err.message : 'rejected',
+    };
+  }
+}
+
+/** Case lifecycle timeline from the sandbox stores (mirrors the resolver). */
+export function getSandboxCaseTimeline(caseId: string) {
+  const issueKey = caseId.replace(/^case-/, '').toUpperCase();
+  const caseProposals = Array.from(proposals.values()).filter((p) => p.caseId === caseId);
+  const targets = new Set<string>([issueKey, caseId, ...caseProposals.map((p) => p.id)]);
+  const events = listSandboxAuditEvents()
+    .filter((e) => targets.has(e.target))
+    .map((e) => ({
+      actor: e.actor,
+      action: e.action,
+      target: e.target,
+      timestamp: e.timestamp,
+      result: e.result,
+    }));
+  return {
+    status: cases.has(caseId) ? ('OK' as const) : ('NOT_FOUND' as const),
+    events,
+    proposals: caseProposals.map((p) => ({ id: p.id, state: p.state, operation: p.operation })),
+  };
+}
+
 /** The sandbox "viewer" is the reviewer; the actor is the analyst. */
-export async function decideSandboxProposal(proposalId: string, decision: 'approve' | 'reject') {
+export async function decideSandboxProposal(
+  proposalId: string,
+  decision: 'approve' | 'reject',
+  rationale?: string | null,
+) {
   const proposal = proposals.get(proposalId);
   if (!proposal) return { status: 'NOT_FOUND' as const, error: 'proposal not found' };
   try {
@@ -295,6 +360,7 @@ export async function decideSandboxProposal(proposalId: string, decision: 'appro
       decision,
       approverUserId: SANDBOX_APPROVER,
       now: new Date(),
+      rationale: rationale ?? null,
     });
     proposals.set(proposalId, updated);
     await recordAuditEvent(

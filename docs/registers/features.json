@@ -453,7 +453,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Case lifecycle timeline",
     "description": "Analysis→proposal→decision→execution→verification timeline per case.",
-    "disposition": "IMPLEMENT",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -461,7 +461,7 @@
     "domain": "A. Product experience and workflows",
     "title": "Judge summary panel",
     "description": "One-glance panel with counts and states for demos.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P3"
   },
   {
@@ -1892,7 +1892,7 @@
     "domain": "E. Governance, approval and human control",
     "title": "Approval revocation before execution",
     "description": "Cancel an approval pre-execution.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {
@@ -1900,7 +1900,7 @@
     "domain": "E. Governance, approval and human control",
     "title": "Rejection rationale capture",
     "description": "Reason stored with the rejection.",
-    "disposition": "DEFER",
+    "disposition": "EXISTING",
     "priority": "P2"
   },
   {

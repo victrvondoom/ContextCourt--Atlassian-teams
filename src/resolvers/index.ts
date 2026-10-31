@@ -13,7 +13,7 @@ import { buildIssueEvidence } from '../integrations/evidence';
 import { normalizeAll } from '../core/normalizer';
 import { analyze, type AnalysisResult } from '../core/contradiction';
 import { digestPayload, sha256Hex } from '../core/digest';
-import { decideProposal, executeProposal, DecisionError } from '../core/execution';
+import { cancelProposal, decideProposal, executeProposal, DecisionError } from '../core/execution';
 import { verifyExecutionOutcome } from '../core/verification';
 import { orderReviewQueue } from '../core/queue';
 import { draftProposal } from '../core/remediation';
@@ -302,6 +302,7 @@ export async function persistAnalysisResult(
 
 const proposalIdResolverSchema = z.string().regex(/^prop_[A-Za-z0-9_-]+$/, 'valid proposal id required');
 const decisionSchema = z.enum(['approve', 'reject']);
+const rationaleSchema = z.string().max(500).optional();
 const prepareSchema = z.object({
   caseId: z.string().regex(/^[A-Za-z0-9_-]+$/, 'valid case id required'),
   findingId: z.string().min(1),
@@ -418,9 +419,10 @@ resolver.define('decideProposal', async (ctx: unknown) => {
   if (!cloudId || !accountId) {
     return { status: 'UNAUTHENTICATED', error: 'tenant context missing' };
   }
-  const body = (c.payload ?? {}) as { proposalId?: unknown; decision?: unknown };
+  const body = (c.payload ?? {}) as { proposalId?: unknown; decision?: unknown; rationale?: unknown };
   const proposalId = proposalIdResolverSchema.safeParse(body.proposalId);
   const decision = decisionSchema.safeParse(body.decision);
+  const rationale = rationaleSchema.safeParse(body.rationale);
   if (!proposalId.success || !decision.success) {
     return { status: 'INVALID_INPUT', error: 'valid proposalId and decision required' };
   }
@@ -435,6 +437,7 @@ resolver.define('decideProposal', async (ctx: unknown) => {
       decision: decision.data,
       approverUserId: accountId,
       now: new Date(),
+      rationale: rationale.success ? rationale.data : null,
     });
     await repo.put(updated);
     const audit = new KvsAuditRepository(kvs as unknown as AuditSinkLike);
@@ -561,6 +564,115 @@ resolver.define('executeProposal', async (ctx: unknown) => {
 });
 
 /**
+ * Cancel (withdraw/revoke) a proposal before execution.
+ * Authority: the actor withdraws PENDING proposals; the approver on record
+ * revokes APPROVED ones. Terminal states are irreversible by design.
+ */
+resolver.define('cancelProposal', async (ctx: unknown) => {
+  const c = ctx as {
+    payload?: unknown;
+    context?: { cloudId?: string; accountId?: string };
+  };
+  const cloudId = c.context?.cloudId;
+  const accountId = c.context?.accountId;
+  if (!cloudId || !accountId) return { status: 'UNAUTHENTICATED', error: 'tenant context missing' };
+  const body = (c.payload ?? {}) as { proposalId?: unknown; rationale?: unknown };
+  const proposalId = proposalIdResolverSchema.safeParse(body.proposalId);
+  const rationale = rationaleSchema.safeParse(body.rationale);
+  if (!proposalId.success) return { status: 'INVALID_INPUT', error: 'valid proposalId required' };
+
+  const repo = new KvsProposalRepository(kvs as unknown as KvsLike);
+  const proposal = await repo.get(cloudId, proposalId.data);
+  if (!proposal) return { status: 'NOT_FOUND', error: 'proposal not found for this tenant' };
+
+  try {
+    const updated = cancelProposal({
+      proposal,
+      requesterUserId: accountId,
+      now: new Date(),
+      rationale: rationale.success ? rationale.data : null,
+    });
+    await repo.put(updated);
+    const audit = new KvsAuditRepository(kvs as unknown as AuditSinkLike);
+    await recordAuditEvent(
+      audit,
+      {
+        tenantId: cloudId,
+        actor: accountId,
+        action: 'proposal_cancelled',
+        target: proposal.id,
+        result: 'success',
+        linkedEvidenceIds: proposal.supportingFindingIds,
+        requestFingerprint: await digestPayload({
+          action: 'proposal_cancelled',
+          actor: accountId,
+          payloadDigest: proposal.payloadDigest,
+        }),
+      },
+      new Date(),
+    );
+    return { status: 'OK', proposal: publicProposal(updated, accountId) };
+  } catch (err) {
+    if (err instanceof DecisionError) {
+      return { status: 'DECISION_REJECTED', error: err.message, code: err.code };
+    }
+    return { status: 'CANCEL_FAILED', error: err instanceof Error ? err.message : 'cancel failed' };
+  }
+});
+
+/**
+ * Case lifecycle timeline: every audited event that belongs to this case —
+ * its analysis runs (target = the issue key derived from the case id), the
+ * case record itself, and the proposals raised for it (prepare/decide/
+ * execute/verify/cancel events target the proposal id).
+ */
+export async function getCaseTimelineCore(
+  cloudId: string,
+  caseId: string,
+  kvsClient: KvsLike = kvs as unknown as KvsLike,
+): Promise<{
+  status: string;
+  events: Array<{ actor: string; action: string; target: string; timestamp: string; result: string }>;
+  proposals: Array<{ id: string; state: string; operation: string }>;
+}> {
+  const caseRepo = new KvsCaseRepository(kvsClient);
+  const record = await caseRepo.get(cloudId, caseId);
+  if (!record) return { status: 'NOT_FOUND', events: [], proposals: [] };
+
+  // Issue key from the deterministic case id (case-pay-142 → PAY-142).
+  const issueKey = caseId.replace(/^case-/, '').toUpperCase();
+  const proposalRepo = new KvsProposalRepository(kvsClient);
+  const caseProposals = (await proposalRepo.list(cloudId)).filter((p) => p.caseId === caseId);
+
+  const audit = new KvsAuditRepository(kvsClient as unknown as AuditSinkLike);
+  const all = await audit.readAll(cloudId);
+  const targets = new Set<string>([issueKey, caseId, ...caseProposals.map((p) => p.id)]);
+  const events = all
+    .filter((e) => targets.has(e.target))
+    .map((e) => ({
+      actor: e.actor,
+      action: e.action,
+      target: e.target,
+      timestamp: e.timestamp,
+      result: e.result,
+    }));
+
+  return {
+    status: 'OK',
+    events,
+    proposals: caseProposals.map((p) => ({ id: p.id, state: p.state, operation: p.operation })),
+  };
+}
+
+resolver.define('getCaseTimeline', async (ctx: unknown) => {
+  const c = ctx as { payload?: unknown; context?: { cloudId?: string } };
+  if (!c.context?.cloudId) return { status: 'UNAUTHENTICATED', events: [], proposals: [] };
+  const parsed = caseIdResolverSchema.safeParse((c.payload as { caseId?: unknown })?.caseId);
+  if (!parsed.success) return { status: 'INVALID_INPUT', events: [], proposals: [] };
+  return getCaseTimelineCore(c.context.cloudId, parsed.data);
+});
+
+/**
  * Proposal view for the UI: the approver identity is exposed only to make
  * self-approval preventable in the interface; execution requires the
  * binding to match the authenticated user server-side regardless.
@@ -582,6 +694,8 @@ function publicProposal(p: RemediationProposal, viewerId: string) {
     expiresAt: p.binding?.expiresAt ?? null,
     viewerIsActor: p.actor === viewerId,
     viewerIsApprover: p.binding?.approverUserId === viewerId,
+    decisionRationale: p.decisionRationale ?? null,
+    verification: p.verification ?? null,
   };
 }
 

@@ -30,7 +30,12 @@ export class DecisionError extends Error {
   constructor(
     message: string,
     public readonly code:
-      'INVALID_STATE' | 'SELF_APPROVAL' | 'NOT_APPROVER' | 'UNAUTHORIZED' | 'UNSUPPORTED_TARGET',
+      | 'INVALID_STATE'
+      | 'SELF_APPROVAL'
+      | 'NOT_APPROVER'
+      | 'NOT_ACTOR'
+      | 'UNAUTHORIZED'
+      | 'UNSUPPORTED_TARGET',
   ) {
     super(message);
     this.name = 'DecisionError';
@@ -45,6 +50,8 @@ export function decideProposal(args: {
   now: Date;
   /** Approval validity window in ms; defaults to 1 hour. */
   validityMs?: number;
+  /** Reviewer rationale; stored with rejections (ignored on approval). */
+  rationale?: string | null;
 }): RemediationProposal {
   if (args.proposal.state !== 'PENDING_APPROVAL') {
     throw new DecisionError(
@@ -53,7 +60,13 @@ export function decideProposal(args: {
     );
   }
   if (args.decision === 'reject') {
-    return { ...args.proposal, state: transition(args.proposal.state, 'REJECTED'), binding: null };
+    const rationale = args.rationale?.trim() || null;
+    return {
+      ...args.proposal,
+      state: transition(args.proposal.state, 'REJECTED'),
+      binding: null,
+      decisionRationale: rationale,
+    };
   }
   // bindApproval rejects self-approval (approver === proposal actor).
   let binding;
@@ -222,4 +235,51 @@ async function postApprovalComment(
     detail: `posted approval-traced comment on ${proposal.target}`,
     resultRef: proposal.target,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Cancellation / revocation (2026-10-31 dynamics pass)
+// ---------------------------------------------------------------------------
+
+/**
+ * Cancel a proposal before execution, with authority rules:
+ *  - PENDING_APPROVAL → the proposal ACTOR may withdraw their own proposal;
+ *  - APPROVED         → only the approver on record may revoke before execution.
+ * Anything later (EXECUTED / terminal) is irreversible by design — replay and
+ * audit integrity outrank convenience. The rationale, when given, is stored
+ * on the proposal and audited by the caller.
+ */
+export function cancelProposal(args: {
+  proposal: RemediationProposal;
+  requesterUserId: string;
+  now: Date;
+  rationale?: string | null;
+}): RemediationProposal {
+  const { proposal } = args;
+  if (proposal.state === 'PENDING_APPROVAL') {
+    if (proposal.actor !== args.requesterUserId) {
+      throw new DecisionError('only the proposal author may withdraw a pending proposal', 'NOT_ACTOR');
+    }
+    return {
+      ...proposal,
+      state: transition(proposal.state, 'CANCELLED'),
+      binding: null,
+      decisionRationale: args.rationale?.trim() || (proposal.decisionRationale ?? null),
+    };
+  }
+  if (proposal.state === 'APPROVED') {
+    if (!proposal.binding || proposal.binding.approverUserId !== args.requesterUserId) {
+      throw new DecisionError('only the approver on record may revoke an approved proposal', 'NOT_APPROVER');
+    }
+    return {
+      ...proposal,
+      state: transition(proposal.state, 'CANCELLED'),
+      binding: null,
+      decisionRationale: args.rationale?.trim() || (proposal.decisionRationale ?? null),
+    };
+  }
+  throw new DecisionError(
+    `proposal is ${proposal.state}; only PENDING_APPROVAL or APPROVED proposals can be cancelled`,
+    'INVALID_STATE',
+  );
 }

@@ -7,6 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import {
+  cancelSandboxProposal,
   listSandboxAuditEvents,
   listSandboxCases,
   listSandboxProposals,
@@ -15,6 +16,7 @@ import {
   executeSandboxProposal,
   prepareSandboxProposal,
   sandboxJiraWrites,
+  getSandboxCaseTimeline,
   sandboxStoreCounts,
 } from '../../src/frontend/sandbox/sandboxEngine';
 import { verifyAuditChain } from '../../src/audit/auditLog';
@@ -86,5 +88,51 @@ describe('sandbox engine (dynamic demo, real code)', () => {
       'sandbox',
     );
     expect(chainOk).toBe(true);
+  });
+
+  describe('sandbox dynamics parity (cancel, rationale, timeline)', () => {
+    it('reject with rationale stores it; cancel authority mirrors production', async () => {
+      const analysis = await runSandboxAnalysis('PAY-142');
+      expect(['VERIFIED_CONTRADICTION', 'POTENTIAL_CONTRADICTION']).toContain(analysis.status);
+      const caseRecord = listSandboxCases().find((c) => c.caseId === 'case-pay-142');
+      expect(caseRecord).toBeDefined();
+      const prepared = await prepareSandboxProposal('case-pay-142', caseRecord!.findingIds[0]!);
+      expect(prepared.status).toBe('OK');
+      const proposal = listSandboxProposals().find((p) => p.state === 'PENDING_APPROVAL');
+      expect(proposal).toBeDefined();
+
+      // Rejection carries a stored rationale.
+      const rejected = await decideSandboxProposal(
+        proposal!.id,
+        'reject',
+        'Not applicable under the current decision record.',
+      );
+      expect(rejected.status).toBe('OK');
+      expect(listSandboxProposals().find((p) => p.id === proposal!.id)?.decisionRationale).toBe(
+        'Not applicable under the current decision record.',
+      );
+
+      // A second proposal: approve, then revoke as the approver — cancel works.
+      const prepared2 = await prepareSandboxProposal('case-pay-142', caseRecord!.findingIds[0]!);
+      expect(prepared2.status).toBe('OK');
+      const approved = await decideSandboxProposal(prepared2.proposalId!, 'approve');
+      expect(approved.status).toBe('OK');
+      const cancelled = await cancelSandboxProposal(prepared2.proposalId!, 'Withdrawn for rework.');
+      expect(cancelled.status).toBe('OK');
+      expect(listSandboxProposals().find((p) => p.id === prepared2.proposalId)?.state).toBe('CANCELLED');
+      expect(
+        listSandboxAuditEvents().some(
+          (e) => e.action === 'proposal_cancelled' && e.target === prepared2.proposalId,
+        ),
+      ).toBe(true);
+
+      // The case timeline surfaces the audited lifecycle from sandbox stores.
+      const timeline = getSandboxCaseTimeline('case-pay-142');
+      expect(timeline.status).toBe('OK');
+      const actions = timeline.events.map((e) => e.action);
+      expect(actions).toContain('analysis_run');
+      expect(actions).toContain('prepare_remediation');
+      expect(actions).toContain('proposal_cancelled');
+    });
   });
 });

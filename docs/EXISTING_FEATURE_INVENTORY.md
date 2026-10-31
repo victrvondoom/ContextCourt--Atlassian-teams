@@ -45,6 +45,18 @@ parentheses). Full capability catalogue with dispositions:
 - Demo: `npm run demo` — Scenarios A–F, deterministic
   (`scripts/demo-scenarios.ts`)
 
+## Dynamics pass (2026-10-31, all TEST-VERIFIED)
+- Cancellation with authority rules: the actor withdraws pending proposals;
+  only the approver on record revokes approved ones; terminal states
+  irreversible (`tests/unit/execution.test.ts` — 5 cancel tests + 2 rationale)
+- Rejection rationale captured, stored on the proposal and rendered
+- Case lifecycle timeline: `getCaseTimeline` resolver + CaseDetail card
+  (`tests/integration/case-timeline.test.ts` — 3 tests)
+- Live expiry countdown on approved proposals; execution confirmation dialog
+- Case search filter, sortable columns, pagination (10/page)
+- At-a-glance panel: real counts of cases, pending, executed, verified
+- Sandbox parity: cancel/rationale/timeline run the same core in-browser
+
 ## Registers and tooling
 - 468-feature catalogue + 459-task register + traceability, generated and
   validated (`npm run build:registers`, `npm run validate:registers`)

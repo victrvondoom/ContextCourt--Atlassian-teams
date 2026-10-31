@@ -107,3 +107,8 @@ features operational, 356/459 tasks verified; 152/152 tests, 22 files.
 `npm test` · `npm run demo` · `npm run build:registers` ·
 `npm run validate:registers` · `npm run typecheck` · `npm run lint` ·
 `npm run build` · benchmark: `npx vite-node benchmarks/evaluate.ts benchmarks/dataset.json`.
+
+## Push evidence (2026-10-31, user-authorized)
+Commit 943f765 pushed to https://github.com/victrvondoom/ContextCourt--Atlassian-teams.git
+(branch main, new branch created on the remote). Deployment/Markeplace remain
+external and unauthorized/unperformed.

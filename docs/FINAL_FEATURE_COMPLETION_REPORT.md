@@ -81,5 +81,7 @@ all test/demo fixtures are classified TEST_ONLY/DEMO_ONLY.
   live-data-gated analytics, notification surfaces, role-based policies, and
   larger-scale infrastructure whose triggers are documented.
 
-No unapproved push or deployment occurred. Remote push was authorized by the
-user for this pass and is performed to the user-specified repository.
+Remote push: **user-authorized** for this pass and performed — commit
+`943f765` pushed to `https://github.com/victrvondoom/ContextCourt--Atlassian-teams.git`
+(branch `main`). No deployment, Marketplace publication or live Jira write
+occurred (those require Atlassian credentials and remain external actions).

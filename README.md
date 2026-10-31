@@ -47,7 +47,27 @@ npm run demo              # Scenarios A–F, deterministic, exits non-zero on fa
 npm run validate:registers # validates the 468-feature + 459-task registers
 ```
 
-### Deploying to Forge
+### Try it in your browser right now (no Atlassian account needed)
+
+```bash
+npm ci
+npm run preview
+# open http://localhost:4173
+```
+
+The app detects it is running outside the Forge panel and starts in **sandbox
+mode**: the REAL ContextCourt engine (evidence → contradiction → proposal →
+human approval → authorized execution → independent verification → audit
+chain) runs in your browser over deterministic fixtures. Every control is
+live. Try issue key `PAY-142` for a verified contradiction, then walk the
+proposal through the Review queue. Live Jira integration activates after the
+Forge deployment below — the sandbox is clearly labeled and never touches
+live Jira.
+
+For judges / a 5-minute check: `npm ci && npm test && npm run demo && npm run preview`
+(153/153 tests · 6/6 deterministic demo scenarios · clickable UI).
+
+## Deploying to Forge
 
 Forge deployment requires an authenticated Atlassian account:
 

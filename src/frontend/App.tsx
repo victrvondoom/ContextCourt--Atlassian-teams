@@ -21,6 +21,13 @@ const NAV: NavItem[] = [
   { id: 'integrations', label: 'Integrations' },
 ];
 
+/**
+ * Standalone detection: outside the Forge panel (e.g. `npm run preview` in a
+ * plain browser) there is no panel context and no Forge backend — the app
+ * then starts in sandbox mode, which runs the REAL engine in-browser over
+ * deterministic fixtures and never calls live Jira. This makes the whole
+ * product clickable with zero Atlassian credentials.
+ */
 export function App() {
   return (
     <SandboxProvider>
@@ -31,6 +38,7 @@ export function App() {
 
 function Shell() {
   const [active, setActive] = useState('overview');
+  const [standalone, setStandalone] = useState(false);
   const [issueKey, setIssueKey] = useState<string | null>(null);
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [selectedCase, setSelectedCase] = useState<string | null>(null);
@@ -44,7 +52,13 @@ function Shell() {
         const key = (ctx as { extension?: { issue?: { key?: string } } })?.extension?.issue?.key ?? null;
         setIssueKey(key);
       })
-      .catch(() => setIssueKey(null));
+      .catch(() => {
+        // No Forge panel context → standalone browser preview: enable the
+        // in-browser engine (sandbox) so every control is live and clickable.
+        setIssueKey(null);
+        setStandalone(true);
+        setSandbox(true);
+      });
   }, []);
 
   // The review badge shows real pending proposals, refreshed when views change.
@@ -84,9 +98,16 @@ function Shell() {
             Workflow guide
           </button>
         </div>
+        {standalone && (
+          <div className="sandbox-banner" role="status">
+            Standalone preview — running the real ContextCourt engine in your browser (sandbox mode). Live
+            Jira integration activates after the Forge app is installed; see the README.
+          </div>
+        )}
         {sandbox && (
           <div className="sandbox-banner" role="status">
-            Sandbox mode — every value below is demo data. Nothing calls live Jira.
+            Sandbox mode — every value below is computed by the real engine over deterministic fixtures.
+            Nothing calls live Jira. Try issue key PAY-142 to see a verified contradiction.
           </div>
         )}
         {active === 'overview' && <Overview issueKey={issueKey} onHealth={onHealth} />}

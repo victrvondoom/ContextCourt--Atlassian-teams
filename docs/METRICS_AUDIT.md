@@ -29,6 +29,8 @@ external systems has been measured — none is claimed anywhere.**
 | Integration health (jira) | Real `/rest/api/3/myself` probe per call | TEST-VERIFIED logic; the probe result itself is BLOCKED live |
 | Integration health (graph/rovo/mcp) | `not-wired` configuration facts | honest static config, labeled as such |
 | Analysis findings | computed per request by the engine | TEST-VERIFIED |
+| Queue priority explanations | computed per proposal by the documented utility | TEST-VERIFIED (queue-ordering tests) |
+| Verification outcomes (VERIFIED/MISMATCH/UNVERIFIED) | computed by independent read-back after execution | TEST-VERIFIED (verification tests, demo Scenario E) |
 | Sandbox values | computed in-browser by the real engine over deterministic fixtures | TEST-VERIFIED (determinism + loop + chain) |
 
 ## Removed / corrected misleading measurements

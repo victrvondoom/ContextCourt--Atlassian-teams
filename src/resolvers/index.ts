@@ -14,6 +14,8 @@ import { normalizeAll } from '../core/normalizer';
 import { analyze, type AnalysisResult } from '../core/contradiction';
 import { digestPayload, sha256Hex } from '../core/digest';
 import { decideProposal, executeProposal, DecisionError } from '../core/execution';
+import { verifyExecutionOutcome } from '../core/verification';
+import { orderReviewQueue } from '../core/queue';
 import { draftProposal } from '../core/remediation';
 
 import { KvsCaseRepository, type KvsLike, type CaseRecord } from '../storage/caseStore';
@@ -382,12 +384,24 @@ resolver.define('prepareProposal', async (ctx: unknown) => {
   }
 });
 
-/** Tenant's remediation proposals, newest first (drives the Review queue). */
+/**
+ * Tenant's remediation proposals ranked by the documented review-utility
+ * function (docs/QUEUE_DESIGN.md): severity-dominant, risk-boosted,
+ * age-accruing, deterministic. Each item carries the explanation for its
+ * rank and its independent post-execution verification state.
+ */
 resolver.define('listProposals', async (ctx: unknown) => {
   const c = ctx as { context?: { cloudId?: string } };
   if (!c.context?.cloudId) return { proposals: [] };
   const repo = new KvsProposalRepository(kvs as unknown as KvsLike);
-  return { proposals: await repo.list(c.context.cloudId) };
+  const ranked = orderReviewQueue(await repo.list(c.context.cloudId));
+  return {
+    proposals: ranked.map((r) => ({
+      ...publicProposal(r.proposal, ''),
+      priorityExplanation: r.priorityExplanation,
+      verification: r.proposal.verification ?? null,
+    })),
+  };
 });
 
 /**
@@ -488,6 +502,39 @@ resolver.define('executeProposal', async (ctx: unknown) => {
   await repo.put(updated);
   if (outcome.state === 'EXECUTED') {
     await repo.recordExecutedDigest(cloudId, proposal.id, proposal.payloadDigest);
+
+    // Independent post-execution verification: an accepted write is re-read
+    // from Jira and compared with the proposal. Execution success and
+    // verification success are recorded as two separate facts.
+    const verification = await verifyExecutionOutcome({
+      proposal,
+      resultRef: outcome.resultRef,
+      fetcher: productionJiraFetcher,
+      now: new Date(),
+    });
+    updated.verification = verification;
+    await repo.put(updated);
+    const verificationAudit = new KvsAuditRepository(kvs as unknown as AuditSinkLike);
+    await recordAuditEvent(
+      verificationAudit,
+      {
+        tenantId: cloudId,
+        actor: accountId,
+        action: 'proposal_verified',
+        target: proposal.id,
+        result: verification.outcome === 'VERIFIED' ? 'success' : 'failure',
+        linkedEvidenceIds: proposal.supportingFindingIds,
+        requestFingerprint: await sha256Hex(
+          JSON.stringify({
+            action: 'proposal_verified',
+            actor: accountId,
+            payloadDigest: proposal.payloadDigest,
+            outcome: verification.outcome,
+          }),
+        ),
+      },
+      new Date(),
+    );
   }
   const audit = new KvsAuditRepository(kvs as unknown as AuditSinkLike);
   await recordAuditEvent(

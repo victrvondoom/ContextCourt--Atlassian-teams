@@ -45,3 +45,28 @@ P0/P1 items below are **done and test-verified** (86/86 tests, typecheck/lint/bu
 1. External: `forge login` → `forge register` → `forge deploy` → `forge install` on a Jira dev site; verify live: health probe, analysis on a real issue (ADF shape), approve+execute one proposal, Rovo tool invocation.
 2. On live verification: change `health` labels for `rovoAgent`/`mcp` from `not-wired` to probed states; wire Teamwork Graph enrichment into `getImpact` behind granular graph scopes.
 3. Benchmark decision gate: awaiting approval for any framework beyond the existing evaluator (see `docs/BENCHMARK_PROPOSAL.md`).
+
+---
+
+## Mission pass 2026-10-31 — hackathon expansion (executed)
+
+- Re-verified baseline independently (87/87 at `d3acfca`, benchmark exact).
+- Registers: 468 features + 459 tasks authored as data modules, generated
+  into docs, validated by `npm run validate:registers` (all §15 rules).
+- **CC-022 fixed**: independent post-execution verification
+  (`src/core/verification.ts` + resolver/sandbox wiring + 9 tests) — execution
+  success and verification success are separate audited facts.
+- **CC-023 fixed**: queue ordering by the documented review-utility function
+  (`src/core/queue.ts`, `docs/QUEUE_DESIGN.md`, 9 invariant/property tests,
+  per-item priority explanations in the UI).
+- Demo: `scripts/demo-scenarios.ts` (`npm run demo`) — Scenarios A–F through
+  the real core with a scripted transport; 6/6, deterministic.
+- Docs: audit, as-built architecture, feature inventory, context/evidence
+  architecture, agent contracts, queue design, security & governance,
+  verification matrix, benchmark methodology/results, demo script,
+  differentiation, handoff; README updated.
+- Final state: typecheck/lint/format clean, **105/105 tests (16 files)**,
+  build ok, registers valid.
+
+Next actionable steps: unchanged — dev-site deploy first, then graph wiring;
+see `docs/MISTRAL_VIBE_HANDOFF.md`.

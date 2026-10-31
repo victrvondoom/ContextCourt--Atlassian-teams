@@ -31,6 +31,13 @@ Evidence classes: code-verified unless marked LIVE-BLOCKED (needs a real Jira si
 | CC-020 | Medium (consistency) | `src/rovo/actions.ts` `putProposal`/`getProposal` | Proposals stored wrapped as `{proposal:…}` by hand-rolled functions with no payload-tenant re-check, divergent from every other store's scheme. | Read. | **FIXED** — unified `KvsProposalRepository` (same key scheme, payload tenant re-check, list pagination). |
 | CC-021 | High (reliability, found by flaky test) | `src/audit/auditLog.ts` | Audit ids tied same-millisecond events to a random uuid tiebreak, so chain-build order and chain-verify order could differ → `verifyAuditChain` intermittently false. Same CC-003 hazard class, reintroduced by the collision-free id change. | 5× repeated suite runs caught it; root cause = sort key vs insertion order. | **FIXED** — id now carries an insertion sequence (`…_{time}_{seq}_{uuid}`), making (timestamp, id) sort match insertion order; regression test added (same-ms chaining). |
 
+## Mission 2026-10-31 — hackathon expansion audit
+
+| ID | Severity | Location | Finding | Evidence | Status |
+|---|---|---|---|---|---|
+| CC-022 | **High (correctness/honesty)** | `src/core/execution.ts` (prior) | Execution treated an accepted API response as the end of the story: no read-back of the resulting state, so a failed/unapplied write could be recorded as EXECUTED with no way to notice. | Path audit: no verification module existed; `RemediationProposal` had no verification state. | **FIXED** — `src/core/verification.ts` (VERIFIED / MISMATCH / UNVERIFIED, trace markers embedded in every write), resolver + sandbox wiring, `proposal_verified` audit events, 9 unit tests, demo Scenario E. |
+| CC-023 | Medium (product/§4-D) | `KvsProposalRepository.list()` (prior) | Queue order was newest-first with no stated objective — an arbitrary order presented to reviewers. | Read of the sort. | **FIXED** — documented review-utility ordering (`src/core/queue.ts`, `docs/QUEUE_DESIGN.md`) with per-item explanations and 9 invariant/property tests. |
+
 ### Remaining open items (accepted, with reasons)
 
 - **Teamwork Graph wiring** — adapter implemented + fixture-tested but no resolver/action calls it; graph scopes are not in the manifest. Wiring without a dev site to verify the `requestTeamworkGraph` transport would produce unverifiable live claims. BLOCKED — EXTERNAL ACTION REQUIRED (deploy + grant `read:graph:*` scopes, then wire `getImpact` enrichment).

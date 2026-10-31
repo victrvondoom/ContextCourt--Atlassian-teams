@@ -20,6 +20,9 @@ VERIFIED ON ATLASSIAN DEVELOPMENT SITE · BLOCKED — EXTERNAL ACTION REQUIRED
 | Marketplace listing (M9) | NOT STARTED | needs partner account |
 | Review queue: list/decide/execute resolvers + UI, `core/execution.ts`, proposal store (2026-10-31) | VERIFIED LOCALLY | 18 new tests incl. full-loop integration; `docs/FINAL_VALIDATION_REPORT.md` |
 | Sandbox demo = real engine in-browser (2026-10-31) | VERIFIED LOCALLY | `tests/integration/sandbox-engine.test.ts` |
+| Post-execution verification + documented queue ordering (2026-10-31) | VERIFIED LOCALLY | tests/unit/verification.test.ts (9), tests/unit/queue-ordering.test.ts (9) |
+| Demo scenarios A–F (one command) | VERIFIED LOCALLY | `npm run demo` — 6/6 deterministic |
+| Registers (468 FR + 459 ET, validated) | VERIFIED LOCALLY | `npm run validate:registers` |
 | Benchmarks | VERIFIED LOCALLY | `benchmarks/RESULTS.md` — actual measured numbers |
 | CI | IMPLEMENTED — UNVERIFIED | workflow committed; first run visible after push |
 

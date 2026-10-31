@@ -330,6 +330,16 @@ tr:last-child td {
   color: var(--text-subtle);
 }
 
+.status-verification-verified {
+  background: rgba(0, 133, 96, 0.12);
+  color: #00654f;
+}
+.status-verification-mismatch,
+.status-verification-unverified {
+  background: rgba(255, 100, 20, 0.12);
+  color: #b54708;
+}
+
 .severity-critical {
   background: var(--danger);
   color: #fff;

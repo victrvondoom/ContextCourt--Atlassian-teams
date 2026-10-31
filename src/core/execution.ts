@@ -18,6 +18,7 @@
 import { assertExecutionAuthorized, bindApproval, SelfApprovalError, transition } from './approval';
 import type { RemediationProposal } from './types';
 import { textToAdfDoc } from '../integrations/adf';
+import { proposalTraceMarker } from './verification';
 
 /** Structurally identical to the Jira adapter's fetcher; kept local to avoid layer coupling. */
 export type WriteFetcher = (
@@ -168,6 +169,7 @@ async function createRemediationIssue(
     `Operation: ${proposal.operation}`,
     `Approved by: ${approverId}`,
     `Supported by findings: ${proposal.supportingFindingIds.join(', ')}`,
+    proposalTraceMarker(proposal.id),
   ].join('\n');
   const res = await fetcher('/rest/api/3/issue', {
     method: 'POST',
@@ -206,6 +208,7 @@ async function postApprovalComment(
     `Approved by: ${approverId}`,
     `Change: ${proposal.expectedChange}`,
     `Supported by findings: ${proposal.supportingFindingIds.join(', ')}`,
+    proposalTraceMarker(proposal.id),
   ].join('\n');
   const res = await fetcher(`/rest/api/3/issue/${encodeURIComponent(proposal.target)}/comment`, {
     method: 'POST',

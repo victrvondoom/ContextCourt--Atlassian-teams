@@ -1,67 +1,81 @@
 # Final Validation Report — ContextCourt AI
 
-Date: 2026-10-31. All claims below are reproducible in this repository.
-Labels: MEASURED / TEST-VERIFIED / UNVERIFIED / BLOCKED follow the project convention.
+Date: 2026-10-31 (hackathon-expansion mission). All claims reproducible in
+this repository at the final commit. Labels follow the project convention
+(MEASURED / TEST-VERIFIED / IMPLEMENTED / BLOCKED …).
 
-## Verification results (exact)
+## Proof-of-work appendix — exact command results
 
 | Check | Command | Result |
 |---|---|---|
-| Typecheck | `npx tsc --noEmit` | **PASS — 0 errors** (2 pre-existing errors fixed: dead `BLOCK_TYPES`, implicit-any in a test) |
-| Lint | `npx eslint src tests` | **PASS — 0 problems** |
-| Format | `npx prettier --check "src/**/*.{ts,tsx,css}" "tests/**/*.ts"` | **PASS** |
-| Tests | `npx vitest run` | **PASS — 14 files, 87/87 tests** (69 at session start) |
-| Frontend build | `npm run build` (vite) | **PASS** — bundle includes the real core engine used by sandbox mode |
-| Benchmark replay | `npx vite-node benchmarks/evaluate.ts benchmarks/dataset.json` | **MEASURED — reproduces exactly**: P=0.800 R=0.571 F1=0.667 FPR=0.200 (deterministic) |
+| Repository integrity | `git status` / `git log` | clean tree; mission started at verified `d3acfca` on `main` |
+| Typecheck | `npm run typecheck` | **PASS — 0 errors** |
+| Lint | `npm run lint` | **PASS — 0 problems** |
+| Format | `npm run format:check` | **PASS** |
+| Tests | `npm test` | **PASS — 105/105 tests, 16 files** (87 at mission start; +18: 9 verification, 9 queue-ordering) |
+| Frontend build | `npm run build` | **PASS** |
+| Benchmark replay | `npx vite-node benchmarks/evaluate.ts benchmarks/dataset.json` | **MEASURED, exact**: P=0.800 R=0.571 F1=0.667 FPR=0.200 (unchanged by the mission — engine untouched) |
+| Demo | `npm run demo` | **PASS — 6/6 scenarios**, deterministic (Scenarios A–F) |
+| Registers | `npm run validate:registers` | **PASS** — 468 features + 459 tasks, all §15 rules (counts, uniqueness, consecutiveness, valid FR references, dispositions with reasons, evidence on completed, reasons on deferred, dependencies on blocked) |
 
-## Problems discovered (this session) — all fixed and regression-tested
+## Problems discovered this mission — all fixed and regression-tested
 
-- CC-013 **Critical**: review queue static; approval/execution loop unreachable → fixed end-to-end (see TECHNICAL_DEBT.md).
-- CC-014 **High**: Rovo get-evidence returned unsanitized text → single shared sanitized builder.
-- CC-015 **Medium**: analysis runs not audited → `analysis_run` events (success + failure) chained.
-- CC-016 **Medium**: review badge wrong denominator → real pending-proposal count.
-- CC-017/018/019/020: misleading file name, hardcoded sandbox results, broken typecheck gate, divergent proposal storage → all fixed.
+- **CC-022 (High)**: no post-execution verification — an accepted API response
+  was the end of the story → `src/core/verification.ts`: independent read-back
+  with VERIFIED / MISMATCH / UNVERIFIED, trace markers embedded in every
+  write, `proposal_verified` audit events, resolver + sandbox + UI wiring,
+  9 unit tests, demo Scenario E.
+- **CC-023 (Medium)**: queue order was arbitrary (newest-first) →
+  `src/core/queue.ts`: documented review-utility function with per-item
+  explanations, 9 invariant/property tests, UI rendering, `docs/QUEUE_DESIGN.md`.
+- Register tooling built to prevent the two failure classes this mission
+  targets: count drift and untraceable claims (validator enforces both).
 
-## Tests added (this session)
+## Features implemented this mission (all TEST-VERIFIED/IMPLEMENTED)
 
-- `tests/unit/execution.test.ts` — 11 tests: decision states, self-approval, approver-only execution, replay, expiry, Jira-failure explicitness, issue-creation payload.
-- `tests/integration/review-queue.test.ts` — 3 tests: full loop (analysis→audit→proposal→approve→execute→replay→chain verify), failure audit, proposal tenant isolation.
-- `tests/integration/sandbox-engine.test.ts` — 3 tests: determinism, real in-memory case/audit creation, full sandbox loop with scripted write + replay rejection + chain integrity.
-- `tests/helpers/fakeKvs.ts` — awaitable KVS query fake (exercises real list paths).
+Post-execution verification (core + resolver + sandbox + UI); documented queue
+ordering (+ severity carried on proposals); trace markers in execution writes;
+demo runner for Scenarios A–F (+ `npm run demo`); 468+459 registers with
+generation and validation scripts; 13 new/updated governance, architecture,
+benchmark, demo and handoff documents; README as-built.
 
-No tests were skipped, disabled, or weakened. No previously passing test was modified to pass.
+## Tests added (this mission)
 
-## Features actually implemented (all TEST-VERIFIED locally)
+- `tests/unit/verification.test.ts` — 9: marker round-trip, VERIFIED comment
+  read-back, MISMATCH on absent comment, UNVERIFIED on unreadable source and on
+  thrown reads, created-issue verification, missing-reference handling,
+  executed-yet-unverified coexistence.
+- `tests/unit/queue-ordering.test.ts` — 9: severity dominance, age bound (190 <
+  200), risk boost (+40), age monotonicity, missing-severity degradation,
+  deterministic order across input permutations (20-case sweep), pending-first,
+  explanations present.
 
-1. Human approval loop: prepare → list → approve/reject (binding, no self-approval, expiry) → execute (Jira write, replay-proof, approver-only) → audited.
-2. Audit ledger reflects every analysis, preparation, decision, execution — digest-chained, tamper-evident.
-3. Dynamic UI: review queue, badge, open-cases card, case detail with evidence and proposal preparation.
-4. Sandbox as the real engine in-browser (deterministic per-key scenarios, in-memory stores, scripted writes).
-5. `write:jira-work` scope added for approved execution only — documented in the manifest and docs.
+No tests were skipped, disabled, or weakened. Existing suites untouched.
 
-## Still BLOCKED — external action required (not fabricatable here)
+## Still BLOCKED — external action required (unchanged, disclosed everywhere)
 
-- Live Forge deployment & install (`forge login` → `register` → `deploy` → `install`): live ADF shapes, real KVS behavior, health probe against real Jira, Rovo agent invocation, MCP tool call.
-- Teamwork Graph wiring: needs graph scopes + dev site to verify the transport.
-- Marketplace listing: needs partner account.
+1. Live Forge deployment (`forge login` → `register` → `deploy` → `install`)
+   — live ADF shapes, live KVS behavior, real approve+execute, Rovo/MCP
+   invocation. 2. Teamwork Graph wiring (graph scopes + dev site).
+   3. Marketplace listing (partner account). 4. Remote push (awaiting explicit
+   user authorization).
 
-## Still simulated / limited (explicit)
+## Still simulated/limited (explicit)
 
-- Sandbox fixtures are synthetic (deterministic scenarios keyed by issue key) — labeled in-product.
-- Benchmark dataset is synthetic (documented limitation, ±0.1 F1 uncertainty).
-- `create_remediation_issue` execution assumes `Task` type in the derived project — failure is explicit and audited.
+Sandbox fixtures are deterministic synthetic scenarios (labeled in-product);
+benchmark dataset is synthetic (±0.1 F1 uncertainty); `create_remediation_issue`
+assumes a `Task` type in the derived project (failure is explicit and audited).
 
 ## Remaining architectural risks
 
-- Teamwork Graph adapter remains unwired (honest `not-wired` state).
-- Supersession/DecisionRecord pipeline has no production source yet.
-- KVS audit chain is O(n) read per append — fine at current scale, revisit if ledgers grow large (documented in TECHNICAL_DEBT.md).
-- `health` cannot self-probe rovo/mcp wiring; labels switch to probed states after first live deployment.
+O(n) audit append (documented, accepted at scale); supersession pipeline has
+no production source yet; Teamwork Graph adapter unwired; `health` cannot
+self-probe rovo/mcp (labels switch after first live deployment).
 
 ## Bottom line
 
-The product's core promise now runs end to end on real code and stored state —
-analysis, evidence, audit, human decision, approved execution — with every
-claim in this repository traceable to a test, a measurement, or an explicit
-BLOCKED label. Nothing in the UI is static; the only remaining "demo" surface
-(sandbox) is the production engine itself with the network scripted out.
+The product promise — evidence → reasoning → proposal → human judgment →
+authorized execution → **independent verification** → tamper-evident audit —
+now runs end to end, is reproducible with one command, and every capability
+claim in the repository is traceable to a register record with a disposition,
+a test, a measurement, or an explicit BLOCKED label.

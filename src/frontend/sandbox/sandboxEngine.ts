@@ -13,6 +13,8 @@ import { analyze, resetFindingIds } from '../../core/contradiction';
 import { normalizeAll, resetPropositionIds } from '../../core/normalizer';
 import { decideProposal, executeProposal } from '../../core/execution';
 import { draftProposal } from '../../core/remediation';
+import { orderReviewQueue } from '../../core/queue';
+import { verifyExecutionOutcome } from '../../core/verification';
 import { recordAuditEvent, orderAuditEvents, type AuditSink } from '../../audit/auditLog';
 import type {
   AuditEvent,
@@ -261,25 +263,26 @@ export async function prepareSandboxProposal(
 }
 
 export function listSandboxProposals() {
-  return Array.from(proposals.values())
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-    .map((p) => ({
-      id: p.id,
-      caseId: p.caseId,
-      target: p.target,
-      operation: p.operation,
-      expectedChange: p.expectedChange,
-      risk: p.risk,
-      state: p.state,
-      actor: p.actor,
-      createdAt: p.createdAt,
-      supportingFindingIds: p.supportingFindingIds,
-      payloadDigest: p.payloadDigest,
-      approverId: p.binding?.approverUserId ?? null,
-      expiresAt: p.binding?.expiresAt ?? null,
-      viewerIsActor: p.actor === SANDBOX_ACTOR,
-      viewerIsApprover: p.binding?.approverUserId === SANDBOX_APPROVER,
-    }));
+  // Same documented review-utility ordering as the production resolver.
+  return orderReviewQueue(Array.from(proposals.values())).map((r) => ({
+    id: r.proposal.id,
+    caseId: r.proposal.caseId,
+    target: r.proposal.target,
+    operation: r.proposal.operation,
+    expectedChange: r.proposal.expectedChange,
+    risk: r.proposal.risk,
+    state: r.proposal.state,
+    actor: r.proposal.actor,
+    createdAt: r.proposal.createdAt,
+    supportingFindingIds: r.proposal.supportingFindingIds,
+    payloadDigest: r.proposal.payloadDigest,
+    approverId: r.proposal.binding?.approverUserId ?? null,
+    expiresAt: r.proposal.binding?.expiresAt ?? null,
+    viewerIsActor: r.proposal.actor === SANDBOX_ACTOR,
+    viewerIsApprover: r.proposal.binding?.approverUserId === SANDBOX_APPROVER,
+    priorityExplanation: r.priorityExplanation,
+    verification: r.proposal.verification ?? null,
+  }));
 }
 
 /** The sandbox "viewer" is the reviewer; the actor is the analyst. */
@@ -328,9 +331,21 @@ export async function executeSandboxProposal(proposalId: string) {
       return { ok: true, status: 201, json: { key: 'SANDBOX-1' } };
     },
   });
-  proposals.set(proposalId, { ...proposal, state: outcome.state });
+  const updated = { ...proposal, state: outcome.state };
+  proposals.set(proposalId, updated);
   if (outcome.state === 'EXECUTED') {
     executedDigests.set(proposalId, [...digests, proposal.payloadDigest]);
+    // Independent verification against the scripted transport's recorded
+    // writes — the same read-back contract as production, over the sandbox
+    // source of truth (recorded writes are all the "Jira" there is here).
+    const verification = await verifyExecutionOutcome({
+      proposal,
+      resultRef: outcome.resultRef,
+      fetcher: sandboxVerifyFetcher,
+      now: new Date(),
+    });
+    updated.verification = verification;
+    proposals.set(proposalId, { ...updated });
   }
   await recordAuditEvent(
     auditSink,
@@ -347,6 +362,37 @@ export async function executeSandboxProposal(proposalId: string) {
   );
   return { status: 'OK' as const, outcome };
 }
+
+/**
+ * Scripted "Jira" read-back for verification: the only source of truth in
+ * sandbox is the set of writes the scripted transport recorded. A comment
+ * write shows up as a comment on its issue; an issue-creation write shows up
+ * as an issue. Anything else reads as absent (→ MISMATCH / UNVERIFIED).
+ */
+const sandboxVerifyFetcher = async (path: string) => {
+  const commentMatch = path.match(/^\/rest\/api\/3\/issue\/([^/]+)\?fields=comment$/);
+  if (commentMatch) {
+    const issue = decodeURIComponent(commentMatch[1]!);
+    const comments = jiraWrites
+      .filter((w) => w.path === `/rest/api/3/issue/${issue}/comment`)
+      .map((w, i) => ({ id: String(i + 1), body: JSON.parse(w.body) }));
+    return {
+      ok: true,
+      status: 200,
+      json: { fields: { comment: { comments } } },
+    };
+  }
+  const issueMatch = path.match(/^\/rest\/api\/3\/issue\/([^/?]+)\?fields=summary$/);
+  if (issueMatch) {
+    const key = decodeURIComponent(issueMatch[1]!);
+    // The scripted transport always creates SANDBOX-1; any other key reads
+    // as absent so verification fails honestly (MISMATCH), as in production.
+    const created = key === 'SANDBOX-1' && jiraWrites.some((w) => w.path === '/rest/api/3/issue');
+    if (!created) return { ok: false, status: 404, json: {} };
+    return { ok: true, status: 200, json: { fields: { summary: 'sandbox remediation issue' } } };
+  }
+  return { ok: false, status: 404, json: {} };
+};
 
 export function listSandboxAuditEvents(): AuditEvent[] {
   return orderAuditEvents([...auditEvents]);

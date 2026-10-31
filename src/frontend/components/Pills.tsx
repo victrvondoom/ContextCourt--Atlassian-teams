@@ -12,6 +12,9 @@ const LABELS: Record<string, string> = {
   'stale-evidence': 'Stale evidence',
   'access-restricted': 'Access restricted',
   'analysis-failed': 'Analysis failed',
+  'verification-verified': 'Verified state',
+  'verification-mismatch': 'Verification mismatch',
+  'verification-unverified': 'Unverified state',
 };
 
 export function StatusPill({ state }: { state: IntegrationState | string }) {

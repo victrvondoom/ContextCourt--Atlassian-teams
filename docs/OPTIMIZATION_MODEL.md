@@ -24,10 +24,19 @@ which orders *human attention*, not task execution:
 - Determinism: same inputs → same severity (tested in
   `tests/unit/severity.test.ts`, `tests/unit/contradiction.test.ts`).
 
-## The remediation queue is NOT a priority queue — by design
+## The remediation queue — implemented review utility (2026-10-31)
 
-Proposals are ordered **newest-first** in `KvsProposalRepository.list()`.
-This is deliberate, not an unfinished optimizer:
+As of the hackathon mission the queue is ordered by a **documented review-utility
+function** (`src/core/queue.ts`, full design in `docs/QUEUE_DESIGN.md`):
+
+`utility(p) = severityRank×100 + riskBoost + ageHours (capped at 90)`,
+pending-first, deterministic id tiebreak. Every queue item carries a
+human-readable `priorityExplanation`; nine property/invariant tests pin the
+order (determinism, severity dominance, age monotonicity, age bound,
+pending-first). The previous newest-first listing is superseded.
+
+The reasoning below still governs why it is a *review-attention* ordering and
+not a throughput scheduler:
 
 1. The queue's purpose is *human governance*, not throughput. The bottleneck
    is a human decision; "optimal" batching would not change how fast a
@@ -39,11 +48,9 @@ This is deliberate, not an unfinished optimizer:
    make starvation mathematically irrelevant; premature fairness machinery
    would be speculative complexity.
 
-If volume ever grows to the point where reviewers report overload, the right
-move is a human-workload ranking (severity × age × affected-work), derived
-from the same severity inputs — a small, testable addition. Until that
-evidence exists, adding an "optimization engine" would violate the project's
-own taste rule: no impressive machinery without a problem it solves.
+The severity × risk × age ranking above IS that human-workload ranking,
+derived from severity inputs and kept small and testable. A constrained
+optimizer/scheduler remains rejected until its triggers appear.
 
 ## What would change this conclusion
 

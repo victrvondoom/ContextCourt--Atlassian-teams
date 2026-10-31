@@ -43,6 +43,13 @@ export interface ProposalView {
   expiresAt: string | null;
   viewerIsActor: boolean;
   viewerIsApprover: boolean;
+  priorityExplanation?: string;
+  verification?: {
+    outcome: 'VERIFIED' | 'MISMATCH' | 'UNVERIFIED';
+    detail: string;
+    evidenceRef: string | null;
+    verifiedAt: string;
+  } | null;
 }
 
 export function ReviewQueue(props: { onPendingCount?: (n: number) => void }) {
@@ -198,6 +205,20 @@ function ProposalCard(props: {
         {p.approverId ? ` · approved by ${p.approverId}` : ''}
         {p.expiresAt ? ` · expires ${new Date(p.expiresAt).toLocaleString()}` : ''}
       </p>
+      {p.priorityExplanation && pending && (
+        <p className="muted">
+          Queue priority: <span className="mono">{p.priorityExplanation}</span>
+        </p>
+      )}
+      {p.verification && (
+        <div className="row">
+          <StatusPill state={`verification-${p.verification.outcome.toLowerCase()}`} />
+          <span className="muted">
+            {p.verification.detail}
+            {p.verification.evidenceRef ? ` · evidence: ${p.verification.evidenceRef}` : ''}
+          </span>
+        </div>
+      )}
       {(pending || approved) && (
         <div className="row">
           {pending && (

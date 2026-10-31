@@ -1,0 +1,3758 @@
+[
+  {
+    "id": "FR-001",
+    "domain": "A. Product experience and workflows",
+    "title": "Case list with status and severity pills",
+    "description": "Cases view renders stored case records with status/severity pills.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-002",
+    "domain": "A. Product experience and workflows",
+    "title": "Case detail with findings and evidence ids",
+    "description": "Detail view lists each finding with cited evidence ids and affected work.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-003",
+    "domain": "A. Product experience and workflows",
+    "title": "Run analysis by issue key",
+    "description": "Overview accepts a Jira issue key and returns the engine verdict.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-004",
+    "domain": "A. Product experience and workflows",
+    "title": "Issue-panel auto-fill of current issue key",
+    "description": "The panel context supplies the current issue key to the input.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-005",
+    "domain": "A. Product experience and workflows",
+    "title": "Review queue listing",
+    "description": "Queue lists tenant proposals with state, risk and provenance.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-006",
+    "domain": "A. Product experience and workflows",
+    "title": "Approve/reject from the UI",
+    "description": "Humans decide pending proposals through resolvers that enforce governance.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-007",
+    "domain": "A. Product experience and workflows",
+    "title": "Execute from the UI (approver only)",
+    "description": "Execution button is enabled only for the recorded approver before expiry.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-008",
+    "domain": "A. Product experience and workflows",
+    "title": "Prepare remediation from case detail",
+    "description": "Verified/potential findings expose a one-click proposal preparation.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-009",
+    "domain": "A. Product experience and workflows",
+    "title": "Pending-proposals badge",
+    "description": "Sidebar badge shows the real PENDING_APPROVAL count.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-010",
+    "domain": "A. Product experience and workflows",
+    "title": "Dynamic open-cases overview card",
+    "description": "Overview shows the latest stored cases and sandbox engine counters.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-011",
+    "domain": "A. Product experience and workflows",
+    "title": "Sandbox demo running the real engine",
+    "description": "Sandbox mode computes results in-browser with the production core.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-012",
+    "domain": "A. Product experience and workflows",
+    "title": "Sandbox workflow guide overlay",
+    "description": "Step-by-step guided workflow for the demo.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-013",
+    "domain": "A. Product experience and workflows",
+    "title": "Integration health panel",
+    "description": "Health card shows probed Jira state and honest configuration facts.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-014",
+    "domain": "A. Product experience and workflows",
+    "title": "Audit ledger view",
+    "description": "Chained audit events rendered with actor, action, target, result.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-015",
+    "domain": "A. Product experience and workflows",
+    "title": "Loading states for async views",
+    "description": "Every async view distinguishes loading from empty from error.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-016",
+    "domain": "A. Product experience and workflows",
+    "title": "Actionable error states",
+    "description": "Errors carry context and next step, not raw stack dumps.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-017",
+    "domain": "A. Product experience and workflows",
+    "title": "Explaining empty states",
+    "description": "Empty states state why they are empty and what produces data.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-018",
+    "domain": "A. Product experience and workflows",
+    "title": "Disabled-control explanations",
+    "description": "Disabled governance controls state the rule that disables them.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-019",
+    "domain": "A. Product experience and workflows",
+    "title": "Keyboard-accessible case rows",
+    "description": "Rows are focusable and activatable by keyboard.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-020",
+    "domain": "A. Product experience and workflows",
+    "title": "ARIA roles and labels",
+    "description": "Interactive elements expose accessible names and states.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-021",
+    "domain": "A. Product experience and workflows",
+    "title": "Design token system",
+    "description": "Spacing, radius, color and type scale defined as CSS variables.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-022",
+    "domain": "A. Product experience and workflows",
+    "title": "Responsive app shell",
+    "description": "Shell adapts to panel and full-page widths.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-023",
+    "domain": "A. Product experience and workflows",
+    "title": "Post-execution verification display",
+    "description": "Executed proposals show VERIFIED / UNVERIFIED / MISMATCH state.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-024",
+    "domain": "A. Product experience and workflows",
+    "title": "Queue priority explanation",
+    "description": "Each proposal shows why it ranks where it does.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-025",
+    "domain": "A. Product experience and workflows",
+    "title": "Execution outcome detail display",
+    "description": "Result reference and detail from execution are visible.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-026",
+    "domain": "A. Product experience and workflows",
+    "title": "Proposal risk badge",
+    "description": "Risk level is visible on every proposal card.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-027",
+    "domain": "A. Product experience and workflows",
+    "title": "Approver identity display",
+    "description": "Cards show who approved and when it expires.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-028",
+    "domain": "A. Product experience and workflows",
+    "title": "Approval expiry countdown",
+    "description": "Time remaining is rendered live on approved proposals.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-029",
+    "domain": "A. Product experience and workflows",
+    "title": "Case search by issue key",
+    "description": "Filter the case list by key fragment.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-030",
+    "domain": "A. Product experience and workflows",
+    "title": "Saved views and filters",
+    "description": "Named filters over cases and proposals (one filter model).",
+    "disposition": "DEFER",
+    "priority": "P3",
+    "reason": "MERGE of saved views + case/proposal filtering: one capability, one model."
+  },
+  {
+    "id": "FR-031",
+    "domain": "A. Product experience and workflows",
+    "title": "Sortable case table",
+    "description": "Column sorting for the case list.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-032",
+    "domain": "A. Product experience and workflows",
+    "title": "Case list pagination",
+    "description": "Bounded pages for large case stores.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-033",
+    "domain": "A. Product experience and workflows",
+    "title": "Bulk decisions",
+    "description": "Approve/reject several proposals under one review session.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-034",
+    "domain": "A. Product experience and workflows",
+    "title": "Case owner display",
+    "description": "Owner is stored and rendered on case records.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-035",
+    "domain": "A. Product experience and workflows",
+    "title": "Rejection rationale capture",
+    "description": "Reviewer enters a reason stored with the rejection.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-036",
+    "domain": "A. Product experience and workflows",
+    "title": "Proposal notifications",
+    "description": "In-app or email notification on new proposals.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-037",
+    "domain": "A. Product experience and workflows",
+    "title": "Live-mode onboarding tour",
+    "description": "First-run guidance in live mode (sandbox already has one).",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-038",
+    "domain": "A. Product experience and workflows",
+    "title": "Demo fixtures for scenarios A–F",
+    "description": "Deterministic fixtures covering all six judge scenarios.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-039",
+    "domain": "A. Product experience and workflows",
+    "title": "Deterministic demo replay",
+    "description": "Same demo inputs produce identical outputs on every run.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-040",
+    "domain": "A. Product experience and workflows",
+    "title": "Copyable evidence citations",
+    "description": "One-click copy of an evidence citation.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-041",
+    "domain": "A. Product experience and workflows",
+    "title": "Deep links to Jira issues",
+    "description": "Open the target issue from a case or proposal.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-042",
+    "domain": "A. Product experience and workflows",
+    "title": "Dark theme",
+    "description": "Theme variant using the same tokens.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-043",
+    "domain": "A. Product experience and workflows",
+    "title": "Localization",
+    "description": "UI string externalization for i18n.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-044",
+    "domain": "A. Product experience and workflows",
+    "title": "Case summary export",
+    "description": "Print/export a case with findings and evidence.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-045",
+    "domain": "A. Product experience and workflows",
+    "title": "Proposal diff view",
+    "description": "Expected change rendered against current state.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-046",
+    "domain": "A. Product experience and workflows",
+    "title": "User activity feed",
+    "description": "Per-user activity across cases and decisions.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-047",
+    "domain": "A. Product experience and workflows",
+    "title": "Onboarding checklist widget",
+    "description": "Guided setup state for new tenants.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-048",
+    "domain": "A. Product experience and workflows",
+    "title": "Help/FAQ panel",
+    "description": "In-product explanations of governance rules.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-049",
+    "domain": "A. Product experience and workflows",
+    "title": "Trust indicators on findings",
+    "description": "Verified/potential/insufficient states are visually distinct.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-050",
+    "domain": "A. Product experience and workflows",
+    "title": "Command palette",
+    "description": "Keyboard-driven navigation.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-051",
+    "domain": "A. Product experience and workflows",
+    "title": "Keyboard shortcuts",
+    "description": "Shortcuts for frequent actions.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-052",
+    "domain": "A. Product experience and workflows",
+    "title": "Focus-visible styling",
+    "description": "Clear focus rings on all controls.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-053",
+    "domain": "A. Product experience and workflows",
+    "title": "Contrast-checked tokens",
+    "description": "Color tokens chosen for accessible contrast.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-054",
+    "domain": "A. Product experience and workflows",
+    "title": "Inline action feedback",
+    "description": "Approve/reject/execute outcomes surfaced inline.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-055",
+    "domain": "A. Product experience and workflows",
+    "title": "Execution confirmation dialog",
+    "description": "Explicit confirmation step before execution.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-056",
+    "domain": "A. Product experience and workflows",
+    "title": "Post-approval cancel flow",
+    "description": "Allow the approver to cancel before execution.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-057",
+    "domain": "A. Product experience and workflows",
+    "title": "Case lifecycle timeline",
+    "description": "Analysis→proposal→decision→execution→verification timeline per case.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-058",
+    "domain": "A. Product experience and workflows",
+    "title": "Judge summary panel",
+    "description": "One-glance panel with counts and states for demos.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-059",
+    "domain": "A. Product experience and workflows",
+    "title": "Fake live indicators",
+    "description": "Pulsing \"live\" dots or fake real-time streams.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P4",
+    "reason": "Rejected: fabricated liveness violates the honesty invariant."
+  },
+  {
+    "id": "FR-060",
+    "domain": "A. Product experience and workflows",
+    "title": "Decorative metric graphs",
+    "description": "Charts without an operational meaning.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P4",
+    "reason": "Rejected: only measured values are ever shown."
+  },
+  {
+    "id": "FR-061",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence record contract",
+    "description": "Typed evidence with provenance, digests and access context.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-062",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Source system and object id on evidence",
+    "description": "Every evidence item names its system and object.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-063",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "SHA-256 content digest",
+    "description": "Evidence content is digested for tamper detection.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-064",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Observed vs updated timestamps",
+    "description": "Observation time is separate from source update time.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-065",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Untrusted content sanitization",
+    "description": "Source text is sanitized before becoming evidence.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-066",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Injection pattern flagging",
+    "description": "Known injection patterns are flagged, not obeyed.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-067",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Single shared evidence builder",
+    "description": "Resolver and agent use one sanitized construction path.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-068",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "ADF to text extraction",
+    "description": "Jira ADF documents are extracted to readable text.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-069",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Description evidence extraction",
+    "description": "Issue descriptions become evidence records.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-070",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Comment evidence extraction",
+    "description": "Comments become evidence records with authors.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-071",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Permission-aware retrieval",
+    "description": "All retrieval runs asUser with the caller rights.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-072",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Tenant-scoped evidence storage",
+    "description": "Evidence keys and payloads are tenant-checked.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-073",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence sufficiency gate",
+    "description": "Both sides of a contradiction need evidence.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-074",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Missing evidence classification",
+    "description": "INSUFFICIENT_EVIDENCE instead of guesses.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-075",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Staleness classification",
+    "description": "Stale evidence downgrades findings explicitly.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-076",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Access-restricted classification",
+    "description": "Revoked or unreadable sources are explicit states.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-077",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Downgrade-only verification",
+    "description": "Verification can never upgrade an uncertain result.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-078",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Provenance per proposition",
+    "description": "Every normalized claim points to its evidence id.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-079",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Inferred vs explicit marking",
+    "description": "Propositions record whether they were inferred.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-080",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Findings cite evidence ids",
+    "description": "Findings list the evidence supporting each side.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-081",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence age feeds severity",
+    "description": "Older evidence lowers recency weight honestly.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-082",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Duplicate evidence detection",
+    "description": "Same-digest evidence is deduplicated.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-083",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence versioning across reads",
+    "description": "Detect changed source text between analyses.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-084",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Freshness recalculation on re-analysis",
+    "description": "Re-running analysis refreshes stored recency.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-085",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Historical evidence snapshots",
+    "description": "Per-case evidence history over time.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-086",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Context budget",
+    "description": "Bounded evidence volume per analysis.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-087",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Context assembly report",
+    "description": "What context was assembled and why per analysis.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-088",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Calibrated confidence display",
+    "description": "Confidence values backed by calibration data.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-089",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Source reliability scoring",
+    "description": "Reliability weights per source type.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-090",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence diffing between analyses",
+    "description": "Show what changed between two runs.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-091",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Teamwork Graph evidence ingestion",
+    "description": "Graph relationships as evidence.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-092",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Confluence evidence ingestion",
+    "description": "Page content as evidence.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-093",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Bitbucket/PR evidence ingestion",
+    "description": "Pull-request content as evidence.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-094",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "User-provided evidence entry",
+    "description": "Manual evidence with provenance.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-095",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence expiry policy",
+    "description": "Evidence older than a policy is marked stale.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-096",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Context replay from stored evidence",
+    "description": "Re-run an analysis from its stored evidence.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-097",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Untrusted-content quarantine view",
+    "description": "Inspect flagged injection content safely.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-098",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence lineage graph",
+    "description": "Visual lineage from source to conclusion.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-099",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Competing claims on findings",
+    "description": "Findings carry both sides with evidence ids.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-100",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Contradiction explanations",
+    "description": "Human-readable explanations cite both sides.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-101",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Documented normalizer patterns",
+    "description": "Deterministic pattern table, ordered, documented.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-102",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Negation-first pattern ordering",
+    "description": "Negations are matched before affirmatives.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-103",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Conservative one-predicate extraction",
+    "description": "One predicate per sentence, no over-reading.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-104",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Deterministic proposition ids",
+    "description": "Resettable counters make replays identical.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-105",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence count transparency",
+    "description": "Analyses report how many evidence items were used.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-106",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Agent injection warnings",
+    "description": "get-evidence flags suspected injection to the agent.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-107",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Canonical digest stability",
+    "description": "Payload digests normalize key order.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-108",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Retrieve-vs-digest cross-check",
+    "description": "Re-read and compare digests to detect edits.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-109",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Runtime context in access metadata",
+    "description": "Tenant and user recorded on every retrieval.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-110",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Derived-context marking",
+    "description": "Engine-derived context is labeled as derived.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-111",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Context snapshot export",
+    "description": "Export the exact analysis context as JSON.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-112",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Evidence retention policy",
+    "description": "Retention and cleanup rules for stored evidence.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-113",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Retrieval provenance in audit",
+    "description": "Analysis audit events link the evidence ids used.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-114",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Vector database for evidence search",
+    "description": "Embedding store over evidence text.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P4",
+    "reason": "Rejected: volumes do not justify an external vector DB; deterministic ids suffice."
+  },
+  {
+    "id": "FR-115",
+    "domain": "B. Context engineering and evidence provenance",
+    "title": "Whole-document evidence storage",
+    "description": "Store entire documents as evidence.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P4",
+    "reason": "Rejected: data minimization keeps only cited spans."
+  },
+  {
+    "id": "FR-116",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Rovo investigator agent",
+    "description": "Manifest-defined agent with evidence-citing prompt.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-117",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Six agent actions with schemas",
+    "description": "Each action declares typed inputs and verbs.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-118",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Absolute-rule agent prompt",
+    "description": "No fabrication, cite evidence, flag injections.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-119",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Prompt injection defense rules",
+    "description": "Source content is data, never instructions.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-120",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "No-evidence rule in prompt",
+    "description": "Agent must say INSUFFICIENT_EVIDENCE rather than guess.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-121",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agents cannot approve or execute",
+    "description": "Structural separation: no approve/execute tool exists.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-122",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "investigate-issue tool",
+    "description": "Agent-triggered analysis on an issue.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-123",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "get-case tool",
+    "description": "Authorized case retrieval for the agent.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-124",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "get-evidence tool",
+    "description": "Sanitized evidence with citations for the agent.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-125",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "get-impact tool",
+    "description": "Verified dependency impact for the agent.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-126",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "prepare-remediation tool",
+    "description": "Proposal drafting (never execution) for the agent.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-127",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "get-approval-status tool",
+    "description": "Read-only proposal state without approver identity.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-128",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "MCP tool surface",
+    "description": "rovo:mcp module exposing the six tools.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-129",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Two reusable skills",
+    "description": "SKILL.md files for investigation and remediation flows.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-130",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "zod validation on every action",
+    "description": "All action inputs are schema-validated.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-131",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Tenant context required",
+    "description": "Actions refuse to run without tenant identity.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-132",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Structured error envelopes",
+    "description": "Status/error codes, never thrown raw errors.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-133",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Bounded retries with backoff",
+    "description": "Adapter retries transient failures with capped backoff.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-134",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Non-transient error short-circuit",
+    "description": "4xx (except 429) never retried.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-135",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Deterministic fallback over LLM",
+    "description": "No model call in the verified path.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-136",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Conversation starters",
+    "description": "Curated starters guide the demo conversation.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-137",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "No invented evidence (contract)",
+    "description": "Engine and prompt both forbid fabricated citations.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-138",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Human escalation to review queue",
+    "description": "Agent proposals land in the human queue.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-139",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Approver identity hidden from agent",
+    "description": "Agent sees binding presence, not who approved.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-140",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Structured root-cause hypotheses",
+    "description": "Typed hypotheses derived from findings.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-141",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Multi-step case planning",
+    "description": "Agent plans investigations across linked issues.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-142",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent execution traces",
+    "description": "Per-tool-call trace records.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-143",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent performance measurement",
+    "description": "Reliability metrics per tool.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-144",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Model provider abstraction",
+    "description": "Swappable model backend.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-145",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "LLM-assisted extraction layer",
+    "description": "Optional LLM normalization on top of patterns.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-146",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Metamorphic agent testing",
+    "description": "Invariant checks under transformations.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-147",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Differential testing vs rule baseline",
+    "description": "Compare model output against the deterministic engine.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-148",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Tool-call post-state verification",
+    "description": "Verify the world state after tool writes.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-149",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Idempotent agent operations",
+    "description": "Re-running investigation upserts rather than duplicates.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-150",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent/UI shared core",
+    "description": "Agent and UI invoke the same pipeline.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-151",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Severity reasons as explanations",
+    "description": "Severity decisions list their reasons.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-152",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Confidence separated from severity",
+    "description": "Uncertainty is explicit and separate.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-153",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Both-sides contradiction reply",
+    "description": "Agent presents conflicting evidence fairly.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-154",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent rate limits",
+    "description": "Per-user throttling of agent actions.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-155",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Failure recovery guidance",
+    "description": "Agent explains failures and next steps.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-156",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Shadow execution mode",
+    "description": "Dry-run agent proposals for evaluation.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-157",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent human-review rubric",
+    "description": "Structured rubric for live agent evaluation.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-158",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Structured investigation output",
+    "description": "Typed analysis result shape everywhere.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-159",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Stored finding schema validation",
+    "description": "Validate findings on read.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-160",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent/UI proposal parity",
+    "description": "Both producers yield identical proposal contracts.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-161",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Per-action audit events",
+    "description": "Agent mutations are audited like human ones.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-162",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Severity-gated agent proposals",
+    "description": "Operations require minimum finding severity.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-163",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Proposal risk classification",
+    "description": "Risk level attached at draft time.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-164",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Documented operation catalog",
+    "description": "Six operations with target/risk/min severity.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-165",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Escalation path documentation",
+    "description": "Docs explain the human handoff.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-166",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent contract registry",
+    "description": "AGENT_CONTRACTS.md defining every agent task.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-167",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Agent verification matrix",
+    "description": "Per-action verification strategies.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-168",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Prompt version tracking",
+    "description": "Versioned prompt history.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-169",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Autonomous approval agent",
+    "description": "An agent that approves proposals.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P0",
+    "reason": "Rejected: violates the human-governance invariant."
+  },
+  {
+    "id": "FR-170",
+    "domain": "C. Agentic intelligence and reasoning",
+    "title": "Multi-agent debate display",
+    "description": "Simulated multi-agent panel UI.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P4",
+    "reason": "Rejected: theater without capability."
+  },
+  {
+    "id": "FR-171",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Remediation candidate generation",
+    "description": "Findings produce typed remediation proposals.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-172",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Operation catalog",
+    "description": "Six operations with declared risk and severity gates.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-173",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Severity gating per operation",
+    "description": "Operations require a minimum finding severity.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-174",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Risk classification per operation",
+    "description": "low/medium/high risk attached at draft time.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-175",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Evidence requirement for proposals",
+    "description": "No proposal without cited evidence.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-176",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Proposal payload digest",
+    "description": "Canonical payload digested for replay safety.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-177",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Tenant-scoped proposal persistence",
+    "description": "Proposals stored with tenant isolation.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-178",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Impact analysis over verified edges",
+    "description": "BFS over verified Jira links only.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-179",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Bounded traversal depth",
+    "description": "Impact traversal depth capped (1..10).",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-180",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Inferred-edge separation",
+    "description": "Inferred edges never merge into verified results.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-181",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Hypothetical change simulation",
+    "description": "What-if edge changes under an explicit hypothetical flag.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-182",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Expected-change text",
+    "description": "Proposals state what will change.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-183",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Supporting finding links",
+    "description": "Proposals reference their findings.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-184",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Duplicate proposal convergence",
+    "description": "Same case+operation converges on one proposal id.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-185",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Conflicting remediation detection",
+    "description": "Detect proposals that undo each other.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-186",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Documented utility queue ordering",
+    "description": "Queue order follows a documented utility function.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-187",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Priority explanation strings",
+    "description": "Each proposal explains its rank inputs.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-188",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Dependency-aware queue constraints",
+    "description": "Order respects declared dependencies.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-189",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Deadline awareness",
+    "description": "Due dates influence ordering.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-190",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Resource-constrained scheduling",
+    "description": "Capacity-aware planning.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-191",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Fairness / starvation prevention",
+    "description": "Long-waiting items eventually surface.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-192",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Dynamic replanning on new evidence",
+    "description": "New analyses refresh queue priorities.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-193",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Deterministic priority recalculation",
+    "description": "Same inputs produce the same order.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-194",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Cost estimation per proposal",
+    "description": "Effort estimate attached to proposals.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-195",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Expected-benefit quantification",
+    "description": "Benefit estimate with stated assumptions.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-196",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Reversibility classification",
+    "description": "Mark whether an operation can be undone.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-197",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Rollback eligibility",
+    "description": "Eligible proposals expose a rollback plan.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-198",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Execution prerequisites check",
+    "description": "State/binding/tenant/digest/expiry verified before writes.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-199",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Candidate state validation",
+    "description": "Only legal state transitions are accepted.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-200",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Risk-adjusted ordering factor",
+    "description": "Higher-risk proposals surface for faster review.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-201",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Age-decay ordering factor",
+    "description": "Waiting time increases review priority.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-202",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Severity-dominant ordering",
+    "description": "Severity outranks risk and age.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-203",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Queue pending counts",
+    "description": "Pending metrics surfaced (badge, queue).",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-204",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Optimization objective documentation",
+    "description": "Objective function and constraints documented.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-205",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Queue design documentation",
+    "description": "QUEUE_DESIGN.md with invariants and rationale.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-206",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Proposal comparison view",
+    "description": "Side-by-side proposal comparison.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-207",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Remediation playbooks",
+    "description": "Reusable per-domain remediation templates.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-208",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Multi-proposal bundling",
+    "description": "Bundle related proposals into one review.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-209",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Auto-suggest remediation on new cases",
+    "description": "Suggest operations when cases are created.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-210",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Proposal approval expiry",
+    "description": "Approvals expire after a validity window.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-211",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Proposal cancellation",
+    "description": "Pending proposals can be cancelled by state machine.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-212",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Rejected-proposal rationale storage",
+    "description": "Store the rejection reason.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-213",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Reopen proposals",
+    "description": "Reopen rejected proposals with new evidence.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-214",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Proposal history per case",
+    "description": "Chronological proposals per case.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-215",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Cross-case remediation dedup",
+    "description": "Deduplicate equivalent proposals across cases.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-216",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Ordering sensitivity property test",
+    "description": "Ordering responds predictably to input changes.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-217",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Ordering regression suite",
+    "description": "Snapshot tests guard the documented order.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-218",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Documented queue constraints",
+    "description": "Hard constraints (state, expiry) stated with the model.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-219",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Background scheduler hooks",
+    "description": "Hooks for future scheduled re-prioritization.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-220",
+    "domain": "D. Remediation intelligence and optimization",
+    "title": "Arbitrary numeric priority score",
+    "description": "Unexplained magic-number ranking.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P2",
+    "reason": "Rejected: unexplained scores; ordering must derive from the documented utility."
+  },
+  {
+    "id": "FR-221",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval state machine",
+    "description": "DRAFT→PENDING→APPROVED→EXECUTED with terminal alternatives.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-222",
+    "domain": "E. Governance, approval and human control",
+    "title": "Valid-transition enforcement",
+    "description": "Illegal transitions throw typed errors.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-223",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval binding contract",
+    "description": "Approver, tenant, target, operation, digest, expiry.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-224",
+    "domain": "E. Governance, approval and human control",
+    "title": "Self-approval prevention",
+    "description": "The proposal actor cannot approve.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-225",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval expiry window",
+    "description": "Default 1h validity.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-226",
+    "domain": "E. Governance, approval and human control",
+    "title": "Replay protection registry",
+    "description": "Executed digests are permanently rejected.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-227",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approver-only execution",
+    "description": "Only the recorded approver may execute.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-228",
+    "domain": "E. Governance, approval and human control",
+    "title": "Separation of duties (agent/human)",
+    "description": "Agents draft; humans approve and execute.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-229",
+    "domain": "E. Governance, approval and human control",
+    "title": "Decision audit events",
+    "description": "Approvals and rejections are chained into the ledger.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-230",
+    "domain": "E. Governance, approval and human control",
+    "title": "Rejection flow",
+    "description": "Rejections are first-class transitions.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-231",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval identity display",
+    "description": "UI shows the recorded approver.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-232",
+    "domain": "E. Governance, approval and human control",
+    "title": "No agent execute/approve tool",
+    "description": "The tool surface structurally excludes them.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-233",
+    "domain": "E. Governance, approval and human control",
+    "title": "Binding creation path (UI resolver)",
+    "description": "decideProposal creates bindings server-side.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-234",
+    "domain": "E. Governance, approval and human control",
+    "title": "Digest-bound approval",
+    "description": "Approvals bind the exact payload digest.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-235",
+    "domain": "E. Governance, approval and human control",
+    "title": "Modified proposal cannot reuse approval",
+    "description": "Digest mismatch fails execution.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-236",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval revocation before execution",
+    "description": "Cancel an approval pre-execution.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-237",
+    "domain": "E. Governance, approval and human control",
+    "title": "Rejection rationale capture",
+    "description": "Reason stored with the rejection.",
+    "disposition": "DEFER",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-238",
+    "domain": "E. Governance, approval and human control",
+    "title": "Risk-based approval routing",
+    "description": "Higher risk requires stricter approver rules.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-239",
+    "domain": "E. Governance, approval and human control",
+    "title": "Sensitive-operation restrictions",
+    "description": "High-risk operations need HIGH+ severity.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-240",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval evidence snapshot",
+    "description": "Snapshot the evidence at approval time.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-241",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval-to-execution traceability",
+    "description": "Chained events connect approval to execution.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-242",
+    "domain": "E. Governance, approval and human control",
+    "title": "Decision accountability",
+    "description": "Every decision records its actor.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-243",
+    "domain": "E. Governance, approval and human control",
+    "title": "Concurrent decision conflict handling",
+    "description": "Two reviewers deciding simultaneously.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-244",
+    "domain": "E. Governance, approval and human control",
+    "title": "Multi-approver policies",
+    "description": "N-of-M approvals for sensitive operations.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-245",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval delegation",
+    "description": "Delegate approval authority temporarily.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-246",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval SLA tracking",
+    "description": "Time-to-decision metrics.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-247",
+    "domain": "E. Governance, approval and human control",
+    "title": "Role-based approver eligibility",
+    "description": "Only eligible roles may approve.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-248",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval history view",
+    "description": "Filterable decision history.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-249",
+    "domain": "E. Governance, approval and human control",
+    "title": "Governance documentation",
+    "description": "SECURITY_AND_GOVERNANCE.md with invariants and threat model.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-250",
+    "domain": "E. Governance, approval and human control",
+    "title": "Policy evaluation engine",
+    "description": "Declarative policy checks before decisions.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-251",
+    "domain": "E. Governance, approval and human control",
+    "title": "Scope-based permission boundaries",
+    "description": "Manifest scopes are minimal and documented.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-252",
+    "domain": "E. Governance, approval and human control",
+    "title": "Separation-of-duties tests",
+    "description": "Automated proofs of governance rules.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-253",
+    "domain": "E. Governance, approval and human control",
+    "title": "Expiry enforcement tests",
+    "description": "Expired approvals cannot execute.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-254",
+    "domain": "E. Governance, approval and human control",
+    "title": "Replay enforcement tests",
+    "description": "Replays are rejected and recorded.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-255",
+    "domain": "E. Governance, approval and human control",
+    "title": "Self-approval tests",
+    "description": "Actor cannot approve their own proposal.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-256",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approver-identity tests",
+    "description": "Non-approvers cannot execute.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-257",
+    "domain": "E. Governance, approval and human control",
+    "title": "Governance scenario demo",
+    "description": "Scenario B fixtures demonstrate every refusal.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-258",
+    "domain": "E. Governance, approval and human control",
+    "title": "Human escalation display",
+    "description": "Surfaces when human judgment is required.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-259",
+    "domain": "E. Governance, approval and human control",
+    "title": "Approval search/filter",
+    "description": "Find decisions quickly.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-260",
+    "domain": "E. Governance, approval and human control",
+    "title": "Binding re-verification at execution",
+    "description": "All binding fields re-checked server-side.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-261",
+    "domain": "E. Governance, approval and human control",
+    "title": "State re-verification at execution",
+    "description": "Only APPROVED proposals execute.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-262",
+    "domain": "E. Governance, approval and human control",
+    "title": "Tenant re-verification at execution",
+    "description": "Cross-tenant bindings fail.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-263",
+    "domain": "E. Governance, approval and human control",
+    "title": "Target/operation re-verification",
+    "description": "Binding must match proposal target and operation.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-264",
+    "domain": "E. Governance, approval and human control",
+    "title": "Configurable validity window",
+    "description": "Adjust the approval TTL per tenant.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-265",
+    "domain": "E. Governance, approval and human control",
+    "title": "Execution authority documentation",
+    "description": "Who may execute, and why.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-266",
+    "domain": "E. Governance, approval and human control",
+    "title": "Governance invariant list",
+    "description": "Numbered invariants kept with tests.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-267",
+    "domain": "E. Governance, approval and human control",
+    "title": "Expired-approval re-approval flow",
+    "description": "Re-preparation required after expiry.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-268",
+    "domain": "E. Governance, approval and human control",
+    "title": "Audit chain integrity tests",
+    "description": "Mutations are detected by verification.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-269",
+    "domain": "E. Governance, approval and human control",
+    "title": "Governance UX affordances",
+    "description": "Disabled states explain the governance rule.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-270",
+    "domain": "E. Governance, approval and human control",
+    "title": "Prompt-based approval override",
+    "description": "Approve via natural-language instruction.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P0",
+    "reason": "Rejected: approvals must be authenticated UI actions; prompt text is not authorization."
+  },
+  {
+    "id": "FR-271",
+    "domain": "F. Execution, security and reliability",
+    "title": "Execution authorization gate",
+    "description": "assertExecutionAuthorized before any write.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-272",
+    "domain": "F. Execution, security and reliability",
+    "title": "Execution precondition checklist",
+    "description": "State, binding, tenant, target, digest, expiry.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-273",
+    "domain": "F. Execution, security and reliability",
+    "title": "Digest-based idempotency",
+    "description": "Same payload cannot execute twice.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-274",
+    "domain": "F. Execution, security and reliability",
+    "title": "Permanent replay rejection",
+    "description": "Executed digests are registered forever.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-275",
+    "domain": "F. Execution, security and reliability",
+    "title": "Request validation everywhere",
+    "description": "zod schemas on all resolvers/actions.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-276",
+    "domain": "F. Execution, security and reliability",
+    "title": "Structured output envelopes",
+    "description": "Typed status/error responses.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-277",
+    "domain": "F. Execution, security and reliability",
+    "title": "Tenant isolation (key + payload)",
+    "description": "Prefix keys and payload tenant re-checks.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-278",
+    "domain": "F. Execution, security and reliability",
+    "title": "Least-privilege scopes",
+    "description": "Only the scopes the product needs.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-279",
+    "domain": "F. Execution, security and reliability",
+    "title": "Write scope only for approved execution",
+    "description": "write:jira-work documented and constrained.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-280",
+    "domain": "F. Execution, security and reliability",
+    "title": "Input sanitization",
+    "description": "Untrusted text sanitized at ingestion.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-281",
+    "domain": "F. Execution, security and reliability",
+    "title": "Hidden-character stripping",
+    "description": "Zero-width and control chars removed.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-282",
+    "domain": "F. Execution, security and reliability",
+    "title": "Typed API error classification",
+    "description": "JiraApiError carries status and path.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-283",
+    "domain": "F. Execution, security and reliability",
+    "title": "Bounded retry with backoff",
+    "description": "Transient failures retried, capped.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-284",
+    "domain": "F. Execution, security and reliability",
+    "title": "Explicit EXECUTION_FAILED",
+    "description": "Failed writes are recorded, never silent.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-285",
+    "domain": "F. Execution, security and reliability",
+    "title": "Execution audit events",
+    "description": "Every execution attempt is chained.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-286",
+    "domain": "F. Execution, security and reliability",
+    "title": "Execution receipts",
+    "description": "resultRef recorded for successful writes.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-287",
+    "domain": "F. Execution, security and reliability",
+    "title": "Post-execution independent verification",
+    "description": "Re-read the resulting state after execution.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-288",
+    "domain": "F. Execution, security and reliability",
+    "title": "Verification result storage",
+    "description": "Verification outcome persisted on the proposal.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-289",
+    "domain": "F. Execution, security and reliability",
+    "title": "Verification audit events",
+    "description": "proposal_verified chained with outcome.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-290",
+    "domain": "F. Execution, security and reliability",
+    "title": "Success vs verified distinction",
+    "description": "API 200 is not verified success.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-291",
+    "domain": "F. Execution, security and reliability",
+    "title": "Partial failure classification",
+    "description": "Multi-step failures classified honestly.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-292",
+    "domain": "F. Execution, security and reliability",
+    "title": "State reconciliation",
+    "description": "Reconcile expected vs actual state.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-293",
+    "domain": "F. Execution, security and reliability",
+    "title": "Compensating actions",
+    "description": "Undo path for executed writes.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-294",
+    "domain": "F. Execution, security and reliability",
+    "title": "Rollback boundaries",
+    "description": "Which operations can and cannot roll back.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-295",
+    "domain": "F. Execution, security and reliability",
+    "title": "Circuit breaker for Jira",
+    "description": "Trip on repeated downstream failures.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-296",
+    "domain": "F. Execution, security and reliability",
+    "title": "Execution timeout budgets",
+    "description": "Bounded execution wall-clock.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-297",
+    "domain": "F. Execution, security and reliability",
+    "title": "429 rate-limit retry",
+    "description": "Rate-limited calls retried with backoff.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-298",
+    "domain": "F. Execution, security and reliability",
+    "title": "Secret management policy",
+    "description": "No secrets committed; documented env vars.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-299",
+    "domain": "F. Execution, security and reliability",
+    "title": "Abuse-resistant input validation",
+    "description": "Issue keys and ids are regex-validated.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-300",
+    "domain": "F. Execution, security and reliability",
+    "title": "Recovery by re-analysis",
+    "description": "Failures are recoverable by re-running analysis.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-301",
+    "domain": "F. Execution, security and reliability",
+    "title": "Failure scenario fixtures",
+    "description": "Deterministic failure fixtures (Scenario D).",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-302",
+    "domain": "F. Execution, security and reliability",
+    "title": "Failure demo in sandbox",
+    "description": "Sandbox shows EXECUTION_FAILED honestly.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-303",
+    "domain": "F. Execution, security and reliability",
+    "title": "Dependency security audit",
+    "description": "npm audit gate in CI.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-304",
+    "domain": "F. Execution, security and reliability",
+    "title": "Data minimization",
+    "description": "Evidence stores cited spans, not whole documents.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-305",
+    "domain": "F. Execution, security and reliability",
+    "title": "Cross-tenant read rejection tests",
+    "description": "Foreign-tenant reads return nothing.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-306",
+    "domain": "F. Execution, security and reliability",
+    "title": "Injection defense tests",
+    "description": "Sanitizer and engine tests over injection fixtures.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-307",
+    "domain": "F. Execution, security and reliability",
+    "title": "Audit-chain mutation detection",
+    "description": "verifyAuditChain detects tampering.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-308",
+    "domain": "F. Execution, security and reliability",
+    "title": "Chain tamper test",
+    "description": "Mutating an event breaks verification.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-309",
+    "domain": "F. Execution, security and reliability",
+    "title": "Same-millisecond chain ordering",
+    "description": "Insertion-monotonic ids keep chain order stable.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-310",
+    "domain": "F. Execution, security and reliability",
+    "title": "Deterministic chain read",
+    "description": "Ordering is stable across reads.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-311",
+    "domain": "F. Execution, security and reliability",
+    "title": "ADF write payloads",
+    "description": "Comments/issues built as ADF documents.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-312",
+    "domain": "F. Execution, security and reliability",
+    "title": "Derived project-key validation",
+    "description": "Project keys validated before issue creation.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-313",
+    "domain": "F. Execution, security and reliability",
+    "title": "Comment execution path",
+    "description": "Non-issue operations post approval-traced comments.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-314",
+    "domain": "F. Execution, security and reliability",
+    "title": "Issue-creation execution path",
+    "description": "create_remediation_issue creates a Task.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-315",
+    "domain": "F. Execution, security and reliability",
+    "title": "Execution state persistence",
+    "description": "EXECUTED/EXECUTION_FAILED stored on the proposal.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-316",
+    "domain": "F. Execution, security and reliability",
+    "title": "Honest UNVERIFIED handling",
+    "description": "Unverifiable states stay UNVERIFIED, not success.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-317",
+    "domain": "F. Execution, security and reliability",
+    "title": "Security review checklist",
+    "description": "Documented review steps with owners.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-318",
+    "domain": "F. Execution, security and reliability",
+    "title": "Threat model documentation",
+    "description": "Assets, actors, threats and mitigations.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-319",
+    "domain": "F. Execution, security and reliability",
+    "title": "CI secret scan",
+    "description": "Grep gate for credential patterns.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-320",
+    "domain": "F. Execution, security and reliability",
+    "title": "Analysis flooding resistance",
+    "description": "Bound analysis frequency per tenant.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-321",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Forge app manifest (globalPage + issuePanel)",
+    "description": "Two UI surfaces registered with one resource.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-322",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Rovo agent module",
+    "description": "rovo:agent registration with prompt and actions.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-323",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Six action modules",
+    "description": "One Forge function per action.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-324",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "rovo:mcp module",
+    "description": "MCP tool surface referencing real actions.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-325",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "rovo:skill modules",
+    "description": "Two skills with SKILL.md frontmatter.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-326",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Node 24 runtime pin",
+    "description": "runtime and .nvmrc aligned.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-327",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Jira REST v3 reads (asUser)",
+    "description": "All Jira reads run with caller permissions.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-328",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Issue field selection",
+    "description": "Only needed fields are requested.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-329",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Comment retrieval",
+    "description": "Comments fetched and mapped with authors.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-330",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Issuelinks retrieval",
+    "description": "Links fetched for impact analysis.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-331",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "JQL search support",
+    "description": "Adapter supports paged JQL search.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-332",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Minimal read scopes",
+    "description": "read:jira-work, read:jira-user only.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-333",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Trusted-route handling",
+    "description": "assumeTrustedRoute used for internally-built paths.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-334",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "KVS storage module",
+    "description": "storage:app KVS with tenant-prefixed keys.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-335",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Health probe endpoint",
+    "description": "GET /myself probe powers health state.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-336",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Forge bridge usage",
+    "description": "invoke/view from @forge/bridge in the UI.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-337",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "ADF write payloads",
+    "description": "Writes serialized as ADF documents.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-338",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Issue creation via REST",
+    "description": "Approved proposals can create issues.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-339",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Comment posting via REST",
+    "description": "Approved proposals can comment.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-340",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Resolver handler pattern",
+    "description": "Thin zod-validated resolver layer.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-341",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Manifest scope documentation",
+    "description": "Every scope justified in the manifest.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-342",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Teamwork Graph adapter",
+    "description": "Curated-query adapter, contract-tested.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-343",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Teamwork Graph wiring",
+    "description": "Resolver/action enrichment via the graph.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-344",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Graph scope request plan",
+    "description": "Granular graph scopes documented for deployment.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-345",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Curated queries only",
+    "description": "No ad-hoc runtime Cypher.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-346",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Permission-filtered graph reads",
+    "description": "Graph rows are user-scoped by design.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-347",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Platform event handling",
+    "description": "Forge event/webhook triggers.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-348",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Scheduled triggers",
+    "description": "Bulk scheduled analysis.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-349",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Development-site deployment",
+    "description": "forge deploy + install on a dev site.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-350",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Marketplace listing",
+    "description": "Listing assets and publication.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-351",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Installation flow docs",
+    "description": "README documents register/deploy/install.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-352",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Forge lint guidance",
+    "description": "Manifest lint findings documented.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-353",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Jira status error mapping",
+    "description": "Statuses mapped to available/degraded/unavailable.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-354",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Rate-limit awareness",
+    "description": "429 retried; other 4xx surfaced.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-355",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "API version pinning",
+    "description": "REST v3 paths pinned explicitly.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-356",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Issue-panel context capture",
+    "description": "Panel supplies the current issue key.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-357",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Global page navigation",
+    "description": "Sidebar navigation across views.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-358",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Cross-service trace ids",
+    "description": "Correlation ids across Forge products.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-359",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "External integration boundaries doc",
+    "description": "atlassian-compatibility.md records decisions.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-360",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Scope-revocation handling",
+    "description": "Revoked scopes surface as ACCESS_RESTRICTED.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-361",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "User display names in citations",
+    "description": "Comment authors appear in citations.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-362",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Issue status in views",
+    "description": "Analysis results show issue status.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-363",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "KVS query pagination",
+    "description": "Repositories page through KVS queries.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-364",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Shared team case views",
+    "description": "Team-level collaboration surfaces on cases.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-365",
+    "domain": "G. Atlassian and collaboration integration",
+    "title": "Undeclared scope creep",
+    "description": "Request scopes without product need.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P0",
+    "reason": "Rejected: scopes must map to implemented, documented capabilities only."
+  },
+  {
+    "id": "FR-366",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Digest-chained audit events",
+    "description": "Each event digests its predecessor.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-367",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Insertion-monotonic event ids",
+    "description": "Ids encode sequence so order is stable.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-368",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Chain verification API",
+    "description": "verifyAuditChain returns tamper status.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-369",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Tamper detection",
+    "description": "Any edit breaks the chain.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-370",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Deterministic event ordering",
+    "description": "Timestamp then id; stable across reads.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-371",
+    "domain": "H. Audit, observability and analytics",
+    "title": "analysis_run events",
+    "description": "Every analysis run is audited.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-372",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Proposal decision events",
+    "description": "prepare/approve/reject audited.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-373",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Execution events",
+    "description": "proposal_executed audited with outcome.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-374",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Tenant-scoped ledger",
+    "description": "Ledger keys are tenant-prefixed.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-375",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Audit ledger UI",
+    "description": "Chained events rendered in the app.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-376",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Event evidence linkage",
+    "description": "Events link the evidence ids they used.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-377",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Request fingerprints",
+    "description": "Each event digests its triggering request.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-378",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Verification outcome events",
+    "description": "proposal_verified chained after execution checks.",
+    "disposition": "IMPLEMENT",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-379",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Execution receipts in audit",
+    "description": "resultRef recorded in the chain.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-380",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Failure-result events",
+    "description": "Failures are audited as failures.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-381",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Chain integrity tests",
+    "description": "Automated chain verification tests.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-382",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Same-millisecond regression test",
+    "description": "Insertion order preserved under same-ms appends.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-383",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Exportable audit report",
+    "description": "Download the ledger with chain proof.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-384",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Audit retention policy",
+    "description": "Retention windows for events.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-385",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Proposal lifecycle analytics",
+    "description": "Funnel from prepared to executed.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-386",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Approval time metrics",
+    "description": "Time-to-decision measurement.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-387",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Queue wait metrics",
+    "description": "Time-in-queue measurement.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-388",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Verification pass-rate metric",
+    "description": "Verified / executed ratio (needs live volume).",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-389",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Latency measurement",
+    "description": "Per-action latency percentiles.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-390",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Cost measurement",
+    "description": "Cost per task (no model usage today).",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-391",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Context quality metric",
+    "description": "Evidence sufficiency trends.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-392",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Retrieval effectiveness metric",
+    "description": "Retrieval relevance measurement.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-393",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Agent reliability metric",
+    "description": "Tool success rates.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-394",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Operational dashboard",
+    "description": "Live ops metrics view.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-395",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Chain append cost note",
+    "description": "O(n) append documented as accepted at scale.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-396",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Metrics audit documentation",
+    "description": "Every displayed number has a formula and label.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-397",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Measurement label discipline",
+    "description": "MEASURED/TEST-VERIFIED/etc. used consistently.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-398",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Benchmark replay determinism",
+    "description": "Evaluator reproduces metrics exactly.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-399",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Audit event schema stability",
+    "description": "Event shape versioned and tested.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-400",
+    "domain": "H. Audit, observability and analytics",
+    "title": "Chain demo for judges",
+    "description": "Demo step shows chain verification live.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-401",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Modular monolith on Forge",
+    "description": "Deployment shape chosen and documented.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-402",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "No speculative infrastructure",
+    "description": "Every infra component justified.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-403",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Storage abstraction",
+    "description": "Repository interfaces over KVS.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-404",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "KVS injection for tests",
+    "description": "Fake KVS drives real repository code.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-405",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Fetcher injection for tests",
+    "description": "Fake Jira transport drives real adapter code.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-406",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Fake KVS test harness",
+    "description": "Shared awaitable query fake.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-407",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "CI pipeline",
+    "description": "Typecheck, lint, format, tests, build.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-408",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Secret scan gate",
+    "description": "CI rejects credential patterns.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-409",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Coverage configuration",
+    "description": "Coverage focused on core and security.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-410",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Node version pinning",
+    "description": ".nvmrc and engines aligned.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-411",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Local development docs",
+    "description": "README dev loop.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-412",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "One-command verification",
+    "description": "npm scripts cover all gates.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-413",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Deterministic test fixtures",
+    "description": "Tests use fixed fixtures and ids.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-414",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Register validation script",
+    "description": "Automated 927-record validation.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-415",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Register authoring scripts",
+    "description": "Single-source-of-truth data modules.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-416",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Generated docs from data",
+    "description": "Catalog/traceability docs generated, not hand-copied.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-417",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Environment example",
+    "description": ".env.example documents expected variables.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-418",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Configuration validation",
+    "description": "zod at every boundary.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-419",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Health check resolver",
+    "description": "Probed health endpoint.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-420",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Resolver namespacing",
+    "description": "Stable resolver API names.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-421",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Tenant boundary tests",
+    "description": "Isolation proven by tests.",
+    "disposition": "EXISTING",
+    "priority": "P0"
+  },
+  {
+    "id": "FR-422",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Resource limits",
+    "description": "Pagination caps, depth caps, bounded retries.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-423",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Deployment readiness docs",
+    "description": "BLOCKED externally; steps documented.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-424",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Observability baseline",
+    "description": "Audit ledger as the ops record.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-425",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Recovery behavior",
+    "description": "Re-analysis and re-preparation after failures.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-426",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Contributor documentation",
+    "description": "CONTRIBUTING.md.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-427",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Architecture documentation set",
+    "description": "As-built architecture docs.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-428",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Durable handoff document",
+    "description": "MISTRAL_VIBE_HANDOFF.md for long-run continuity.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-429",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Feature-to-task traceability docs",
+    "description": "Generated mapping FR↔ET.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-430",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Durable execution state",
+    "description": "Proposals and digests persist in KVS.",
+    "disposition": "EXISTING",
+    "priority": "P1"
+  },
+  {
+    "id": "FR-431",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Transaction boundary notes",
+    "description": "Single-key writes; accepted consistency model.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-432",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Background worker evaluation",
+    "description": "Rejected for now, documented rationale.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-433",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Event-driven execution evaluation",
+    "description": "Assess Forge events when triggers exist.",
+    "disposition": "DEFER",
+    "priority": "P4"
+  },
+  {
+    "id": "FR-434",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Forge-managed DR/multi-region",
+    "description": "Handled by the platform; documented.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-435",
+    "domain": "I. Cloud-native platform and developer experience",
+    "title": "Kubernetes/Kafka/Redis cluster",
+    "description": "Self-managed heavy infrastructure.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P4",
+    "reason": "Rejected: adds operational cost with zero product value on Forge; revisit only if a measured need appears."
+  },
+  {
+    "id": "FR-436",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Problem statement documentation",
+    "description": "The problem, crisply stated with evidence.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-437",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Core identity statement",
+    "description": "Evidence→Reasoning→Proposal→Human→Execution→Verification.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-438",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Scenario A: normal remediation",
+    "description": "Deterministic fixture: analyze→propose→approve→execute→verify.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-439",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Scenario B: approval security",
+    "description": "Every governance refusal demonstrated from tests.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-440",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Scenario C: evidence contradiction",
+    "description": "Contradiction fixture surfaces uncertainty honestly.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-441",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Scenario D: failed execution",
+    "description": "Controlled failure: classification, audit, no fake success.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-442",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Scenario E: post-execution verification",
+    "description": "Execution success distinguished from verified state.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-443",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Scenario F: optimization and queue",
+    "description": "Multiple proposals ordered by documented utility.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-444",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Demo script document",
+    "description": "HACKATHON_DEMO_SCRIPT.md with exact steps and commands.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-445",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Deterministic demo fixtures",
+    "description": "Scenario fixtures checked in and stable.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-446",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Demo replay instructions",
+    "description": "One command re-runs the full demo.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-447",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Judging evidence pack",
+    "description": "Test output and command transcripts included.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-448",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "README as-built",
+    "description": "README matches the implemented product.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-449",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Benchmark results presentation",
+    "description": "Measured results with definitions.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-450",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Honest limitations section",
+    "description": "External blockers stated plainly.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-451",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Reproducibility commands",
+    "description": "Every claim runnable by a judge.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-452",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Before/after defect evidence",
+    "description": "Defect register shows fixed vs remaining.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-453",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Architecture diagram",
+    "description": "As-built dataflow diagram in docs.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-454",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Security demonstration",
+    "description": "Invariant tests shown as governance proof.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-455",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Failure demonstration",
+    "description": "Scenario D shown with real output.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-456",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Video readiness outline",
+    "description": "Script outline for a demo video.",
+    "disposition": "DEFER",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-457",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Pitch narrative",
+    "description": "HACKATHON_DIFFERENTIATION.md.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-458",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Bonus prize mapping",
+    "description": "bonus-evidence-matrix.md.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-459",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Evaluation methodology doc",
+    "description": "BENCHMARK_METHODOLOGY.md.",
+    "disposition": "IMPLEMENT",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-460",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Measured vs simulated separation",
+    "description": "Labels enforced across docs.",
+    "disposition": "EXISTING",
+    "priority": "P2"
+  },
+  {
+    "id": "FR-461",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Demo timing plan",
+    "description": "Minute-by-minute demo schedule.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-462",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Live vs sandbox labeling",
+    "description": "Modes labeled honestly in-product.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-463",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "One-command demo runner",
+    "description": "scripts/demo-scenarios.ts runs all scenarios.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-464",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Proof-of-work appendix",
+    "description": "Commands and outputs recorded in final report.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-465",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Differentiation vs generic AI dashboards",
+    "description": "Explicit contrast in differentiation doc.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-466",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Submission checklist",
+    "description": "Exact list of what is submitted and its status.",
+    "disposition": "IMPLEMENT",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-467",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "External blockers disclosure",
+    "description": "Deploy/graph/marketplace blockers stated.",
+    "disposition": "EXISTING",
+    "priority": "P3"
+  },
+  {
+    "id": "FR-468",
+    "domain": "J. Hackathon demonstration, evaluation and differentiation",
+    "title": "Invented competitor comparisons",
+    "description": "Fabricated benchmark comparisons vs other products.",
+    "disposition": "REJECT_WITH_REASON",
+    "priority": "P3",
+    "reason": "Rejected: no external system has been measured; fabricating comparisons would violate honesty rules."
+  }
+]

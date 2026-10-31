@@ -54,6 +54,8 @@ export interface ProposalDraft {
   suggestedState: 'DRAFT' | 'PENDING_APPROVAL';
 }
 
+/** The proposal body type draftProposal returns (includes severity + verification). */
+
 /** Build a remediation proposal from a verified/potential finding. */
 export async function draftProposal(req: ProposalRequest): Promise<ProposalDraft> {
   const spec = OPERATIONS[req.operation];
@@ -103,6 +105,7 @@ export async function draftProposal(req: ProposalRequest): Promise<ProposalDraft
       risk: spec.risk,
       actor: req.actor,
       createdAt: req.now.toISOString(),
+      severity: req.finding.severity,
       verificationRequirements: [
         'revalidate actor permissions on target at execution time',
         'approval binding digest must match payload digest',

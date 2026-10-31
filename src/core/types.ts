@@ -164,7 +164,16 @@ export interface RemediationProposal {
   actor: string;
   createdAt: string;
   binding: ApprovalBinding | null;
+  /** Severity of the supporting finding at draft time; drives queue utility. */
+  severity?: Severity;
   verificationRequirements: string[];
+  /** Independent post-execution verification result (null until executed+verified read). */
+  verification?: {
+    outcome: 'VERIFIED' | 'MISMATCH' | 'UNVERIFIED';
+    detail: string;
+    evidenceRef: string | null;
+    verifiedAt: string;
+  } | null;
 }
 
 export interface AuditEvent {

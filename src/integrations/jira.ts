@@ -7,6 +7,8 @@
  * testable without network access, and a passing mocked test is NOT proof of
  * live integration (see docs/atlassian-compatibility.md).
  */
+import { adfToText } from './adf';
+
 export interface JiraUser {
   accountId: string;
   displayName: string;
@@ -138,14 +140,27 @@ export function validateIssueKey(key: string): void {
   }
 }
 
+/**
+ * Jira REST v3 returns description and comment bodies as ADF documents.
+ * Plain strings are tolerated for older deployment shapes and fixtures.
+ */
+function extractTextField(value: unknown): string {
+  if (typeof value === 'string') return value;
+  return adfToText(value);
+}
+
 function mapIssue(raw: unknown): JiraIssue {
   const d = (raw ?? {}) as Record<string, any>;
   const fields = d.fields ?? {};
+  const description = extractTextField(fields.description);
   return {
     id: String(d.id ?? ''),
     key: String(d.key ?? ''),
     summary: String(fields.summary ?? ''),
-    description: typeof fields.description === 'string' ? fields.description : null,
+    // Jira REST v3 returns the description as an ADF document, not a string.
+    // Without ADF extraction every real issue would yield empty evidence and
+    // the engine would always report INSUFFICIENT_EVIDENCE (defect CC-001).
+    description: description.length > 0 ? description : null,
     status: fields.status?.name ? String(fields.status.name) : null,
     updated: fields.updated ? String(fields.updated) : null,
     labels: Array.isArray(fields.labels) ? fields.labels.map(String) : [],
@@ -153,28 +168,36 @@ function mapIssue(raw: unknown): JiraIssue {
       ? fields.comment.comments.map((c: any) => ({
           author: String(c.author?.displayName ?? ''),
           created: String(c.created ?? ''),
-          body: typeof c.body === 'string' ? c.body : '',
+          body: extractTextField(c.body),
         }))
       : [],
-    // Only real issue links are kept; each is a verified Jira-sourced edge.
+    /*
+     * Jira issuelinks are user-maintained but persisted by Jira, so they are
+     * treated as Jira-sourced (persisted) edges — not invented. Direction is
+     * taken from inward/outward position; the link type name is preserved and
+     * only "Blocks" links assert blocking semantics. Everything else is
+     * 'related' — we never invent 'dependsOn' for unknown link types (CC-006).
+     */
     issuelinks: Array.isArray(fields.issuelinks)
       ? fields.issuelinks.flatMap((link: any) => {
-          const type = link?.type?.name === 'Blocks' ? 'blocks' : 'dependsOn';
-          const outward = link?.outwardIssue
+          const isBlocks = link?.type?.name === 'Blocks';
+          const direction: JiraIssue['issuelinks'][number]['direction'] = isBlocks ? 'blocks' : 'related';
+          type LinkEdge = JiraIssue['issuelinks'][number];
+          const outward: LinkEdge | null = link?.outwardIssue
             ? {
                 key: String(link.outwardIssue.key),
                 summary: link.outwardIssue.fields?.summary ?? null,
-                direction: type,
+                direction,
               }
             : null;
-          const inward = link?.inwardIssue
+          const inward: LinkEdge | null = link?.inwardIssue
             ? {
                 key: String(link.inwardIssue.key),
                 summary: link.inwardIssue.fields?.summary ?? null,
-                direction: type,
+                direction,
               }
             : null;
-          return [outward, inward].filter((e): e is JiraIssue['issuelinks'][number] => e !== null);
+          return [outward, inward].filter((e): e is LinkEdge => e !== null);
         })
       : [],
   };

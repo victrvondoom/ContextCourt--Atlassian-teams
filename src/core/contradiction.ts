@@ -136,6 +136,23 @@ function hasSupersessionMarker(ev: EvidenceRecord): boolean {
   return /supersed/i.test(ev.extractedText);
 }
 
+/** Age in days of the newest evidence record backing a candidate pair. */
+function newestEvidenceAgeDays(
+  props: Proposition[],
+  evidenceById: Map<string, EvidenceRecord>,
+  now: Date,
+): number {
+  let newest = Number.POSITIVE_INFINITY;
+  for (const p of props) {
+    const ev = evidenceById.get(p.evidenceId);
+    if (!ev) continue;
+    const t = Date.parse(ev.sourceUpdatedAt || ev.observedAt);
+    if (!Number.isNaN(t)) newest = Math.min(newest, t);
+  }
+  if (!Number.isFinite(newest)) return 0;
+  return Math.max(0, (now.getTime() - newest) / 86_400_000);
+}
+
 // ---------------------------------------------------------------------------
 // Candidate generation (Layer C)
 // ---------------------------------------------------------------------------
@@ -257,7 +274,9 @@ export function analyze(input: AnalysisInput, failure: AnalysisFailure | null = 
           detectionType: c.type,
           evidenceStrength: status === 'VERIFIED_CONTRADICTION' ? 1 : 0.5,
           affectedWorkCount: input.affectedWork.length,
-          newestEvidenceAgeDays: 0,
+          // Real age of the pair's evidence — a hardcoded 0 would make the
+          // recency term always maximal and inflate severity (defect CC-005).
+          newestEvidenceAgeDays: newestEvidenceAgeDays([c.a, c.b], evidenceById, now),
           hasVerifiedDependency: false,
         },
         now,

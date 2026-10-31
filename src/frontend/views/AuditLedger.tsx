@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { invoke } from '@forge/bridge';
+import { useSandbox } from '../sandbox/SandboxContext';
+import { listSandboxAuditEvents } from '../sandbox/sandboxEngine';
 
 interface AuditEventView {
   id: string;
@@ -11,14 +13,20 @@ interface AuditEventView {
 }
 
 export function AuditLedger() {
+  const { sandbox } = useSandbox();
   const [events, setEvents] = useState<AuditEventView[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (sandbox) {
+      // Events written by the in-browser engine this session — real chain.
+      setEvents(listSandboxAuditEvents());
+      return;
+    }
     invoke('listAuditEvents')
       .then((res) => setEvents((res as { events: AuditEventView[] }).events))
       .catch((e) => setError(String(e)));
-  }, []);
+  }, [sandbox]);
 
   if (error) {
     return (

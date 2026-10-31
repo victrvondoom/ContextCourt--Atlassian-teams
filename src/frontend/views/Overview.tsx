@@ -2,14 +2,57 @@ import { useEffect, useState } from 'react';
 import { invoke } from '@forge/bridge';
 import type { AnalysisView, HealthStatus } from '../types';
 import { StatusPill, SeverityPill } from '../components/Pills';
+import { useSandbox } from '../sandbox/SandboxContext';
+import { runSandboxAnalysis, sandboxStoreCounts, listSandboxCases } from '../sandbox/sandboxEngine';
+
+interface CaseSummary {
+  caseId: string;
+  title: string;
+  status: string;
+  severity: string;
+  updatedAt: string;
+}
 
 export function Overview(props: { issueKey: string | null; onHealth: (h: HealthStatus) => void }) {
+  const { sandbox } = useSandbox();
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisView | null>(null);
   const [busy, setBusy] = useState(false);
   const [inputKey, setInputKey] = useState(props.issueKey ?? '');
+  const [recentCases, setRecentCases] = useState<CaseSummary[] | null>(null);
+
+  const loadCases = async () => {
+    if (sandbox) {
+      setRecentCases(listSandboxCases().slice(0, 5));
+      return;
+    }
+    try {
+      const res = (await invoke('listCases')) as { cases: CaseSummary[] };
+      setRecentCases(res.cases.slice(0, 5));
+    } catch {
+      setRecentCases([]);
+    }
+  };
 
   const refresh = async () => {
+    if (sandbox) {
+      // Sandbox health is honest: nothing is wired to live Jira; the engine
+      // itself runs in-browser. Integration states say so explicitly.
+      const h: HealthStatus = {
+        app: 'contextcourt-ai (sandbox)',
+        version: 'sandbox',
+        integrations: {
+          jira: 'not-wired',
+          teamworkGraph: 'not-wired',
+          rovoAgent: 'not-wired',
+          mcp: 'not-wired',
+        },
+        checkedAt: new Date().toISOString(),
+      };
+      setHealth(h);
+      props.onHealth(h);
+      return;
+    }
     try {
       const h = (await invoke('health')) as HealthStatus;
       setHealth(h);
@@ -21,15 +64,26 @@ export function Overview(props: { issueKey: string | null; onHealth: (h: HealthS
 
   useEffect(() => {
     refresh();
-  }, []);
+    loadCases();
+  }, [sandbox]);
 
   const runAnalysis = async () => {
-    const key = (inputKey || props.issueKey || '').toUpperCase();
-    if (!key) return;
+    const rawKey = inputKey || props.issueKey || '';
+    if (!rawKey.trim()) return;
+    const key = rawKey.toUpperCase();
     setBusy(true);
     try {
+      if (sandbox) {
+        // The REAL engine runs in-browser over the deterministic fixture for
+        // this key — the displayed result is computed, never hardcoded.
+        const res = (await runSandboxAnalysis(key)) as AnalysisView;
+        setAnalysis(res);
+        loadCases();
+        return;
+      }
       const res = (await invoke('analyzeIssue', { issueKey: key })) as AnalysisView;
       setAnalysis(res);
+      loadCases();
     } catch (err) {
       setAnalysis({ status: 'ANALYSIS_FAILED', error: String(err) });
     } finally {
@@ -85,12 +139,48 @@ export function Overview(props: { issueKey: string | null; onHealth: (h: HealthS
         )}
       </section>
 
-      <section className="card">
-        <h2>Open cases</h2>
-        <p className="muted">
-          Cases appear here after live analysis detects verified or potential contradictions. This build has
-          no synthetic placeholder cases — an empty state means no analysis has run.
-        </p>
+      <section className="card" aria-labelledby="cases-h">
+        <h2 id="cases-h">Open cases</h2>
+        {recentCases === null && <p className="muted">Loading cases…</p>}
+        {recentCases && recentCases.length === 0 && (
+          <p className="muted">
+            No cases yet — an empty state means no analysis has detected a contradiction. Run an analysis
+            above{sandbox ? ' (sandbox analyses create real in-memory cases)' : ''}.
+          </p>
+        )}
+        {recentCases && recentCases.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>Case</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Severity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentCases.map((c) => (
+                <tr key={c.caseId}>
+                  <td className="mono">{c.caseId}</td>
+                  <td>{c.title}</td>
+                  <td>
+                    <span className={`pill status-${c.status.toLowerCase()}`}>{c.status}</span>
+                  </td>
+                  <td>
+                    <span className={`pill severity-${c.severity.toLowerCase()}`}>{c.severity}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        {sandbox && (
+          <p className="muted">
+            Sandbox engine this session: {sandboxStoreCounts().cases} case(s), {sandboxStoreCounts().findings}{' '}
+            finding(s), {sandboxStoreCounts().auditEvents} audit event(s) — all computed by the real engine,
+            stored in memory.
+          </p>
+        )}
       </section>
     </div>
   );

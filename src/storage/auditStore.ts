@@ -3,7 +3,7 @@
  * reads are structurally impossible; the digest chain is verified on read.
  */
 import type { AuditEvent } from '../core/types';
-import { sha256Hex } from '../core/digest';
+import { orderAuditEvents } from '../audit/auditLog';
 
 export interface AuditSinkLike {
   set(key: string, value: unknown): Promise<unknown>;
@@ -25,14 +25,18 @@ export interface AuditSinkLike {
 
 const PREFIX = 'audit:';
 
+/**
+ * KVS-backed audit event repository. Keys are tenant-prefixed so cross-tenant
+ * reads are structurally impossible; the digest chain is verified on read.
+ *
+ * Chain building lives in `audit/auditLog.recordAuditEvent`; `append` stores
+ * the event exactly as given (single source of truth for chain digests).
+ */
 export class KvsAuditRepository {
   constructor(private readonly kvs: AuditSinkLike) {}
 
   async append(event: AuditEvent): Promise<void> {
-    const existing = await this.readAll(event.tenantId);
-    const tail = existing[existing.length - 1];
-    const precedingEventDigest = tail ? await sha256Hex(JSON.stringify(tail)) : null;
-    await this.kvs.set(`${PREFIX}${event.tenantId}:${event.id}`, { ...event, precedingEventDigest });
+    await this.kvs.set(`${PREFIX}${event.tenantId}:${event.id}`, event);
   }
 
   async readAll(tenantId: string): Promise<AuditEvent[]> {
@@ -51,7 +55,8 @@ export class KvsAuditRepository {
       }
       cursor = page.nextCursor as string | undefined;
     } while (cursor);
-    return results;
+    // KVS query order is not guaranteed; chain logic needs a stable order.
+    return orderAuditEvents(results);
   }
 }
 

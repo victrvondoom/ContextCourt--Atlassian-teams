@@ -9,6 +9,8 @@ export function Sidebar(props: {
   onSelect: (id: string) => void;
   badge?: { id: string; count: number };
   environment?: string;
+  sandbox?: boolean;
+  onToggleSandbox?: () => void;
 }) {
   return (
     <nav className="sidebar" aria-label="ContextCourt navigation">
@@ -37,6 +39,17 @@ export function Sidebar(props: {
           </li>
         ))}
       </ul>
+      {props.onToggleSandbox && (
+        <div className="sidebar-sandbox">
+          <button
+            className={`button${props.sandbox ? '' : ' primary'}`}
+            onClick={props.onToggleSandbox}
+            aria-pressed={props.sandbox}
+          >
+            {props.sandbox ? 'Exit sandbox' : 'Sandbox demo'}
+          </button>
+        </div>
+      )}
       <div className="sidebar-footer">
         <span className={`env-dot ${props.environment?.startsWith('Jira connected') ? 'ok' : 'warn'}`} />
         {props.environment}

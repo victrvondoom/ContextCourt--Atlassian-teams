@@ -15,14 +15,18 @@ Built for Codegeist 2026 (Apps for Software Teams).
 
 | Workstream | Status |
 |---|---|
-| Forge app scaffold, core engine, Jira adapter, tests, CI | IMPLEMENTED — UNVERIFIED (live Forge deployment pending credentials) |
-| Teamwork Graph adapter | NOT STARTED (docs verified, see docs/atlassian-compatibility.md) |
-| Rovo agent | NOT STARTED |
-| MCP tools (`rovo:mcp`) | NOT STARTED |
+| Forge app scaffold, core engine, Jira adapter, tests, CI | VERIFIED LOCALLY (87/87 tests; live Forge deployment BLOCKED — credentials) |
+| Evidence + contradiction engine (deterministic, evidence-cited) | VERIFIED LOCALLY |
+| **Human approval loop: prepare → review → approve/reject → execute (Jira write, replay-proof, approver-only)** | VERIFIED LOCALLY (integration + unit tests) |
+| Audit ledger (digest-chained: analysis, preparation, decision, execution) | VERIFIED LOCALLY |
+| Custom UI — fully dynamic: analysis, cases, review queue, audit ledger | VERIFIED LOCALLY (build + contract tests) |
+| Sandbox demo — the real engine running in-browser over deterministic fixtures | VERIFIED LOCALLY |
+| Teamwork Graph adapter | IMPLEMENTED — UNVERIFIED (adapter tested; not wired, needs graph scopes + dev site) |
+| Rovo agent + 6 actions + 2 skills + MCP tools | IMPLEMENTED — UNVERIFIED (live invocation BLOCKED) |
 | Marketplace listing | NOT STARTED |
 
 See `docs/` for the full verification trail. Statuses are used truthfully:
-`IMPLEMENTED — UNVERIFIED`, `VERIFIED LOCALLY`, `VERIFIED ON ATLASSIAN DEVELOPMENT SITE`, `BLOCKED — EXTERNAL ACTION REQUIRED`.
+`IMPLEMENTED — UNVERIFIED`, `VERIFIED LOCALLY`, `BLOCKED — EXTERNAL ACTION REQUIRED`.
 
 ## Development
 
@@ -55,18 +59,24 @@ Secrets must never be committed. Use GitHub Codespaces secrets or interactive
 
 ```
 Jira (issues, comments)  ──┐
-Teamwork Graph (verified   ├──►  Evidence layer ──► Contradiction engine ──► Findings ──► Review queue ──► Approved remediation
-  relationships, scoped)  ─┘      (provenance)       (detect + verify)                                  (state machine)
+Teamwork Graph (planned,  ├──►  Evidence layer ──► Contradiction engine ──► Findings ──► Cases
+  scoped, not wired yet)  │      (provenance)       (detect + verify)            │
+                          ┘                                                   ▼
+                                               Review queue ──► Human approval (binding) ──► Approved execution (Jira write)
+                                                                                     │
+                                                                        Audit ledger (digest-chained, tamper-evident)
 ```
 
-- `src/core/` — domain model, contradiction engine, severity, approval state machine
-- `src/integrations/` — Jira adapter (user-scoped REST), Teamwork Graph (planned)
-- `src/resolvers/` — Forge backend resolvers
-- `src/frontend/` — Custom UI (React)
-- `src/storage/` — tenant-isolated Forge KVS repositories
-- `tests/` — unit, security, integration, contract, e2e
+- `src/core/` — domain model, contradiction engine, severity, approval state machine, decision + execution
+- `src/integrations/` — Jira adapter (user-scoped REST, ADF in/out), shared sanitized evidence builder, Teamwork Graph (unwired)
+- `src/resolvers/` — Forge backend resolvers (analysis, cases, proposals, decisions, execution, health)
+- `src/rovo/` — Rovo agent actions and MCP tool surface (agents investigate and draft; **never approve or execute**)
+- `src/frontend/` — Custom UI (React); the sandbox demo runs the real `src/core` engine in-browser
+- `src/storage/` — tenant-isolated Forge KVS repositories (cases, findings, proposals, audit)
+- `tests/` — unit, security, integration (incl. the full approval→execution loop), sandbox engine
 
-See `docs/atlassian-compatibility.md` for verified platform capabilities and decisions.
+See `docs/atlassian-compatibility.md` for verified platform capabilities and decisions,
+and `docs/FINAL_VALIDATION_REPORT.md` for the current verification state.
 
 ## License
 

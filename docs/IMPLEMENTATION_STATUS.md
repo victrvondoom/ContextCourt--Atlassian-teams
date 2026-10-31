@@ -1,4 +1,4 @@
-# Implementation status (updated 2026-10-28)
+# Implementation status (updated 2026-10-31)
 
 Statuses: NOT STARTED · IMPLEMENTED — UNVERIFIED · VERIFIED LOCALLY ·
 VERIFIED ON ATLASSIAN DEVELOPMENT SITE · BLOCKED — EXTERNAL ACTION REQUIRED
@@ -18,6 +18,8 @@ VERIFIED ON ATLASSIAN DEVELOPMENT SITE · BLOCKED — EXTERNAL ACTION REQUIRED
 | Rovo invocation in Atlassian | BLOCKED — EXTERNAL ACTION REQUIRED | needs forge login + dev site |
 | MCP tool invocation via Rovo Studio | BLOCKED — EXTERNAL ACTION REQUIRED | needs forge deploy + Rovo access |
 | Marketplace listing (M9) | NOT STARTED | needs partner account |
+| Review queue: list/decide/execute resolvers + UI, `core/execution.ts`, proposal store (2026-10-31) | VERIFIED LOCALLY | 18 new tests incl. full-loop integration; `docs/FINAL_VALIDATION_REPORT.md` |
+| Sandbox demo = real engine in-browser (2026-10-31) | VERIFIED LOCALLY | `tests/integration/sandbox-engine.test.ts` |
 | Benchmarks | VERIFIED LOCALLY | `benchmarks/RESULTS.md` — actual measured numbers |
 | CI | IMPLEMENTED — UNVERIFIED | workflow committed; first run visible after push |
 

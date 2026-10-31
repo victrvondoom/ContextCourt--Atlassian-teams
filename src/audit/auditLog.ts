@@ -31,11 +31,16 @@ export async function recordAuditEvent(
   req: AuditWriteRequest,
   now: Date,
 ): Promise<AuditEvent> {
-  const existing = await sink.readAll(req.tenantId);
+  const existing = orderAuditEvents(await sink.readAll(req.tenantId));
   const tail = existing[existing.length - 1];
   const precedingDigest = tail ? await sha256Hex(JSON.stringify(tail)) : null;
+  // Collision-free AND insertion-monotonic id. The sequence number makes the
+  // (timestamp, id) sort order match insertion order even when several events
+  // land in the same millisecond — otherwise the chain would be built in one
+  // order and verified in another (CC-003 regression class).
+  const id = `audit_${req.tenantId}_${now.getTime()}_${String(existing.length).padStart(6, '0')}_${crypto.randomUUID().slice(0, 8)}`;
   const event: AuditEvent = {
-    id: `audit_${req.tenantId}_${existing.length + 1}`,
+    id,
     tenantId: req.tenantId,
     actor: req.actor,
     action: req.action,
@@ -50,9 +55,16 @@ export async function recordAuditEvent(
   return event;
 }
 
+/** Deterministic storage order: by timestamp, then id as tiebreaker. */
+export function orderAuditEvents(events: AuditEvent[]): AuditEvent[] {
+  return [...events].sort((a, b) =>
+    a.timestamp === b.timestamp ? a.id.localeCompare(b.id) : a.timestamp.localeCompare(b.timestamp),
+  );
+}
+
 /** Verify the stored chain — returns false when history was modified. */
 export async function verifyAuditChain(sink: AuditSink, tenantId: string): Promise<boolean> {
-  const events = await sink.readAll(tenantId);
+  const events = orderAuditEvents(await sink.readAll(tenantId));
   for (let i = 1; i < events.length; i++) {
     const prev = events[i - 1]!;
     const digest = await sha256Hex(JSON.stringify(prev));

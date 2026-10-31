@@ -203,6 +203,12 @@ app:
 
 permissions:
   scopes:
+    # Reads run asUser for every operation (issues, comments, links).
     - read:jira-work
     - read:jira-user
+    # Needed ONLY to execute human-approved remediation proposals
+    # (core/execution.ts): comment on the target issue or create the
+    # remediation issue. Agents can never trigger these writes — execution
+    # requires an approval binding from a second human (see docs/).
+    - write:jira-work
     - storage:app

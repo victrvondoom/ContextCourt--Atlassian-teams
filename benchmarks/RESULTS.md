@@ -38,3 +38,9 @@ npx vite-node benchmarks/evaluate.ts benchmarks/dataset.json
 - Small held-out set (24); uncertainty on these metrics is roughly ±0.1 F1.
 - Baselines (keyword-only, LLM-summarization) listed in the test plan are NOT
   yet measured — no invented comparison numbers.
+
+## Replay confirmation — 2026-10-31
+
+Re-run after the review-queue/execution work (engine unchanged): all four
+metrics reproduce **exactly** (P=0.800, R=0.571, F1=0.667, FPR=0.200 overall
+and per split) — MEASURED, deterministic replay.
